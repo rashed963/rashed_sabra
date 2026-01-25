@@ -1,47 +1,44 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("blog", ({ data }) => !data.draft);
   return entries.map((entry) => ({
-    params: { slug: entry.id },
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
-const { title, description, publishDate, series, part, heroImage } = entry.data;
+const { Content } = await render(entry);
+const { title, description, publishDate, series, part } = entry.data;
 ---
 
 <Layout>
-  <main
-    style="max-width: 52rem; margin: 0 auto; padding: 1.5rem; font-family: system-ui, sans-serif; line-height: 1.6;"
-  >
-    <article>
-      <header style="margin-bottom: 1.5rem;">
+  <main class="container">
+    <article class="card">
+      <header style="margin-bottom: 1.75rem;">
         {series && (
-          <p style="font-size: 0.875rem; color: #666; margin: 0 0 0.25rem;">
+          <p class="muted" style="margin: 0 0 0.5rem; font-size: 0.95rem;">
             {series}
-            {part != null ? ` · Part ${part}` : ""}
+            {part != null ? ` · الجزء ${part}` : ""}
           </p>
         )}
-        <h1 style="font-size: 1.75rem; font-weight: 700; margin: 0 0 0.5rem;">
-          {title}
-        </h1>
+        <h1 style="margin: 0 0 0.75rem; font-size: 2rem;">{title}</h1>
         <time
           datetime={publishDate.toISOString()}
-          style="font-size: 0.875rem; color: #666;"
+          class="muted"
+          style="font-size: 0.9rem;"
         >
-          {publishDate.toLocaleDateString("en-CA", {
+          {publishDate.toLocaleDateString("ar-EG", {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}
         </time>
         {description && (
-          <p style="margin: 0.75rem 0 0; color: #444; font-size: 1rem;">
+          <p style="margin: 0.9rem 0 0; color: #444; font-size: 1.05rem;">
             {description}
           </p>
         )}
@@ -55,8 +52,28 @@ const { title, description, publishDate, series, part, heroImage } = entry.data;
 
 <style>
   .prose :global(p) {
-    margin: 0 0 1rem;
+    margin: 0 0 1.1rem;
   }
+
+  .prose :global(h2) {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.5rem;
+  }
+
+  .prose :global(h3) {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 1.25rem 1rem 0;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
   .prose :global(strong) {
     font-weight: 600;
   }

@@ -1,11 +1,75 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const entries = await getCollection("blog", ({ data }) => !data.draft);
+const posts = entries
+  .sort(
+    (a, b) =>
+      new Date(b.data.publishDate).valueOf() -
+      new Date(a.data.publishDate).valueOf()
+  )
+  .slice(0, 3);
+
+const latestPosts = posts.length ? posts : entries.slice(0, 3);
 ---
 
 <Layout>
-	<Welcome />
+  <main class="container">
+    <section class="card" style="margin-bottom: 2rem;">
+      <p class="muted" style="margin: 0 0 0.5rem; font-size: 0.95rem;">
+        مرحبًا، أنا
+      </p>
+      <h1 style="margin: 0 0 0.75rem; font-size: 2.25rem;">Rashed Sabra</h1>
+      <p style="margin: 0 0 1.25rem; font-size: 1.1rem;">
+        مستشار وقيادي في التحول الرقمي يركز على تبسيط العمليات، الأتمتة الذكية، وبناء أنظمة عمل
+        قابلة للتوسع.
+      </p>
+      <a
+        href="/blog"
+        style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: 600;"
+      >
+        تصفّح المدونة ←
+      </a>
+    </section>
+
+    <section class="card">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;">
+        <h2 style="margin: 0; font-size: 1.4rem;">أحدث المقالات</h2>
+        <a href="/blog" style="text-decoration: none; font-weight: 600;">عرض الكل</a>
+      </div>
+      {latestPosts.length ? (
+        <ul style="list-style: none; padding: 0; margin: 1.5rem 0 0;">
+          {latestPosts.map((entry) => (
+            <li style="padding: 1rem 0; border-bottom: 1px solid #eee;">
+              <a
+                href={`/blog/${entry.slug}`}
+                style="text-decoration: none; font-weight: 600; font-size: 1.05rem; display: inline-block;"
+              >
+                {entry.data.title}
+              </a>
+              <p class="muted" style="margin: 0.5rem 0 0;">
+                {entry.data.description}
+              </p>
+              <time
+                datetime={entry.data.publishDate.toISOString()}
+                class="muted"
+                style="display: block; margin-top: 0.5rem; font-size: 0.9rem;"
+              >
+                {entry.data.publishDate.toLocaleDateString("ar-EG", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted" style="margin: 1rem 0 0;">
+          لا توجد مقالات بعد. ابدأ بإضافة أول مقال من مجلد المحتوى.
+        </p>
+      )}
+    </section>
+  </main>
 </Layout>
