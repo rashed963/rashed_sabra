@@ -12,39 +12,30 @@ const posts = entries.sort(
 
 <Layout>
   <main class="container">
-    <section class="card">
-      <h1 style="margin: 0 0 1.5rem; font-size: 2rem;">المدونة</h1>
-      <ul style="list-style: none; padding: 0; margin: 0;">
+    <section>
+      <h1 class="page-title">المدونة</h1>
+      <ul class="card-list">
         {posts.map((entry) => (
-          <li style="padding: 1.25rem 0; border-bottom: 1px solid #eee;">
-            <a
-              href={`/blog/${entry.slug}`}
-              style="color: inherit; text-decoration: none; font-weight: 600; font-size: 1.15rem;"
-            >
-              {entry.data.title}
+          <li>
+            <a href={`/blog/${entry.slug}`} class="card card-link">
+              <h2 class="card-title">{entry.data.title}</h2>
+              <p class="muted card-description">{entry.data.description}</p>
+              <div class="card-meta">
+                <time datetime={entry.data.publishDate.toISOString()} class="meta">
+                  {entry.data.publishDate.toLocaleDateString("ar-EG", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+                {entry.data.series && (
+                  <span class="meta">
+                    · {entry.data.series}
+                    {entry.data.part != null ? `، الجزء ${entry.data.part}` : ""}
+                  </span>
+                )}
+              </div>
             </a>
-            <p class="muted" style="margin: 0.6rem 0 0;">
-              {entry.data.description}
-            </p>
-            <div style="margin-top: 0.6rem;">
-              <time
-                datetime={entry.data.publishDate.toISOString()}
-                class="muted"
-                style="font-size: 0.9rem;"
-              >
-                {entry.data.publishDate.toLocaleDateString("ar-EG", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              {entry.data.series && (
-                <span class="muted" style="font-size: 0.9rem; margin-right: 0.5rem;">
-                  · {entry.data.series}
-                  {entry.data.part != null ? `، الجزء ${entry.data.part}` : ""}
-                </span>
-              )}
-            </div>
           </li>
         ))}
       </ul>

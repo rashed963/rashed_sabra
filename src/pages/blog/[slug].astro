@@ -18,19 +18,15 @@ const { title, description, publishDate, series, part } = entry.data;
 <Layout>
   <main class="container">
     <article class="card">
-      <header style="margin-bottom: 1.75rem;">
+      <header class="post-header">
         {series && (
-          <p class="muted" style="margin: 0 0 0.5rem; font-size: 0.95rem;">
+          <p class="meta">
             {series}
             {part != null ? ` · الجزء ${part}` : ""}
           </p>
         )}
-        <h1 style="margin: 0 0 0.75rem; font-size: 2rem;">{title}</h1>
-        <time
-          datetime={publishDate.toISOString()}
-          class="muted"
-          style="font-size: 0.9rem;"
-        >
+        <h1 class="hero-title">{title}</h1>
+        <time datetime={publishDate.toISOString()} class="meta">
           {publishDate.toLocaleDateString("ar-EG", {
             year: "numeric",
             month: "long",
@@ -38,9 +34,7 @@ const { title, description, publishDate, series, part } = entry.data;
           })}
         </time>
         {description && (
-          <p style="margin: 0.9rem 0 0; color: #444; font-size: 1.05rem;">
-            {description}
-          </p>
+          <p class="post-description">{description}</p>
         )}
       </header>
       <div class="prose">
@@ -49,32 +43,3 @@ const { title, description, publishDate, series, part } = entry.data;
     </article>
   </main>
 </Layout>
-
-<style>
-  .prose :global(p) {
-    margin: 0 0 1.1rem;
-  }
-
-  .prose :global(h2) {
-    margin: 2rem 0 0.75rem;
-    font-size: 1.5rem;
-  }
-
-  .prose :global(h3) {
-    margin: 1.5rem 0 0.5rem;
-    font-size: 1.25rem;
-  }
-
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin: 0 1.25rem 1rem 0;
-  }
-
-  .prose :global(li) {
-    margin-bottom: 0.5rem;
-  }
-
-  .prose :global(strong) {
-    font-weight: 600;
-  }
-</style>
