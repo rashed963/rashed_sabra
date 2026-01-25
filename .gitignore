@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local knowledge base (project context, personal background — not for version control)
+knowledge-base/

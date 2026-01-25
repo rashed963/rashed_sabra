@@ -1,0 +1,10 @@
+---
+description: Require user confirmation before applying any edits or running commands
+alwaysApply: true
+---
+
+# Confirm before changes
+
+- **Do not** edit files, create/delete files, or run terminal commands without the user's explicit confirmation first.
+- **Propose** changes (e.g. show diff, describe new file, or state the command) and wait for the user to approve before applying.
+- Exception: reading files, searching code, or listing directories to answer questions does not require confirmation.

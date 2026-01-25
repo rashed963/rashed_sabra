@@ -1,0 +1,19 @@
+---
+description: Project and personal context from local knowledge base
+alwaysApply: true
+---
+
+# Knowledge base context
+
+When working in this repo, **read and follow** the private knowledge base so suggestions match project goals and the author's background.
+
+## Files to use (do not commit; they are gitignored)
+
+- **`knowledge-base/project-goal.md`** — Vision, audience, publishing model, technical approach, priorities, tone, and out-of-scope.
+- **`knowledge-base/personal-background.md`** — Author’s role, focus areas, writing themes, preferences, and constraints.
+
+## How to use them
+
+1. At the start of a task that affects content, structure, or workflow, read the relevant file(s).
+2. Align recommendations with: blog-first publishing, minimal/readable UI, Astro + Content Collections, and the stated priorities.
+3. Respect tone (minimal, clear, practical) and out-of-scope items (no DB/CMS, no heavy extras this quarter).
