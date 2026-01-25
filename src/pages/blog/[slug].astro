@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
@@ -12,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, description, publishDate, series, part } = entry.data;
+const { title, description, publishDate, series, part, heroImage } = entry.data;
 ---
 
 <Layout>
@@ -33,8 +34,14 @@ const { title, description, publishDate, series, part } = entry.data;
             day: "numeric",
           })}
         </time>
-        {description && (
-          <p class="post-description">{description}</p>
+        {description && <p class="post-description">{description}</p>}
+        {heroImage && (
+          <Image
+            src={heroImage}
+            alt={title}
+            class="hero-image"
+            loading="eager"
+          />
         )}
       </header>
       <div class="prose">
