@@ -1,0 +1,34 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const profile = await getEntry("profile", "about");
+if (!profile) {
+  throw new Error("Profile content not found. Ensure src/content/profile/about.md exists.");
+}
+
+const { title, headline, description } = profile.data;
+const { Content } = await profile.render();
+---
+
+<Layout title={`${title} | عنّي`}>
+  <main class="container about-page">
+    <nav class="about-ctas" aria-label="روابط سريعة">
+      <a href="/blog" class="button-link">المدونة</a>
+      <a href="https://www.linkedin.com/in/rashed-sabra/" target="_blank" rel="noopener noreferrer" class="button-link">LinkedIn</a>
+    </nav>
+
+    <article class="card about-article">
+      <header class="about-header">
+        <h1 class="about-title">{title}</h1>
+        <p class="about-headline">{headline}</p>
+        <p class="about-description muted">{description}</p>
+      </header>
+
+      <div class="prose about-prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
+
