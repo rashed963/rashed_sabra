@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { formatDate, slugify } from "../../utils/content";
 
 const entries = await getCollection("blog", ({ data }) => !data.draft);
 const posts = entries.sort(
@@ -8,32 +9,146 @@ const posts = entries.sort(
     new Date(b.data.publishDate).valueOf() -
     new Date(a.data.publishDate).valueOf()
 );
+
+const categoryMap = new Map<string, { name: string; count: number }>();
+const seriesMap = new Map<
+  string,
+  {
+    name: string;
+    entries: typeof posts;
+  }
+>();
+
+posts.forEach((entry) => {
+  if (entry.data.category) {
+    const key = slugify(entry.data.category);
+    const existing = categoryMap.get(key);
+    categoryMap.set(key, {
+      name: entry.data.category,
+      count: (existing?.count ?? 0) + 1,
+    });
+  }
+
+  if (entry.data.series) {
+    const key = slugify(entry.data.series);
+    const existing = seriesMap.get(key);
+    if (existing) {
+      existing.entries.push(entry);
+    } else {
+      seriesMap.set(key, { name: entry.data.series, entries: [entry] });
+    }
+  }
+});
+
+const categories = Array.from(categoryMap.values()).sort(
+  (a, b) => b.count - a.count
+);
+const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
+  ...group,
+  entries: group.entries.sort((a, b) => {
+    const partA = a.data.part ?? 0;
+    const partB = b.data.part ?? 0;
+    if (partA !== partB) {
+      return partA - partB;
+    }
+    return (
+      new Date(a.data.publishDate).valueOf() -
+      new Date(b.data.publishDate).valueOf()
+    );
+  }),
+}));
 ---
 
 <Layout>
   <main class="container">
+    <section class="card hero-card">
+      <p class="muted hero-kicker">المدونة</p>
+      <h1 class="hero-title">أفكار عملية حول التحول الرقمي والأتمتة الذكية</h1>
+      <p class="hero-subtitle">
+        دليل واقعي لبناء أنظمة واضحة، منضبطة، وسهلة التشغيل. استكشف المقالات حسب الموضوع أو
+        السلسلة لتجد ما تحتاجه بسرعة.
+      </p>
+    </section>
+
+    <section class="section-grid">
+      <article class="card">
+        <div class="section-header">
+          <h2 class="section-title">تصفّح حسب الموضوع</h2>
+        </div>
+        {categories.length ? (
+          <ul class="pill-list">
+            {categories.map((category) => (
+              <li>
+                <a
+                  href={`/blog/categories/${slugify(category.name)}`}
+                  class="pill pill-link"
+                >
+                  {category.name}
+                  <span class="pill-count">{category.count}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="muted">أضف تصنيفات للمقالات لعرضها هنا.</p>
+        )}
+      </article>
+
+      <article class="card">
+        <div class="section-header">
+          <h2 class="section-title">سلاسل مترابطة</h2>
+        </div>
+        {seriesGroups.length ? (
+          <ul class="series-list">
+            {seriesGroups.map((seriesGroup) => {
+              const lastEntry = seriesGroup.entries.at(-1);
+              return (
+                <li class="series-item">
+                  <a
+                    href={`/blog/series/${slugify(seriesGroup.name)}`}
+                    class="series-link"
+                  >
+                    {seriesGroup.name}
+                  </a>
+                  <p class="muted series-meta">
+                    {seriesGroup.entries.length} أجزاء
+                    {lastEntry ? ` · آخر تحديث ${formatDate(lastEntry.data.publishDate)}` : ""}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p class="muted">أضف سلسلة للمقالات لعرضها هنا.</p>
+        )}
+      </article>
+    </section>
+
     <section>
-      <h1 class="page-title">المدونة</h1>
+      <div class="section-header">
+        <h2 class="section-title">كل المقالات</h2>
+      </div>
       <ul class="card-list">
         {posts.map((entry) => (
           <li>
             <a href={`/blog/${entry.slug}`} class="card card-link">
+              <div class="card-eyebrow">
+                {entry.data.category && (
+                  <span class="pill">{entry.data.category}</span>
+                )}
+                {entry.data.series && (
+                  <span class="pill pill-muted">
+                    {entry.data.series}
+                    {entry.data.part != null ? ` · الجزء ${entry.data.part}` : ""}
+                  </span>
+                )}
+              </div>
               <h2 class="card-title">{entry.data.title}</h2>
               <p class="muted card-description">{entry.data.description}</p>
               <div class="card-meta">
                 <time datetime={entry.data.publishDate.toISOString()} class="meta">
-                  {entry.data.publishDate.toLocaleDateString("ar-EG", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {formatDate(entry.data.publishDate)}
                 </time>
-                {entry.data.series && (
-                  <span class="meta">
-                    · {entry.data.series}
-                    {entry.data.part != null ? `، الجزء ${entry.data.part}` : ""}
-                  </span>
-                )}
               </div>
             </a>
           </li>

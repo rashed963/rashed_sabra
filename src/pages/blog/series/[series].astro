@@ -1,0 +1,84 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import { formatDate, slugify } from "../../../utils/content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("blog", ({ data }) => !data.draft);
+  const seriesMap = new Map<string, typeof entries>();
+
+  entries.forEach((entry) => {
+    if (!entry.data.series) {
+      return;
+    }
+    const key = slugify(entry.data.series);
+    const existing = seriesMap.get(key);
+    if (existing) {
+      existing.push(entry);
+    } else {
+      seriesMap.set(key, [entry]);
+    }
+  });
+
+  return Array.from(seriesMap.entries()).map(([key, posts]) => ({
+    params: { series: key },
+    props: {
+      series: posts[0]?.data.series ?? key,
+      posts,
+    },
+  }));
+}
+
+const { series, posts } = Astro.props;
+const sortedPosts = posts.sort((a, b) => {
+  const partA = a.data.part ?? 0;
+  const partB = b.data.part ?? 0;
+  if (partA !== partB) {
+    return partA - partB;
+  }
+  return (
+    new Date(a.data.publishDate).valueOf() -
+    new Date(b.data.publishDate).valueOf()
+  );
+});
+---
+
+<Layout>
+  <main class="container">
+    <section class="card hero-card">
+      <p class="muted hero-kicker">سلسلة</p>
+      <h1 class="hero-title">{series}</h1>
+      <p class="hero-subtitle">
+        {sortedPosts.length} أجزاء مرتبة بالتسلسل لتبني صورة كاملة عن الموضوع خطوة بخطوة.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">الأجزاء</h2>
+        <a href="/blog" class="button-link">العودة إلى المدونة</a>
+      </div>
+      <ul class="card-list">
+        {sortedPosts.map((entry) => (
+          <li>
+            <a href={`/blog/${entry.slug}`} class="card card-link">
+              <div class="card-eyebrow">
+                {entry.data.category && <span class="pill">{entry.data.category}</span>}
+                {entry.data.part != null && (
+                  <span class="pill pill-muted">الجزء {entry.data.part}</span>
+                )}
+              </div>
+              <h2 class="card-title">{entry.data.title}</h2>
+              <p class="muted card-description">{entry.data.description}</p>
+              <div class="card-meta">
+                <time datetime={entry.data.publishDate.toISOString()} class="meta">
+                  {formatDate(entry.data.publishDate)}
+                </time>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+</Layout>

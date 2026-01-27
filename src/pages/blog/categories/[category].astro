@@ -1,0 +1,80 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import { formatDate, slugify } from "../../../utils/content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("blog", ({ data }) => !data.draft);
+  const categoryMap = new Map<string, typeof entries>();
+
+  entries.forEach((entry) => {
+    if (!entry.data.category) {
+      return;
+    }
+    const key = slugify(entry.data.category);
+    const existing = categoryMap.get(key);
+    if (existing) {
+      existing.push(entry);
+    } else {
+      categoryMap.set(key, [entry]);
+    }
+  });
+
+  return Array.from(categoryMap.entries()).map(([key, posts]) => ({
+    params: { category: key },
+    props: {
+      category: posts[0]?.data.category ?? key,
+      posts,
+    },
+  }));
+}
+
+const { category, posts } = Astro.props;
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(b.data.publishDate).valueOf() -
+    new Date(a.data.publishDate).valueOf()
+);
+---
+
+<Layout>
+  <main class="container">
+    <section class="card hero-card">
+      <p class="muted hero-kicker">تصنيف</p>
+      <h1 class="hero-title">{category}</h1>
+      <p class="hero-subtitle">
+        {sortedPosts.length} مقالات ضمن هذا التصنيف. استعرض آخر الأفكار المرتبطة بالموضوع.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">المقالات</h2>
+        <a href="/blog" class="button-link">العودة إلى المدونة</a>
+      </div>
+      <ul class="card-list">
+        {sortedPosts.map((entry) => (
+          <li>
+            <a href={`/blog/${entry.slug}`} class="card card-link">
+              <div class="card-eyebrow">
+                {entry.data.series && (
+                  <span class="pill pill-muted">
+                    {entry.data.series}
+                    {entry.data.part != null ? ` · الجزء ${entry.data.part}` : ""}
+                  </span>
+                )}
+              </div>
+              <h2 class="card-title">{entry.data.title}</h2>
+              <p class="muted card-description">{entry.data.description}</p>
+              <div class="card-meta">
+                <time datetime={entry.data.publishDate.toISOString()} class="meta">
+                  {formatDate(entry.data.publishDate)}
+                </time>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+</Layout>
