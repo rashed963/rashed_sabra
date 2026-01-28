@@ -1,23 +1,31 @@
 ---
 import "../styles/global.css";
+
+const {
+  title = "Rashed Sabra",
+  description,
+  lang = "ar",
+  dir = "rtl",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Rashed Sabra</title>
+    {description && <meta name="description" content={description} />}
+    <title>{title}</title>
   </head>
   <body>
     <slot />

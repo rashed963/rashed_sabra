@@ -1,0 +1,93 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const entries = await getCollection("journey");
+const entry = entries.find(
+  (item) =>
+    item.id === "journey.en" ||
+    item.id === "journey.en.md" ||
+    item.slug === "journey.en"
+);
+
+if (!entry) {
+  throw new Error("Journey content not found.");
+}
+
+const { Content } = await entry.render();
+const { data } = entry;
+---
+
+<Layout title={data.title} description={data.description} lang="en" dir="ltr">
+  <main class="container journey-page">
+    <header class="journey-header">
+      <div class="journey-nav">
+        <a class="pill pill-link" href="/">Home</a>
+        <a class="pill pill-link" href="/journey">العربية</a>
+      </div>
+      <p class="meta journey-kicker">Bilingual professional narrative</p>
+      <h1 class="page-title journey-title">{data.title}</h1>
+      <p class="meta journey-description">{data.description}</p>
+      <p class="journey-intro">{data.intro}</p>
+    </header>
+
+    {data.links && (
+      <div class="journey-links">
+        {data.links.linkedin && (
+          <a class="pill pill-link" href={data.links.linkedin}>
+            LinkedIn
+          </a>
+        )}
+        {data.links.github && (
+          <a class="pill pill-link" href={data.links.github}>
+            GitHub
+          </a>
+        )}
+        {data.links.email && (
+          <a class="pill pill-link" href={`mailto:${data.links.email}`}>
+            Email
+          </a>
+        )}
+      </div>
+    )}
+
+    <section class="journey-section">
+      <h2 class="section-title">Themes</h2>
+      <div class="theme-grid">
+        {data.themes.map((theme) => (
+          <article class="card theme-card">
+            <h3 class="card-title">{theme.title}</h3>
+            <p class="card-description">{theme.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="journey-section">
+      <h2 class="section-title">Timeline</h2>
+      <div class="timeline">
+        {data.timeline.map((item) => (
+          <article class="card timeline-card">
+            <span class="marker" aria-hidden="true"></span>
+            <div class="timeline-content">
+              <p class="meta timeline-period">{item.period}</p>
+              <h3 class="card-title timeline-title">{item.title}</h3>
+              <p class="card-description">{item.summary}</p>
+              {item.highlights.length ? (
+                <ul class="timeline-highlights">
+                  {item.highlights.map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="journey-section prose">
+      <Content />
+    </section>
+  </main>
+</Layout>
