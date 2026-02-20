@@ -1,4 +1,4 @@
----
+﻿---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
@@ -19,34 +19,28 @@ const { data } = entry;
 ---
 
 <Layout title={data.title} description={data.description} lang="en" dir="ltr">
-  <main class="container journey-page">
+  <main class="container main-page journey-page">
     <header class="journey-header">
       <div class="journey-nav">
         <a class="pill pill-link" href="/">Home</a>
         <a class="pill pill-link" href="/journey">العربية</a>
       </div>
-      <p class="meta journey-kicker">Bilingual professional narrative</p>
-      <h1 class="page-title journey-title">{data.title}</h1>
-      <p class="meta journey-description">{data.description}</p>
+      <p class="meta">Bilingual professional narrative</p>
+      <h1 class="journey-title">{data.title}</h1>
+      <p class="journey-description">{data.description}</p>
       <p class="journey-intro">{data.intro}</p>
     </header>
 
     {data.links && (
       <div class="journey-links">
         {data.links.linkedin && (
-          <a class="pill pill-link" href={data.links.linkedin}>
-            LinkedIn
-          </a>
+          <a class="pill pill-link" href={data.links.linkedin}>LinkedIn</a>
         )}
         {data.links.github && (
-          <a class="pill pill-link" href={data.links.github}>
-            GitHub
-          </a>
+          <a class="pill pill-link" href={data.links.github}>GitHub</a>
         )}
         {data.links.email && (
-          <a class="pill pill-link" href={`mailto:${data.links.email}`}>
-            Email
-          </a>
+          <a class="pill pill-link" href={`mailto:${data.links.email}`}>Email</a>
         )}
       </div>
     )}
@@ -55,7 +49,7 @@ const { data } = entry;
       <h2 class="section-title">Themes</h2>
       <div class="theme-grid">
         {data.themes.map((theme) => (
-          <article class="card theme-card">
+          <article class="card">
             <h3 class="card-title">{theme.title}</h3>
             <p class="card-description">{theme.description}</p>
           </article>
@@ -69,18 +63,16 @@ const { data } = entry;
         {data.timeline.map((item) => (
           <article class="card timeline-card">
             <span class="marker" aria-hidden="true"></span>
-            <div class="timeline-content">
-              <p class="meta timeline-period">{item.period}</p>
-              <h3 class="card-title timeline-title">{item.title}</h3>
-              <p class="card-description">{item.summary}</p>
-              {item.highlights.length ? (
-                <ul class="timeline-highlights">
-                  {item.highlights.map((highlight) => (
-                    <li>{highlight}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
+            <p class="meta timeline-period">{item.period}</p>
+            <h3 class="card-title timeline-title">{item.title}</h3>
+            <p class="card-description">{item.summary}</p>
+            {item.highlights.length > 0 && (
+              <ul class="timeline-highlights">
+                {item.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            )}
           </article>
         ))}
       </div>

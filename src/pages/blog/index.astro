@@ -1,9 +1,13 @@
----
+﻿---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate, slugify } from "../../utils/content";
 
-const entries = await getCollection("blog", ({ data }) => !data.draft);
+const entries = await getCollection(
+  "blog",
+  ({ data }) => data.status === "published" && !data.draft
+);
+
 const posts = entries.sort(
   (a, b) =>
     new Date(b.data.publishDate).valueOf() -
@@ -40,9 +44,7 @@ posts.forEach((entry) => {
   }
 });
 
-const categories = Array.from(categoryMap.values()).sort(
-  (a, b) => b.count - a.count
-);
+const categories = Array.from(categoryMap.values()).sort((a, b) => b.count - a.count);
 const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
   ...group,
   entries: group.entries.sort((a, b) => {
@@ -59,14 +61,13 @@ const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
 }));
 ---
 
-<Layout>
-  <main class="container">
+<Layout title="المدونة">
+  <main class="container main-page">
     <section class="card hero-card">
-      <p class="muted hero-kicker">المدونة</p>
+      <p class="hero-kicker">المدونة</p>
       <h1 class="hero-title">أفكار عملية حول التحول الرقمي والأتمتة الذكية</h1>
       <p class="hero-subtitle">
-        دليل واقعي لبناء أنظمة واضحة، منضبطة، وسهلة التشغيل. استكشف المقالات حسب الموضوع أو
-        السلسلة لتجد ما تحتاجه بسرعة.
+        دليل واقعي لبناء أنظمة واضحة ومنضبطة وسهلة التشغيل. تصفّح المقالات حسب الموضوع أو السلسلة.
       </p>
     </section>
 
@@ -79,10 +80,7 @@ const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
           <ul class="pill-list">
             {categories.map((category) => (
               <li>
-                <a
-                  href={`/blog/categories/${slugify(category.name)}`}
-                  class="pill pill-link"
-                >
+                <a href={`/blog/categories/${slugify(category.name)}`} class="pill pill-link">
                   {category.name}
                   <span class="pill-count">{category.count}</span>
                 </a>
@@ -104,13 +102,10 @@ const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
               const lastEntry = seriesGroup.entries.at(-1);
               return (
                 <li class="series-item">
-                  <a
-                    href={`/blog/series/${slugify(seriesGroup.name)}`}
-                    class="series-link"
-                  >
+                  <a href={`/blog/series/${slugify(seriesGroup.name)}`} class="series-link">
                     {seriesGroup.name}
                   </a>
-                  <p class="muted series-meta">
+                  <p class="series-meta muted">
                     {seriesGroup.entries.length} أجزاء
                     {lastEntry ? ` · آخر تحديث ${formatDate(lastEntry.data.publishDate)}` : ""}
                   </p>
@@ -132,10 +127,8 @@ const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
         {posts.map((entry) => (
           <li>
             <a href={`/blog/${entry.slug}`} class="card card-link">
-              <div class="card-eyebrow">
-                {entry.data.category && (
-                  <span class="pill">{entry.data.category}</span>
-                )}
+              <div class="pill-list" style="margin-bottom: 0.7rem;">
+                {entry.data.category && <span class="pill">{entry.data.category}</span>}
                 {entry.data.series && (
                   <span class="pill pill-muted">
                     {entry.data.series}
@@ -144,8 +137,8 @@ const seriesGroups = Array.from(seriesMap.values()).map((group) => ({
                 )}
               </div>
               <h2 class="card-title">{entry.data.title}</h2>
-              <p class="muted card-description">{entry.data.description}</p>
-              <div class="card-meta">
+              <p class="card-description">{entry.data.description}</p>
+              <div class="card-meta" style="margin-top: 0.55rem;">
                 <time datetime={entry.data.publishDate.toISOString()} class="meta">
                   {formatDate(entry.data.publishDate)}
                 </time>

@@ -1,55 +1,48 @@
----
+﻿---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
-const entries = await getCollection("blog", ({ data }) => !data.draft);
-const posts = entries
+const entries = await getCollection(
+  "blog",
+  ({ data }) => data.status === "published" && !data.draft
+);
+
+const latestPosts = entries
   .sort(
     (a, b) =>
       new Date(b.data.publishDate).valueOf() -
       new Date(a.data.publishDate).valueOf()
   )
   .slice(0, 3);
-
-const latestPosts = posts.length ? posts : entries.slice(0, 3);
 ---
 
 <Layout>
-  <main class="container">
+  <main class="container main-home">
     <section class="card hero-card">
-      <p class="muted hero-kicker">مرحبًا، أنا</p>
+      <p class="hero-kicker">مرحبًا، أنا</p>
       <h1 class="hero-title">Rashed Sabra</h1>
       <p class="hero-subtitle">
-        مستشار وقيادي في التحول الرقمي يركز على تبسيط العمليات، الأتمتة الذكية، وبناء أنظمة عمل
-        قابلة للتوسع.
+        مستشار وقيادي في التحول الرقمي يركز على تبسيط العمليات، الأتمتة الذكية، وبناء أنظمة عمل قابلة للتوسع.
       </p>
       <div class="hero-actions">
-        <a href="/blog" class="button-link">
-          تصفّح المدونة ←
-        </a>
-        <a href="/journey" class="button-link">
-          الرحلة المهنية →
-        </a>
+        <a href="/journey" class="button-link primary">الرحلة المهنية ←</a>
+        <a href="/blog" class="button-link">تصفّح المدونة ←</a>
       </div>
     </section>
 
     <section class="card">
       <div class="section-header">
         <h2 class="section-title">أحدث المقالات</h2>
-        <a href="/blog" class="button-link">عرض الكل</a>
+        <a href="/blog" class="meta">عرض الكل</a>
       </div>
+
       {latestPosts.length ? (
         <ul class="latest-list">
           {latestPosts.map((entry) => (
             <li class="latest-item">
-              <a href={`/blog/${entry.slug}`} class="latest-link">
-                {entry.data.title}
-              </a>
-              <p class="muted latest-description">{entry.data.description}</p>
-              <time
-                datetime={entry.data.publishDate.toISOString()}
-                class="meta"
-              >
+              <a href={`/blog/${entry.slug}`} class="latest-link">{entry.data.title}</a>
+              <p class="latest-description">{entry.data.description}</p>
+              <time datetime={entry.data.publishDate.toISOString()} class="meta">
                 {entry.data.publishDate.toLocaleDateString("ar-EG", {
                   year: "numeric",
                   month: "long",
@@ -60,7 +53,7 @@ const latestPosts = posts.length ? posts : entries.slice(0, 3);
           ))}
         </ul>
       ) : (
-        <p class="muted latest-empty">لا توجد مقالات بعد. ابدأ بإضافة أول مقال من مجلد المحتوى.</p>
+        <p class="muted">لا توجد مقالات منشورة بعد.</p>
       )}
     </section>
   </main>

@@ -5,13 +5,15 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      lang: z.enum(["ar", "en"]).default("ar"),
       description: z.string(),
       publishDate: z.coerce.date(),
+      status: z.enum(["draft", "scheduled", "published"]).default("published"),
+      draft: z.boolean().default(false),
       category: z.string().optional(),
       tags: z.array(z.string()).default([]),
       series: z.string().optional(),
       part: z.number().int().positive().optional(),
-      draft: z.boolean().default(false),
       heroImage: image().optional(),
     }),
 });

@@ -1,16 +1,21 @@
----
+﻿---
 import { getCollection } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import { formatDate, slugify } from "../../../utils/content";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("blog", ({ data }) => !data.draft);
+  const entries = await getCollection(
+    "blog",
+    ({ data }) => data.status === "published" && !data.draft
+  );
+
   const seriesMap = new Map<string, typeof entries>();
 
   entries.forEach((entry) => {
     if (!entry.data.series) {
       return;
     }
+
     const key = slugify(entry.data.series);
     const existing = seriesMap.get(key);
     if (existing) {
@@ -43,14 +48,12 @@ const sortedPosts = posts.sort((a, b) => {
 });
 ---
 
-<Layout>
-  <main class="container">
+<Layout title={`سلسلة: ${series}`}>
+  <main class="container main-page">
     <section class="card hero-card">
-      <p class="muted hero-kicker">سلسلة</p>
+      <p class="hero-kicker">سلسلة</p>
       <h1 class="hero-title">{series}</h1>
-      <p class="hero-subtitle">
-        {sortedPosts.length} أجزاء مرتبة بالتسلسل لتبني صورة كاملة عن الموضوع خطوة بخطوة.
-      </p>
+      <p class="hero-subtitle">{sortedPosts.length} أجزاء مرتبة بالتسلسل.</p>
     </section>
 
     <section>
@@ -62,19 +65,17 @@ const sortedPosts = posts.sort((a, b) => {
         {sortedPosts.map((entry) => (
           <li>
             <a href={`/blog/${entry.slug}`} class="card card-link">
-              <div class="card-eyebrow">
+              <div class="pill-list" style="margin-bottom:0.7rem;">
                 {entry.data.category && <span class="pill">{entry.data.category}</span>}
                 {entry.data.part != null && (
                   <span class="pill pill-muted">الجزء {entry.data.part}</span>
                 )}
               </div>
               <h2 class="card-title">{entry.data.title}</h2>
-              <p class="muted card-description">{entry.data.description}</p>
-              <div class="card-meta">
-                <time datetime={entry.data.publishDate.toISOString()} class="meta">
-                  {formatDate(entry.data.publishDate)}
-                </time>
-              </div>
+              <p class="card-description">{entry.data.description}</p>
+              <time datetime={entry.data.publishDate.toISOString()} class="meta">
+                {formatDate(entry.data.publishDate)}
+              </time>
             </a>
           </li>
         ))}

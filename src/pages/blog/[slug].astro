@@ -1,4 +1,4 @@
----
+﻿---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
@@ -6,7 +6,11 @@ import Layout from "../../layouts/Layout.astro";
 import { formatDate, slugify } from "../../utils/content";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("blog", ({ data }) => !data.draft);
+  const entries = await getCollection(
+    "blog",
+    ({ data }) => data.status === "published" && !data.draft
+  );
+
   return entries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -15,21 +19,27 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, description, publishDate, series, part, heroImage, category } =
-  entry.data;
+const { title, description, publishDate, series, part, heroImage, category } = entry.data;
+
 const heroImageModules = import.meta.glob<{ default: ImageMetadata }>(
   "/src/content/blog/images/*.{avif,gif,jpg,jpeg,png,webp,svg}"
 );
+
 const heroImagePath =
   typeof heroImage === "string"
     ? `/src/content/blog/${heroImage.replace(/^\.\//, "")}`
     : null;
+
 const heroImageAsset =
   typeof heroImage === "string"
     ? (await heroImageModules[heroImagePath ?? ""]?.())?.default ?? null
     : heroImage;
 
-const allEntries = await getCollection("blog", ({ data }) => !data.draft);
+const allEntries = await getCollection(
+  "blog",
+  ({ data }) => data.status === "published" && !data.draft
+);
+
 const seriesEntries = series
   ? allEntries
       .filter((post) => post.data.series === series)
@@ -45,91 +55,73 @@ const seriesEntries = series
         );
       })
   : [];
+
 const currentIndex = seriesEntries.findIndex((post) => post.slug === entry.slug);
-const previousEntry =
-  currentIndex > 0 ? seriesEntries[currentIndex - 1] : null;
+const previousEntry = currentIndex > 0 ? seriesEntries[currentIndex - 1] : null;
 const nextEntry =
   currentIndex >= 0 && currentIndex < seriesEntries.length - 1
     ? seriesEntries[currentIndex + 1]
     : null;
 ---
 
-<Layout>
-  <main class="container">
+<Layout title={title} description={description}>
+  <main class="container main-page">
     <article class="card">
       <header class="post-header">
         {(category || series) && (
           <div class="post-meta">
             {category && (
-              <a
-                href={`/blog/categories/${slugify(category)}`}
-                class="pill pill-link"
-              >
+              <a href={`/blog/categories/${slugify(category)}`} class="pill pill-link">
                 {category}
               </a>
             )}
             {series && (
-              <a
-                href={`/blog/series/${slugify(series)}`}
-                class="pill pill-link pill-muted"
-              >
+              <a href={`/blog/series/${slugify(series)}`} class="pill pill-link pill-muted">
                 {series}
                 {part != null ? ` · الجزء ${part}` : ""}
               </a>
             )}
           </div>
         )}
+
         <h1 class="hero-title">{title}</h1>
-        <time datetime={publishDate.toISOString()} class="meta">
-          {formatDate(publishDate)}
-        </time>
+        <time datetime={publishDate.toISOString()} class="meta">{formatDate(publishDate)}</time>
         {description && <p class="post-description">{description}</p>}
-        {heroImageAsset && (
-          <Image
-            src={heroImageAsset}
-            alt={title}
-            class="hero-image"
-            loading="eager"
-          />
-        )}
+        {heroImageAsset && <Image src={heroImageAsset} alt={title} class="hero-image" loading="eager" />}
       </header>
+
       <div class="prose">
         <Content />
       </div>
+
       {series && seriesEntries.length > 1 && (
         <footer class="series-nav">
           <div class="section-header">
             <h2 class="section-title">سلسلة {series}</h2>
-            <a href={`/blog/series/${slugify(series)}`} class="button-link">
-              عرض جميع الأجزاء
-            </a>
+            <a href={`/blog/series/${slugify(series)}`} class="button-link">عرض جميع الأجزاء</a>
           </div>
+
           <ul class="series-steps">
             {seriesEntries.map((post) => (
               <li class={post.slug === entry.slug ? "series-step active" : "series-step"}>
                 <a href={`/blog/${post.slug}`} class="series-step-link">
                   <span class="series-step-title">{post.data.title}</span>
-                  {post.data.part != null && (
-                    <span class="meta">الجزء {post.data.part}</span>
-                  )}
+                  {post.data.part != null && <span class="meta">الجزء {post.data.part}</span>}
                 </a>
               </li>
             ))}
           </ul>
+
           <div class="series-pagination">
             {previousEntry ? (
-              <a href={`/blog/${previousEntry.slug}`} class="button-link">
-                ← المقال السابق
-              </a>
+              <a href={`/blog/${previousEntry.slug}`} class="button-link">← المقال السابق</a>
             ) : (
-              <span class="muted">لا يوجد مقال سابق</span>
+              <span class="meta">لا يوجد مقال سابق</span>
             )}
             {nextEntry ? (
-              <a href={`/blog/${nextEntry.slug}`} class="button-link">
-                المقال التالي →
-              </a>
+              <a href={`/blog/${nextEntry.slug}`} class="button-link">المقال التالي →</a>
             ) : (
-              <span class="muted">لا يوجد مقال لاحق</span>
+              <span class="meta">لا يوجد مقال لاحق</span>
             )}
           </div>
         </footer>
