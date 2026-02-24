@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { GraduationCap, Briefcase, Crown, Cpu, Rocket } from "lucide-react";
-import type { Milestone, MilestoneType } from "./TimelineMilestone";
+import type { Milestone, MilestoneType } from "../features/journey/types";
 
 const typeConfig: Record<
   MilestoneType,

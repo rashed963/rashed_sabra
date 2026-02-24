@@ -1,4 +1,3 @@
-// Types shared across timeline components
 export type MilestoneType = "education" | "role" | "leadership" | "product" | "ai";
 
 export interface Milestone {
@@ -13,3 +12,4 @@ export interface Milestone {
   impact?: string;
   lesson?: string;
 }
+

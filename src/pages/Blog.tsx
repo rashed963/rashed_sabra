@@ -1,7 +1,9 @@
 ﻿import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
-import { blogPosts } from "../data/blog-posts";
+import PostCard from "../features/blog/PostCard";
+import { getAllBlogPosts } from "../features/blog/selectors";
+
+const posts = getAllBlogPosts();
 
 const Blog = () => (
   <Layout>
@@ -38,39 +40,8 @@ const Blog = () => (
 
     <section className="py-12 pb-24">
       <div className="container max-w-2xl space-y-4">
-        {blogPosts.map((post, i) => (
-          <motion.article
-            key={post.slug}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: i * 0.07, ease: "easeOut" }}
-            className="card-neural p-6 group"
-          >
-            <div className="mb-3 flex items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">{post.tag}</span>
-              <span className="text-muted-foreground/30">·</span>
-              <span className="text-xs text-muted-foreground/60">{post.readTime} قراءة</span>
-            </div>
-
-            <h2 className="mb-4 text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary md:text-2xl">
-              <Link to={`/blog/${post.slug}`} className="hover:underline underline-offset-4">
-                {post.title}
-              </Link>
-            </h2>
-
-            <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
-
-            <div className="flex items-center justify-between">
-              <time className="text-xs text-muted-foreground/50">{post.date}</time>
-              <Link
-                to={`/blog/${post.slug}`}
-                className="text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100"
-              >
-                اقرأ المقال ←
-              </Link>
-            </div>
-          </motion.article>
+        {posts.map((post, i) => (
+          <PostCard key={post.slug} post={post} index={i} />
         ))}
       </div>
     </section>

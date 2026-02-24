@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import { blogPosts } from "../data/blog-posts";
+import { getBlogPostBySlug } from "../features/blog/selectors";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find((item) => item.slug === slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return <Navigate to="/blog" replace />;

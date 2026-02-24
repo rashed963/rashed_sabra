@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Timeline } from "../components/Timeline";
-import { milestones } from "../data/milestones";
+import { milestones } from "../features/journey/data";
 import Layout from "../components/Layout";
 
 const themes = [

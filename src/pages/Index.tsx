@@ -1,14 +1,17 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import TypingEffect from "../components/TypingEffect";
-import { blogPosts } from "../data/blog-posts";
+import PostCard from "../features/blog/PostCard";
+import { getAllBlogPosts } from "../features/blog/selectors";
 
 const typingTexts = [
   "أبني أنظمة ذكية قابلة للتدقيق",
   "أقود فرقًا نحو تسليم منتجات موثوقة",
   "أصمم وكلاء ذكاء اصطناعي حتميين",
 ];
+
+const posts = getAllBlogPosts();
 
 const Index = () => (
   <Layout>
@@ -96,9 +99,7 @@ const Index = () => (
     <section className="py-16">
       <div className="container max-w-2xl">
         <div className="mb-10 flex items-baseline justify-between">
-          <h2 className="text-sm font-semibold text-foreground">
-            أحدث المقالات
-          </h2>
+          <h2 className="text-sm font-semibold text-foreground">أحدث المقالات</h2>
           <Link
             to="/blog"
             className="text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
@@ -108,31 +109,8 @@ const Index = () => (
         </div>
 
         <div className="space-y-4">
-          {blogPosts.map((post, i) => (
-            <motion.article
-              key={post.slug}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
-              className="card-neural p-6 group"
-            >
-              <div className="mb-3 flex items-center gap-3">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  {post.tag}
-                </span>
-                <span className="text-muted-foreground/30">·</span>
-                <time className="text-xs text-muted-foreground/60">{post.date}</time>
-              </div>
-              <h3 className="mb-3 text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
-                <Link to={`/blog/${post.slug}`} className="hover:underline underline-offset-4">
-                  {post.title}
-                </Link>
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {post.excerpt}
-              </p>
-            </motion.article>
+          {posts.map((post, i) => (
+            <PostCard key={post.slug} post={post} index={i} showReadTime={false} showReadMore={false} />
           ))}
         </div>
       </div>

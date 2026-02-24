@@ -1,4 +1,4 @@
-import type { Milestone } from "../components/TimelineMilestone";
+import type { Milestone } from "./types";
 
 export const milestones: Milestone[] = [
   {
@@ -65,3 +65,4 @@ export const milestones: Milestone[] = [
     lesson: "المستقبل للأنظمة التي يمكن تفسيرها والوثوق بها، لا الأكثر تعقيدًا.",
   },
 ];
+
