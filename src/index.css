@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Neural Dark Theme ────────────────────── */
+    --background:      220 25% 6%;
+    --foreground:      200 15% 92%;
+
+    --card:            220 22% 10%;
+    --card-foreground: 200 15% 92%;
+
+    --popover:         220 22% 10%;
+    --popover-foreground: 200 15% 92%;
+
+    --primary:         190 65% 55%;
+    --primary-foreground: 220 25% 6%;
+
+    --secondary:       220 20% 14%;
+    --secondary-foreground: 200 15% 88%;
+
+    --muted:           220 18% 13%;
+    --muted-foreground: 200 10% 55%;
+
+    --accent:          170 70% 45%;
+    --accent-foreground: 220 25% 6%;
+
+    --accent-warm:     35 85% 55%;
+    --accent-warm-foreground: 220 25% 6%;
+
+    --destructive:     0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:          220 18% 16%;
+    --input:           220 18% 16%;
+    --ring:            190 65% 55%;
+
+    --radius:          0.5rem;
+
+    /* ── Milestone type tokens ──────────────── */
+    --milestone-education:  210 60% 55%;
+    --milestone-role:       170 55% 45%;
+    --milestone-leadership: 35 78% 50%;
+    --milestone-product:    280 45% 55%;
+    --milestone-ai:         190 65% 55%;
+
+    /* ── Timeline ──────────────────────────── */
+    --timeline-line:  220 18% 18%;
+    --timeline-dot:   190 65% 55%;
+
+    /* ── Shadows ───────────────────────────── */
+    --shadow-card:        0 2px 8px 0 hsl(0 0% 0% / 0.3), 0 0 1px 0 hsl(190 65% 55% / 0.08);
+    --shadow-card-hover:  0 8px 30px 0 hsl(0 0% 0% / 0.4), 0 0 15px -5px hsl(190 65% 55% / 0.12);
+    --shadow-inset:       inset 0 1px 0 0 hsl(190 65% 55% / 0.04);
+
+    --sidebar-background: 220 25% 7%;
+    --sidebar-foreground: 200 15% 88%;
+    --sidebar-primary: 190 65% 55%;
+    --sidebar-primary-foreground: 220 25% 6%;
+    --sidebar-accent: 220 20% 14%;
+    --sidebar-accent-foreground: 200 15% 88%;
+    --sidebar-border: 220 18% 16%;
+    --sidebar-ring: 190 65% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+    font-feature-settings: "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.8;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  p, li {
+    font-weight: 400;
+    line-height: 1.85;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.22);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-mono {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  .chapter-num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  .ruled {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  /* Card with subtle neural border */
+  .card-neural {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .card-neural:hover {
+    border-color: hsl(var(--primary) / 0.25);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Arc gradient for timeline */
+  .arc-gradient {
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--milestone-education)),
+      hsl(var(--milestone-role)),
+      hsl(var(--milestone-leadership)),
+      hsl(var(--milestone-ai))
+    );
+  }
+}
