@@ -10,6 +10,11 @@
 - Removed obsolete files: `src/data/blog-posts.ts`, `src/data/milestones.ts`, `src/components/TimelineMilestone.tsx`, `src/App.css`.
 - Removed unused legacy content assets under `src/content`.
 
+## Phase 3: Centralized Frontend Change Points
+- Added `src/config/routes.ts` and `src/config/site.ts` as central sources for routes, navigation, profile, and external links.
+- Added `src/features/copy/ar.ts` as a central source for UI copy.
+- Added `src/features/journey/content.ts` for journey themes.
+- Rewired header, footer, routes, and page-level copy to consume centralized config/content files.
+
 ## Validation
 - Lint, tests, and production build must pass after each phase.
-

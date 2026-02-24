@@ -1,12 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/journey", label: "الرحلة" },
-  { href: "/blog", label: "المدونة" },
-];
+import { siteConfig } from "../config/site";
 
 const SiteHeader = () => {
   const { pathname } = useLocation();
@@ -17,19 +12,19 @@ const SiteHeader = () => {
       <div className="container flex h-14 items-center justify-between">
         {/* Wordmark */}
         <Link
-          to="/"
+          to={siteConfig.navigation[0].href}
           className="group flex items-center gap-2.5 text-foreground transition-opacity hover:opacity-70"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          <span className="text-sm font-bold tracking-wide">راشد صبرة</span>
+          <span className="text-sm font-bold tracking-wide">{siteConfig.profile.name}</span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden sm:flex items-center gap-1">
-          {navLinks.map((link) => {
+          {siteConfig.navigation.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
@@ -58,7 +53,7 @@ const SiteHeader = () => {
         <button
           className="sm:hidden flex flex-col gap-1.5 p-2 text-foreground"
           onClick={() => setMenuOpen((v) => !v)}
-          aria-label="القائمة"
+          aria-label="فتح القائمة"
         >
           <span className={`block h-0.5 w-5 bg-foreground rounded transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
           <span className={`block h-0.5 w-5 bg-foreground rounded transition-all ${menuOpen ? "opacity-0" : ""}`} />
@@ -77,7 +72,7 @@ const SiteHeader = () => {
             className="sm:hidden overflow-hidden border-b border-border/30 bg-background/95 backdrop-blur-xl"
           >
             <nav className="container flex flex-col py-3 gap-1">
-              {navLinks.map((link) => (
+              {siteConfig.navigation.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}

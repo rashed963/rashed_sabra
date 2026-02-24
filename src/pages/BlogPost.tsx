@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
+import { routes } from "../config/routes";
+import { copyAr } from "../features/copy/ar";
 import { getBlogPostBySlug } from "../features/blog/selectors";
 
 const BlogPost = () => {
@@ -8,15 +10,15 @@ const BlogPost = () => {
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
-    return <Navigate to="/blog" replace />;
+    return <Navigate to={routes.blog} replace />;
   }
 
   return (
     <Layout>
       <article className="pt-16 pb-24 md:pt-24">
         <div className="container max-w-2xl">
-          <Link to="/blog" className="mb-8 inline-flex text-sm font-medium text-primary hover:underline">
-            → العودة إلى المدونة
+          <Link to={routes.blog} className="mb-8 inline-flex text-sm font-medium text-primary hover:underline">
+            {copyAr.common.backToBlog}
           </Link>
 
           <motion.header
@@ -30,7 +32,9 @@ const BlogPost = () => {
               <span className="text-muted-foreground/30">·</span>
               <time className="text-xs text-muted-foreground/60">{post.date}</time>
               <span className="text-muted-foreground/30">·</span>
-              <span className="text-xs text-muted-foreground/60">{post.readTime} قراءة</span>
+              <span className="text-xs text-muted-foreground/60">
+                {post.readTime} {copyAr.common.readLabel}
+              </span>
             </div>
 
             <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">{post.title}</h1>

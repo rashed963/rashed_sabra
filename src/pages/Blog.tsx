@@ -1,6 +1,7 @@
 ﻿import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import PostCard from "../features/blog/PostCard";
+import { copyAr } from "../features/copy/ar";
 import { getAllBlogPosts } from "../features/blog/selectors";
 
 const posts = getAllBlogPosts();
@@ -15,7 +16,7 @@ const Blog = () => (
           transition={{ duration: 0.4 }}
           className="mb-4 text-sm font-medium tracking-wide text-primary"
         >
-          أفكار وتحليلات
+          {copyAr.blog.eyebrow}
         </motion.p>
 
         <motion.h1
@@ -24,7 +25,7 @@ const Blog = () => (
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-5 text-5xl font-bold md:text-6xl"
         >
-          المدونة
+          {copyAr.blog.title}
         </motion.h1>
 
         <motion.p
@@ -33,7 +34,7 @@ const Blog = () => (
           transition={{ duration: 0.5, delay: 0.08, ease: "easeOut" }}
           className="text-base leading-relaxed text-muted-foreground"
         >
-          مقالات في الأتمتة الذكية، القيادة التقنية، وبناء الأنظمة.
+          {copyAr.blog.subtitle}
         </motion.p>
       </div>
     </section>

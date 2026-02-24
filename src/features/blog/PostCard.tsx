@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { blogPostPath } from "../../config/routes";
+import { copyAr } from "../copy/ar";
 import type { BlogPost } from "./types";
 
 type PostCardProps = {
@@ -22,12 +24,12 @@ const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: Pos
       <span className="text-xs font-semibold uppercase tracking-wider text-primary">{post.tag}</span>
       <span className="text-muted-foreground/30">·</span>
       <span className="text-xs text-muted-foreground/60">
-        {showReadTime ? `${post.readTime} قراءة` : post.date}
+        {showReadTime ? `${post.readTime} ${copyAr.common.readLabel}` : post.date}
       </span>
     </div>
 
     <h2 className="mb-4 text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary md:text-2xl">
-      <Link to={`/blog/${post.slug}`} className="hover:underline underline-offset-4">
+      <Link to={blogPostPath(post.slug)} className="hover:underline underline-offset-4">
         {post.title}
       </Link>
     </h2>
@@ -38,10 +40,10 @@ const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: Pos
       <div className="flex items-center justify-between">
         <time className="text-xs text-muted-foreground/50">{post.date}</time>
         <Link
-          to={`/blog/${post.slug}`}
+          to={blogPostPath(post.slug)}
           className="text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100"
         >
-          اقرأ المقال ←
+          {copyAr.common.readPostCta}
         </Link>
       </div>
     )}
@@ -49,4 +51,3 @@ const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: Pos
 );
 
 export default PostCard;
-
