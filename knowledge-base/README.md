@@ -1,18 +1,23 @@
-<!-- knowledge-base/README.md -->
+﻿# Knowledge Base
 
-# Knowledge Base (Local Only)
+This folder captures stable project context for ongoing maintenance decisions.
 
-This folder is **private and local-only**. It is intended for Cursor (or any IDE agent) to understand the project context and personal background.
-
-- Do **not** commit this folder to Git.
-- Keep the content short and factual.
-- Update these files whenever goals, tone, or personal context changes.
+## Scope
+- Keep content short, factual, and updated when architecture/process changes.
+- This folder is currently tracked in Git for team/agent continuity.
 
 ## Files
+- `project-goal.md`: product direction, audience, workflow, and technical approach.
+- `personal-background.md`: personal/professional context and writing focus.
 
-- `project-goal.md` — Project vision, audience, priorities, tone, and out-of-scope.
-- `personal-background.md` — Your background, preferences, constraints, and writing topics (as provided).
+## Current maintenance change points
+Most routine frontend updates should be done in:
+- `src/config/routes.ts`
+- `src/config/site.ts`
+- `src/features/copy/ar.ts`
+- `src/features/blog/data.ts`
+- `src/features/journey/data.ts`
+- `src/features/journey/content.ts`
 
-## Source of truth
-- Personal profile reference (do not embed here unless needed):  
-  `https://www.linkedin.com/in/rashed-sabra` :contentReference[oaicite:0]{index=0}
+## Reference
+- LinkedIn: `https://www.linkedin.com/in/rashed-sabra`
