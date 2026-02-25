@@ -2,12 +2,13 @@ import { motion } from "framer-motion";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { routes } from "../config/routes";
+import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import { copyAr } from "../features/copy/ar";
 import { getBlogPostBySlug } from "../features/blog/selectors";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = getBlogPostBySlug(slug);
+  const post = getBlogPostBySlug(slug, DEFAULT_BLOG_LANGUAGE);
 
   if (!post) {
     return <Navigate to={routes.blog} replace />;

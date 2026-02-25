@@ -4,11 +4,12 @@ import Layout from "../components/Layout";
 import { routes } from "../config/routes";
 import { siteConfig } from "../config/site";
 import TypingEffect from "../components/TypingEffect";
+import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import PostCard from "../features/blog/PostCard";
 import { copyAr } from "../features/copy/ar";
 import { getAllBlogPosts } from "../features/blog/selectors";
 
-const posts = getAllBlogPosts();
+const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
 
 const Index = () => (
   <Layout>
