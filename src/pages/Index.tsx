@@ -19,7 +19,7 @@ const Index = () => (
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-5 text-sm font-medium tracking-wide text-primary"
+          className="mb-6 text-base font-semibold tracking-wide text-primary/90 md:text-lg"
         >
           {siteConfig.profile.role}
         </motion.p>
@@ -37,11 +37,11 @@ const Index = () => (
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.14 }}
-          className="mb-8 h-8"
+          className="mb-7 h-8"
         >
           <TypingEffect
             texts={copyAr.home.typingTexts}
-            className="text-base text-muted-foreground"
+            className="text-sm text-muted-foreground md:text-base"
             speed={55}
             pauseMs={2800}
             prefix=""
@@ -52,7 +52,7 @@ const Index = () => (
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut", delay: 0.2 }}
-          className="mb-10 max-w-lg text-base leading-relaxed text-muted-foreground"
+          className="mb-10 max-w-xl text-base leading-relaxed text-muted-foreground"
         >
           {copyAr.home.bio}
         </motion.p>

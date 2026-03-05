@@ -1,7 +1,9 @@
 ﻿import { motion } from "framer-motion";
 import { Timeline } from "../components/Timeline";
+import { Link } from "react-router-dom";
 import { siteConfig } from "../config/site";
 import Layout from "../components/Layout";
+import { routes } from "../config/routes";
 import { copyAr } from "../features/copy/ar";
 import { milestones } from "../features/journey/data";
 import { journeyThemes } from "../features/journey/content";
@@ -84,6 +86,33 @@ const Journey = () => (
       <div className="container max-w-2xl">
         <h2 className="mb-10 text-sm font-semibold text-foreground">{copyAr.journey.timelineTitle}</h2>
         <Timeline milestones={milestones} />
+      </div>
+    </section>
+
+    <div className="container max-w-2xl">
+      <div className="ruled" />
+    </div>
+
+    <section className="py-16">
+      <div className="container max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="card-neural p-7 md:p-9"
+        >
+          <h2 className="mb-3 text-2xl font-bold text-foreground">{copyAr.blog.title}</h2>
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+            {copyAr.blog.subtitle}
+          </p>
+          <Link
+            to={routes.blog}
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
+          >
+            {copyAr.home.showAllCta}
+          </Link>
+        </motion.div>
       </div>
     </section>
   </Layout>

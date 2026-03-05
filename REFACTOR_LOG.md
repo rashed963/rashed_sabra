@@ -18,3 +18,9 @@
 
 ## Validation
 - Lint, tests, and production build must pass after each phase.
+
+## Phase 4: Positioning and Narrative Flow
+- Strengthened homepage identity hierarchy in `src/pages/Index.tsx` by increasing visual weight for the primary role line and reducing emphasis on rotating helper copy.
+- Improved hero readability by slightly widening the bio measure to keep the primary positioning statement legible.
+- Added a narrative bridge section in `src/pages/Journey.tsx` that directs visitors from career proof (`Journey`) to thought leadership (`Blog`).
+- Introduced explicit `Journey -> Blog` CTA via `routes.blog` to make the user path intentional rather than implicit.
