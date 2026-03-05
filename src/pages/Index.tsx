@@ -8,8 +8,15 @@ import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import PostCard from "../features/blog/PostCard";
 import { copyAr } from "../features/copy/ar";
 import { getAllBlogPosts } from "../features/blog/selectors";
+import { milestones } from "../features/journey/data";
+import { journeyThemes } from "../features/journey/content";
 
 const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
+const proofStats = [
+  { value: milestones.length, label: copyAr.journey.timelineTitle },
+  { value: journeyThemes.length, label: copyAr.journey.themesTitle },
+  { value: posts.length, label: copyAr.home.latestPostsTitle },
+];
 
 const Index = () => (
   <Layout>
@@ -77,6 +84,36 @@ const Index = () => (
             {copyAr.home.blogCta}
             <span aria-hidden="true">←</span>
           </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.32, ease: "easeOut" }}
+          className="mt-8 grid gap-3 sm:grid-cols-3"
+        >
+          {proofStats.map((item) => (
+            <div key={item.label} className="card-neural px-4 py-3">
+              <p className="text-2xl font-bold chapter-num text-foreground">{item.value}</p>
+              <p className="text-xs font-medium text-muted-foreground">{item.label}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.38, ease: "easeOut" }}
+          className="mt-6"
+        >
+          <a
+            href={siteConfig.external.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/15"
+          >
+            {copyAr.common.linkedInCta}
+          </a>
         </motion.div>
       </div>
     </section>

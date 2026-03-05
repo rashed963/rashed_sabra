@@ -30,3 +30,14 @@
 - Added topic query filtering (`?topic=`) in `src/pages/Blog.tsx` with visible filter chips.
 - Extended `src/pages/Journey.tsx` theme cards to show related blog links and fallback topic navigation.
 - Updated knowledge base narrative guidance in `knowledge-base/site-narrative-flow.md`.
+
+## Phase 6: Trust Signals and Reading Focus
+- Added a proof strip in `src/pages/Index.tsx` using real counts from milestones, themes, and published posts.
+- Updated `src/components/NeuralBackground.tsx` to avoid pointer interception (`pointer-events-none`) so content interaction remains primary.
+- Added reduced-motion behavior in `src/components/NeuralBackground.tsx` with lower node count and disabled cursor-reactive effects.
+
+## Phase 7: Conversion and Credibility Hardening
+- Added explicit contact CTAs on `src/pages/Index.tsx` and `src/pages/BlogPost.tsx` using the canonical LinkedIn entry point.
+- Added milestone outcome chips in `src/components/Timeline.tsx` to surface practical delivery signals.
+- Enabled route-level lazy loading in `src/App.tsx` and lazy loading for heavy visuals/components in `src/components/Layout.tsx` and `src/pages/Journey.tsx`.
+- Verified production bundle now splits into smaller page/component chunks with no large-chunk warning.

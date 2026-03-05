@@ -9,6 +9,7 @@ export interface Milestone {
   type: MilestoneType;
   context: string;
   actions: string[];
+  outcomes?: string[];
   impact?: string;
   lesson?: string;
 }

@@ -1,5 +1,5 @@
 ﻿import { motion } from "framer-motion";
-import { Timeline } from "../components/Timeline";
+import { Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/site";
 import Layout from "../components/Layout";
@@ -10,6 +10,10 @@ import { getAllBlogPosts } from "../features/blog/selectors";
 import { getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
 import { milestones } from "../features/journey/data";
 import { journeyThemes } from "../features/journey/content";
+
+const Timeline = lazy(() =>
+  import("../components/Timeline").then((module) => ({ default: module.Timeline })),
+);
 
 const topicOrder: BlogTopicId[] = [
   "engineering-leadership",
@@ -125,7 +129,9 @@ const Journey = () => (
     <section className="py-16">
       <div className="container max-w-2xl">
         <h2 className="mb-10 text-sm font-semibold text-foreground">{copyAr.journey.timelineTitle}</h2>
-        <Timeline milestones={milestones} />
+        <Suspense fallback={<div className="h-24 rounded-md border border-border/50 bg-secondary/40" aria-hidden="true" />}>
+          <Timeline milestones={milestones} />
+        </Suspense>
       </div>
     </section>
 

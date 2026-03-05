@@ -39,6 +39,13 @@ const typeConfig: Record<
   },
 };
 
+const fallbackOutcomes: Record<string, string[]> = {
+  masters: ["NLP specialization", "Scalable AI systems foundation"],
+  "l-one": ["ESA-funded platform", "CAD and robotics workflow delivery"],
+  "wianco-lead": ["Cross-functional engineering leadership", "Operational roadmap ownership"],
+  "ai-direction": ["Deterministic agent systems", "On-prem enterprise AI delivery"],
+};
+
 interface MilestoneCardProps {
   milestone: Milestone;
   index: number;
@@ -49,6 +56,7 @@ const MilestoneCard = ({ milestone, index, total }: MilestoneCardProps) => {
   const config = typeConfig[milestone.type];
   const Icon = config.icon;
   const isLast = index === total - 1;
+  const outcomes = milestone.outcomes ?? fallbackOutcomes[milestone.id] ?? [];
 
   return (
     <motion.div
@@ -119,6 +127,19 @@ const MilestoneCard = ({ milestone, index, total }: MilestoneCardProps) => {
               <span className="font-bold text-accent">الأثر — </span>
               {milestone.impact}
             </p>
+          </div>
+        )}
+
+        {outcomes.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {outcomes.map((outcome) => (
+              <span
+                key={outcome}
+                className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary/90"
+              >
+                {outcome}
+              </span>
+            ))}
           </div>
         )}
 

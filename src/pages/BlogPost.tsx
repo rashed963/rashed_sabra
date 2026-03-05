@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { routes } from "../config/routes";
+import { siteConfig } from "../config/site";
 import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import { copyAr } from "../features/copy/ar";
 import { getBlogPostBySlug } from "../features/blog/selectors";
@@ -126,6 +127,22 @@ const BlogPost = () => {
               loading="lazy"
             />
             {post.content.map((block, index) => renderBlock(block, index))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.12, ease: "easeOut" }}
+            className="mt-6 card-neural p-6"
+          >
+            <a
+              href={siteConfig.external.linkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              {copyAr.common.linkedInCta}
+            </a>
           </motion.div>
         </div>
       </article>
