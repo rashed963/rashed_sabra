@@ -58,18 +58,11 @@ function parseFrontmatter(raw: string) {
   return { frontmatter: parsedFrontmatter, markdownBody };
 }
 
-function markdownToParagraphs(markdown: string) {
+function markdownToBlocks(markdown: string) {
   return markdown
     .split(/\n\s*\n/g)
     .map((block) => block.trim())
-    .filter(Boolean)
-    .map((block) =>
-      block
-        .replace(/^#{1,6}\s+/gm, "")
-        .replace(/^-\s+/gm, "• ")
-        .replace(/\n/g, " ")
-        .trim(),
-    );
+    .filter(Boolean);
 }
 
 function formatDateForLanguage(date: string, language: BlogLanguage) {
@@ -94,6 +87,6 @@ export function parseMarkdownPost(rawMarkdown: string): ParsedMarkdown {
       ...frontmatter,
       dateDisplay: formatDateForLanguage(frontmatter.date, frontmatter.language),
     },
-    content: markdownToParagraphs(markdownBody),
+    content: markdownToBlocks(markdownBody),
   };
 }

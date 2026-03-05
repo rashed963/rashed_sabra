@@ -15,3 +15,9 @@ Create blog posts as markdown files for reliable, versioned publishing.
 2. Open the generated file in `src/content/blog/`.
 3. Update frontmatter values and article body.
 4. Run the app and verify the article appears in `/blog`.
+
+## Supported markdown blocks
+- Headings: `#`, `##`, `###`
+- Bullet lists: lines starting with `- `
+- Block quotes: lines starting with `>`
+- Paragraphs separated by empty lines

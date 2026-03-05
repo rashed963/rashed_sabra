@@ -6,6 +6,77 @@ import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import { copyAr } from "../features/copy/ar";
 import { getBlogPostBySlug } from "../features/blog/selectors";
 
+const renderBlock = (block: string, index: number) => {
+  const headingMatch = block.match(/^(#{1,3})\s+(.+)$/);
+  if (headingMatch) {
+    const level = headingMatch[1].length;
+    const text = headingMatch[2].trim();
+
+    if (level === 1) {
+      return (
+        <h2 key={index} className="text-2xl font-bold leading-snug text-foreground md:text-3xl">
+          {text}
+        </h2>
+      );
+    }
+
+    if (level === 2) {
+      return (
+        <h3 key={index} className="text-xl font-bold leading-snug text-foreground md:text-2xl">
+          {text}
+        </h3>
+      );
+    }
+
+    return (
+      <h4 key={index} className="text-lg font-semibold leading-snug text-foreground">
+        {text}
+      </h4>
+    );
+  }
+
+  if (block.startsWith(">")) {
+    const quote = block
+      .split("\n")
+      .map((line) => line.replace(/^>\s?/, "").trim())
+      .filter(Boolean)
+      .join(" ");
+
+    return (
+      <blockquote
+        key={index}
+        className="border-r-2 border-primary/45 bg-secondary/45 px-4 py-3 text-base leading-relaxed text-foreground/85"
+      >
+        {quote}
+      </blockquote>
+    );
+  }
+
+  const listLines = block
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => /^-\s+/.test(line));
+
+  if (listLines.length > 0 && listLines.length === block.split("\n").filter(Boolean).length) {
+    return (
+      <ul key={index} className="space-y-2 text-base leading-relaxed text-foreground/90">
+        {listLines.map((line, lineIndex) => (
+          <li key={`${index}-${lineIndex}`} className="flex items-start gap-2.5">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+            <span>{line.replace(/^-\s+/, "")}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <p key={index} className="text-base leading-loose text-foreground/90">
+      {block.replace(/\n/g, " ")}
+    </p>
+  );
+};
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = getBlogPostBySlug(slug, DEFAULT_BLOG_LANGUAGE);
@@ -54,11 +125,7 @@ const BlogPost = () => {
               className="h-auto w-full rounded-md border border-border object-cover"
               loading="lazy"
             />
-            {post.content.map((paragraph) => (
-              <p key={paragraph} className="text-base leading-relaxed text-foreground/90">
-                {paragraph}
-              </p>
-            ))}
+            {post.content.map((block, index) => renderBlock(block, index))}
           </motion.div>
         </div>
       </article>
