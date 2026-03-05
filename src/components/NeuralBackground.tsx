@@ -21,9 +21,9 @@ const NeuralBackground = () => {
   const CONNECTION_DIST = 180;
   const MOUSE_RADIUS = 220;
 
-  const initNodes = useCallback((w: number, h: number) => {
+  const initNodes = useCallback((w: number, h: number, count: number = NODE_COUNT) => {
     const nodes: Node[] = [];
-    for (let i = 0; i < NODE_COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       nodes.push({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -42,6 +42,7 @@ const NeuralBackground = () => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -51,7 +52,7 @@ const NeuralBackground = () => {
       canvas.style.height = `${window.innerHeight}px`;
       ctx.scale(dpr, dpr);
       if (nodesRef.current.length === 0) {
-        initNodes(window.innerWidth, window.innerHeight);
+        initNodes(window.innerWidth, window.innerHeight, reduceMotion ? 28 : NODE_COUNT);
       }
     };
 
@@ -61,7 +62,9 @@ const NeuralBackground = () => {
 
     resize();
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", handleMouse);
+    if (!reduceMotion) {
+      window.addEventListener("mousemove", handleMouse);
+    }
 
     const draw = () => {
       const w = window.innerWidth;
@@ -108,7 +111,7 @@ const NeuralBackground = () => {
           if (dist < CONNECTION_DIST) {
             const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
             // Pulse the connection
-            const pulse = Math.sin(timeRef.current * 0.02 + i * 0.5) * 0.5 + 0.5;
+            const pulse = reduceMotion ? 1 : Math.sin(timeRef.current * 0.02 + i * 0.5) * 0.5 + 0.5;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -117,7 +120,7 @@ const NeuralBackground = () => {
             ctx.stroke();
 
             // Data packet animation along some connections
-            if (dist < CONNECTION_DIST * 0.6 && (i + j) % 5 === 0) {
+            if (!reduceMotion && dist < CONNECTION_DIST * 0.6 && (i + j) % 5 === 0) {
               const t = ((timeRef.current * 0.008 + i * 0.3) % 1);
               const px = nodes[i].x + (nodes[j].x - nodes[i].x) * t;
               const py = nodes[i].y + (nodes[j].y - nodes[i].y) * t;
@@ -149,7 +152,7 @@ const NeuralBackground = () => {
       }
 
       // Mouse glow
-      if (mouse.x > 0 && mouse.y > 0) {
+      if (!reduceMotion && mouse.x > 0 && mouse.y > 0) {
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, MOUSE_RADIUS * 0.7);
         gradient.addColorStop(0, "hsla(190, 70%, 55%, 0.04)");
         gradient.addColorStop(1, "hsla(190, 70%, 55%, 0)");
@@ -167,14 +170,16 @@ const NeuralBackground = () => {
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouse);
+      if (!reduceMotion) {
+        window.removeEventListener("mousemove", handleMouse);
+      }
     };
   }, [initNodes]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-auto"
+      className="fixed inset-0 z-0 pointer-events-none"
       style={{ background: "transparent" }}
     />
   );
