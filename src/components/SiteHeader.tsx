@@ -30,6 +30,7 @@ const SiteHeader = () => {
               <Link
                 key={link.href}
                 to={link.href}
+                aria-current={active ? "page" : undefined}
                 className={`relative px-4 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                   active
                     ? "text-primary"
@@ -53,6 +54,8 @@ const SiteHeader = () => {
         <button
           className="sm:hidden flex flex-col gap-1.5 p-2 text-foreground"
           onClick={() => setMenuOpen((v) => !v)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
           aria-label="فتح القائمة"
         >
           <span className={`block h-0.5 w-5 bg-foreground rounded transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
@@ -71,12 +74,13 @@ const SiteHeader = () => {
             transition={{ duration: 0.2 }}
             className="sm:hidden overflow-hidden border-b border-border/30 bg-background/95 backdrop-blur-xl"
           >
-            <nav className="container flex flex-col py-3 gap-1">
+            <nav id="mobile-navigation" className="container flex flex-col py-3 gap-1">
               {siteConfig.navigation.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
                   onClick={() => setMenuOpen(false)}
+                  aria-current={pathname === link.href ? "page" : undefined}
                   className={`px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
                     pathname === link.href
                       ? "bg-primary/10 text-primary"

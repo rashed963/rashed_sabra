@@ -59,13 +59,14 @@ const Blog = () => {
             {copyAr.blog.subtitle}
           </motion.p>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-6 flex flex-wrap gap-2" role="group" aria-label="Blog topic filters">
             {topicFilters.map((topic) => {
               const isActive = activeTopic === topic.id;
               return (
                 <button
                   key={topic.id}
                   type="button"
+                  aria-pressed={isActive}
                   onClick={() => {
                     if (topic.id === "all") {
                       setSearchParams({});

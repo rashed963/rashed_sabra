@@ -20,6 +20,8 @@ Keep a consistent visitor mental model across pages and prevent disconnected bro
 - In `src/components/NeuralBackground.tsx`, interaction priority is protected with `pointer-events-none` and reduced-motion safeguards.
 - In `src/pages/Index.tsx` and `src/pages/BlogPost.tsx`, contact CTA placement gives a clear post-read next action.
 - In `src/App.tsx`, route-level lazy loading keeps initial load focused on the current page.
+- In `src/components/Layout.tsx`, skip-link and `main` landmark wiring supports keyboard-first navigation.
+- In `src/components/SiteHeader.tsx` and `src/pages/Blog.tsx`, stateful controls expose ARIA semantics (`aria-current`, `aria-expanded`, `aria-pressed`).
 
 ## Editing rule
 When updating any page copy or CTA, verify that the `Home -> Journey -> Blog` progression remains explicit.

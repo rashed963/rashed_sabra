@@ -41,3 +41,9 @@
 - Added milestone outcome chips in `src/components/Timeline.tsx` to surface practical delivery signals.
 - Enabled route-level lazy loading in `src/App.tsx` and lazy loading for heavy visuals/components in `src/components/Layout.tsx` and `src/pages/Journey.tsx`.
 - Verified production bundle now splits into smaller page/component chunks with no large-chunk warning.
+
+## Phase 8: Accessibility Hardening
+- Added a skip-to-content link and focusable `main` landmark in `src/components/Layout.tsx`.
+- Added `aria-current`, `aria-expanded`, and `aria-controls` semantics to navigation controls in `src/components/SiteHeader.tsx`.
+- Added `aria-pressed` and labeled grouping for topic filter chips in `src/pages/Blog.tsx`.
+- Revalidated with lint, test, and production build.
