@@ -24,3 +24,9 @@
 - Improved hero readability by slightly widening the bio measure to keep the primary positioning statement legible.
 - Added a narrative bridge section in `src/pages/Journey.tsx` that directs visitors from career proof (`Journey`) to thought leadership (`Blog`).
 - Introduced explicit `Journey -> Blog` CTA via `routes.blog` to make the user path intentional rather than implicit.
+
+## Phase 5: Topic-Level Information Architecture
+- Added `src/features/blog/topics.ts` to centralize post topic classification.
+- Added topic query filtering (`?topic=`) in `src/pages/Blog.tsx` with visible filter chips.
+- Extended `src/pages/Journey.tsx` theme cards to show related blog links and fallback topic navigation.
+- Updated knowledge base narrative guidance in `knowledge-base/site-narrative-flow.md`.

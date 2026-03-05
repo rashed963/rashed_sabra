@@ -3,10 +3,21 @@ import { Timeline } from "../components/Timeline";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/site";
 import Layout from "../components/Layout";
-import { routes } from "../config/routes";
+import { blogPostPath, routes } from "../config/routes";
 import { copyAr } from "../features/copy/ar";
+import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
+import { getAllBlogPosts } from "../features/blog/selectors";
+import { getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
 import { milestones } from "../features/journey/data";
 import { journeyThemes } from "../features/journey/content";
+
+const topicOrder: BlogTopicId[] = [
+  "engineering-leadership",
+  "arabic-nlp",
+  "robotics-simulation",
+];
+
+const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
 
 const Journey = () => (
   <Layout>
@@ -60,20 +71,49 @@ const Journey = () => (
       <div className="container max-w-2xl">
         <h2 className="mb-8 text-sm font-semibold text-foreground">{copyAr.journey.themesTitle}</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          {journeyThemes.map((theme, i) => (
-            <motion.div
-              key={theme.title}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="card-neural p-5"
-            >
-              <span className="mb-3 block text-3xl font-bold text-primary/15 chapter-num">{theme.num}</span>
-              <h3 className="mb-2 text-base font-bold text-foreground">{theme.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{theme.description}</p>
-            </motion.div>
-          ))}
+          {journeyThemes.map((theme, i) => {
+            const topic = topicOrder[i] ?? "general";
+            const relatedPosts = getPostsByTopic(posts, topic).slice(0, 2);
+
+            return (
+              <motion.div
+                key={theme.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="card-neural p-5"
+              >
+                <span className="mb-3 block text-3xl font-bold text-primary/15 chapter-num">{theme.num}</span>
+                <h3 className="mb-2 text-base font-bold text-foreground">{theme.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{theme.description}</p>
+
+                <div className="mt-4 ruled pt-3">
+                  {relatedPosts.length > 0 ? (
+                    <ul className="space-y-2">
+                      {relatedPosts.map((post) => (
+                        <li key={post.slug}>
+                          <Link
+                            to={blogPostPath(post.slug)}
+                            className="text-xs font-medium text-primary hover:underline underline-offset-4"
+                          >
+                            {post.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <Link
+                      to={`${routes.blog}?topic=${topic}`}
+                      className="text-xs font-medium text-primary hover:underline underline-offset-4"
+                    >
+                      {copyAr.blog.title}
+                    </Link>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
