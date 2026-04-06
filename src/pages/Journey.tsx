@@ -8,8 +8,7 @@ import { copyAr } from "../features/copy/ar";
 import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import { getAllBlogPosts } from "../features/blog/selectors";
 import { getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
-import { milestones } from "../features/journey/data";
-import { journeyThemes } from "../features/journey/content";
+import { milestones, journeyThemes } from "../features/journey/content";
 
 const Timeline = lazy(() =>
   import("../components/Timeline").then((module) => ({ default: module.Timeline })),

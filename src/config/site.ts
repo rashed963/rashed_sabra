@@ -1,14 +1,13 @@
 import { routes } from "./routes";
+import synced from "./synced-content.json";
 
 export const siteConfig = {
   profile: {
-    firstName: "راشد",
-    lastName: "صبرة",
-    name: "راشد صبرة",
-    role: "مهندس ذكاء اصطناعي · رئيس التقنية والمنتج",
+    name: synced.profile.name,
+    role: synced.profile.role,
   },
   external: {
-    linkedIn: "https://www.linkedin.com/in/rashed-sabra",
+    linkedIn: synced.profile.linkedIn,
   },
   navigation: [
     { href: routes.home, label: "الرئيسية" },

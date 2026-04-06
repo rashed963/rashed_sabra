@@ -2,8 +2,7 @@ import { Navigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { routes } from "@/config/routes";
 
-const commandExample =
-  "npm run article:new -- --slug your-article-slug --lang ar";
+const notionDbUrl = "https://www.notion.so/fe62fb415bef45a196be5654c76aefea";
 
 const AdminNewArticle = () => {
   if (!import.meta.env.DEV) {
@@ -13,19 +12,33 @@ const AdminNewArticle = () => {
   return (
     <Layout>
       <section className="pt-16 pb-24 md:pt-24">
-        <div className="container max-w-2xl space-y-6">
-          <h1 className="text-4xl font-bold md:text-5xl">Admin: New Article</h1>
-          <p className="text-base text-muted-foreground">
-            Article creation is file-based for reliability. Use the local generator command to create a markdown file
-            in <code>src/content/blog</code>.
-          </p>
-          <div className="card-neural p-6">
-            <p className="mb-3 text-sm text-muted-foreground">Run this in your terminal:</p>
-            <pre className="overflow-x-auto rounded-md bg-secondary/60 p-4 text-sm">{commandExample}</pre>
+        <div className="container max-w-2xl space-y-8">
+          <h1 className="text-4xl font-bold md:text-5xl">Content</h1>
+
+          <div className="card-neural p-6 space-y-4">
+            <p className="text-sm font-semibold text-foreground">Blog posts — via Notion</p>
+            <p className="text-sm text-muted-foreground">
+              Write articles in the{" "}
+              <a href={notionDbUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">
+                Blog Posts database
+              </a>
+              . Check <code>Published</code>, then sync:
+            </p>
+            <pre className="overflow-x-auto rounded-md bg-secondary/60 p-4 text-sm">npm run sync:notion</pre>
+            <p className="text-xs text-muted-foreground">
+              Or sync + build in one step: <code>npm run sync:build</code>
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">
-            This page is intentionally hidden from navigation and only available in development.
-          </p>
+
+          <div className="card-neural p-6 space-y-4">
+            <p className="text-sm font-semibold text-foreground">New journey milestone</p>
+            <pre className="overflow-x-auto rounded-md bg-secondary/60 p-4 text-sm">
+              {"npm run milestone:new -- --id new-role --order 5 --title \"عنوان المحطة\" --org \"المؤسسة\" --type role"}
+            </pre>
+            <p className="text-xs text-muted-foreground">Then edit the generated file in <code>src/content/journey/milestones/</code></p>
+          </div>
+
+          <p className="text-sm text-muted-foreground">This page is only available in development.</p>
         </div>
       </section>
     </Layout>

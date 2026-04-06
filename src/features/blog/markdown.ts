@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { parseFrontmatter } from "../../lib/parse-frontmatter";
 import type { BlogLanguage } from "./types";
 
 const frontmatterSchema = z.object({
@@ -18,45 +19,6 @@ type ParsedMarkdown = {
   frontmatter: BlogFrontmatter & { dateDisplay: string };
   content: string[];
 };
-
-function normalize(input: string) {
-  return input.replace(/\r\n/g, "\n").trim();
-}
-
-function parseFrontmatter(raw: string) {
-  const normalized = normalize(raw);
-  if (!normalized.startsWith("---\n")) {
-    throw new Error("Markdown file is missing frontmatter start delimiter.");
-  }
-
-  const endMarker = "\n---\n";
-  const endIndex = normalized.indexOf(endMarker, 4);
-  if (endIndex === -1) {
-    throw new Error("Markdown file is missing frontmatter end delimiter.");
-  }
-
-  const frontmatterBody = normalized.slice(4, endIndex);
-  const markdownBody = normalized.slice(endIndex + endMarker.length).trim();
-  const pairs = Object.fromEntries(
-    frontmatterBody
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .map((line) => {
-        const separatorIndex = line.indexOf(":");
-        if (separatorIndex <= 0) {
-          throw new Error(`Invalid frontmatter line: ${line}`);
-        }
-
-        const key = line.slice(0, separatorIndex).trim();
-        const value = line.slice(separatorIndex + 1).trim();
-        return [key, value];
-      }),
-  );
-
-  const parsedFrontmatter = frontmatterSchema.parse(pairs);
-  return { frontmatter: parsedFrontmatter, markdownBody };
-}
 
 function markdownToBlocks(markdown: string) {
   return markdown
@@ -80,13 +42,13 @@ function formatDateForLanguage(date: string, language: BlogLanguage) {
 }
 
 export function parseMarkdownPost(rawMarkdown: string): ParsedMarkdown {
-  const { frontmatter, markdownBody } = parseFrontmatter(rawMarkdown);
+  const { data, body } = parseFrontmatter(rawMarkdown, frontmatterSchema);
 
   return {
     frontmatter: {
-      ...frontmatter,
-      dateDisplay: formatDateForLanguage(frontmatter.date, frontmatter.language),
+      ...data,
+      dateDisplay: formatDateForLanguage(data.date, data.language),
     },
-    content: markdownToBlocks(markdownBody),
+    content: markdownToBlocks(body),
   };
 }

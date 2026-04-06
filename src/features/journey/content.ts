@@ -1,18 +1,22 @@
-export const journeyThemes = [
-  {
-    title: "القيادة الهندسية",
-    description: "بناء فرق متعددة التخصصات وتسليم أنظمة برمجية إنتاجية عالية الجودة.",
-    num: "01",
-  },
-  {
-    title: "معالجة اللغة العربية",
-    description: "نماذج لاستخراج العلاقات، اكتشاف التأثير، وبناء المعرفة للغة العربية.",
-    num: "02",
-  },
-  {
-    title: "الروبوتات والمحاكاة",
-    description: "منصات تخطيط مسارات الروبوتات ومحاكاة CAD وربط البيانات ثلاثية الأبعاد.",
-    num: "03",
-  },
-] as const;
+import { parseMilestone, parseTheme } from "./markdown";
 
+const milestoneModules = import.meta.glob("../../content/journey/milestones/*.md", {
+  eager: true,
+  import: "default",
+  query: "?raw",
+}) as Record<string, string>;
+
+const themeModules = import.meta.glob("../../content/journey/themes/*.md", {
+  eager: true,
+  import: "default",
+  query: "?raw",
+}) as Record<string, string>;
+
+function sortedValues(modules: Record<string, string>): string[] {
+  return Object.entries(modules)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, raw]) => raw);
+}
+
+export const milestones = sortedValues(milestoneModules).map(parseMilestone);
+export const journeyThemes = sortedValues(themeModules).map(parseTheme);

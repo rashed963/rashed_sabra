@@ -10,6 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "article:new": "node scripts/new-article.mjs",
+    "milestone:new": "node scripts/new-milestone.mjs",
+    "sync:notion": "node --env-file=.env scripts/sync-notion.mjs",
+    "sync:build": "node --env-file=.env scripts/sync-notion.mjs && vite build",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -67,6 +70,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@notionhq/client": "^5.15.0",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.0.0",
@@ -81,6 +85,7 @@
     "globals": "^15.15.0",
     "jsdom": "^20.0.3",
     "lovable-tagger": "^1.1.13",
+    "notion-to-md": "^3.1.9",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
