@@ -11,12 +11,12 @@ const AdminNewArticle = () => {
 
   return (
     <Layout>
-      <section className="pt-16 pb-24 md:pt-24">
-        <div className="container max-w-2xl space-y-8">
+      <section className="py-16 md:py-24">
+        <div className="reading-shell space-y-8">
           <h1 className="text-4xl font-bold md:text-5xl">Content</h1>
 
-          <div className="card-neural p-6 space-y-4">
-            <p className="text-sm font-semibold text-foreground">Blog posts — via Notion</p>
+          <div className="surface space-y-4 p-6">
+            <p className="text-sm font-semibold text-foreground">Blog posts - via Notion</p>
             <p className="text-sm text-muted-foreground">
               Write articles in the{" "}
               <a href={notionDbUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">
@@ -24,18 +24,20 @@ const AdminNewArticle = () => {
               </a>
               . Check <code>Published</code>, then sync:
             </p>
-            <pre className="overflow-x-auto rounded-md bg-secondary/60 p-4 text-sm">npm run sync:notion</pre>
+            <pre className="overflow-x-auto rounded-sm bg-secondary/60 p-4 text-sm">npm run sync:notion</pre>
             <p className="text-xs text-muted-foreground">
               Or sync + build in one step: <code>npm run sync:build</code>
             </p>
           </div>
 
-          <div className="card-neural p-6 space-y-4">
+          <div className="surface space-y-4 p-6">
             <p className="text-sm font-semibold text-foreground">New journey milestone</p>
-            <pre className="overflow-x-auto rounded-md bg-secondary/60 p-4 text-sm">
+            <pre className="overflow-x-auto rounded-sm bg-secondary/60 p-4 text-sm">
               {"npm run milestone:new -- --id new-role --order 5 --title \"عنوان المحطة\" --org \"المؤسسة\" --type role"}
             </pre>
-            <p className="text-xs text-muted-foreground">Then edit the generated file in <code>src/content/journey/milestones/</code></p>
+            <p className="text-xs text-muted-foreground">
+              Then edit the generated file in <code>src/content/journey/milestones/</code>
+            </p>
           </div>
 
           <p className="text-sm text-muted-foreground">This page is only available in development.</p>

@@ -1,163 +1,120 @@
-﻿import { motion } from "framer-motion";
-import { Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
-import { siteConfig } from "../config/site";
 import Layout from "../components/Layout";
-import { blogPostPath, routes } from "../config/routes";
+import { Timeline } from "../components/Timeline";
+import { routes } from "../config/routes";
+import { siteConfig } from "../config/site";
 import { copyAr } from "../features/copy/ar";
-import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
-import { getAllBlogPosts } from "../features/blog/selectors";
-import { getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
 import { milestones, journeyThemes } from "../features/journey/content";
-
-const Timeline = lazy(() =>
-  import("../components/Timeline").then((module) => ({ default: module.Timeline })),
-);
-
-const topicOrder: BlogTopicId[] = [
-  "engineering-leadership",
-  "arabic-nlp",
-  "robotics-simulation",
-];
-
-const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
 
 const Journey = () => (
   <Layout>
-    <section className="pt-16 pb-12 md:pt-24 md:pb-16">
-      <div className="container max-w-2xl">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-          className="mb-4 text-sm font-medium tracking-wide text-primary"
-        >
-          {copyAr.journey.eyebrow}
-        </motion.p>
+    <section className="py-16 md:py-24">
+      <div className="page-shell">
+        <div className="max-w-2xl">
+          <p className="eyebrow mb-5">{copyAr.journey.eyebrow}</p>
+          <h1 className="mb-6 text-4xl font-bold leading-tight text-foreground md:text-6xl">
+            {copyAr.journey.titlePrefix} {copyAr.journey.titleHighlight}
+          </h1>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            {copyAr.journey.subtitle}
+          </p>
+        </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-5 text-5xl font-bold md:text-6xl"
-        >
-          {copyAr.journey.titlePrefix} <span className="text-primary">{copyAr.journey.titleHighlight}</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.08, ease: "easeOut" }}
-          className="mb-2 text-base leading-relaxed text-muted-foreground"
-        >
-          {copyAr.journey.subtitle}
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-6"
-        >
+        <div className="mt-9 flex flex-wrap gap-3">
           <a
             href={siteConfig.external.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/30 hover:bg-secondary"
+            className="inline-flex items-center rounded-sm border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary/70"
           >
             {copyAr.common.linkedInCta}
           </a>
-        </motion.div>
-      </div>
-    </section>
-
-    <section className="pb-16">
-      <div className="container max-w-2xl">
-        <h2 className="mb-8 text-sm font-semibold text-foreground">{copyAr.journey.themesTitle}</h2>
-        <div className="grid gap-3 sm:grid-cols-3">
-          {journeyThemes.map((theme, i) => {
-            const topic = topicOrder[i] ?? "general";
-            const relatedPosts = getPostsByTopic(posts, topic).slice(0, 2);
-
-            return (
-              <motion.div
-                key={theme.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="card-neural p-5"
-              >
-                <span className="mb-3 block text-3xl font-bold text-primary/15 chapter-num">{theme.num}</span>
-                <h3 className="mb-2 text-base font-bold text-foreground">{theme.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{theme.description}</p>
-
-                <div className="mt-4 ruled pt-3">
-                  {relatedPosts.length > 0 ? (
-                    <ul className="space-y-2">
-                      {relatedPosts.map((post) => (
-                        <li key={post.slug}>
-                          <Link
-                            to={blogPostPath(post.slug)}
-                            className="text-xs font-medium text-primary hover:underline underline-offset-4"
-                          >
-                            {post.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <Link
-                      to={`${routes.blog}?topic=${topic}`}
-                      className="text-xs font-medium text-primary hover:underline underline-offset-4"
-                    >
-                      {copyAr.blog.title}
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
+          <Link
+            to={routes.blog}
+            className="inline-flex items-center rounded-sm border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary/70"
+          >
+            {copyAr.home.blogCta}
+          </Link>
         </div>
       </div>
     </section>
 
-    <div className="container max-w-2xl">
-      <div className="ruled" />
-    </div>
-
-    <section className="py-16">
-      <div className="container max-w-2xl">
-        <h2 className="mb-10 text-sm font-semibold text-foreground">{copyAr.journey.timelineTitle}</h2>
-        <Suspense fallback={<div className="h-24 rounded-md border border-border/50 bg-secondary/40" aria-hidden="true" />}>
-          <Timeline milestones={milestones} />
-        </Suspense>
+    <section className="pb-16">
+      <div className="page-shell section-rule pt-8">
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <h2 className="eyebrow">{copyAr.journey.themesTitle}</h2>
+          <span className="text-xs text-muted-foreground">01</span>
+        </div>
+        <div className="grid gap-0 border-y border-border/80 md:grid-cols-3">
+          {journeyThemes.map((theme) => (
+            <article key={theme.title} className="border-b border-border/70 py-5 md:border-b-0 md:border-l md:px-5 md:first:pr-0 md:last:border-l-0 md:last:pl-0">
+              <p className="mb-2 text-xs font-semibold text-muted-foreground">{theme.num}</p>
+              <h3 className="mb-2 text-lg font-bold text-foreground">{theme.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{theme.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
-    <div className="container max-w-2xl">
-      <div className="ruled" />
-    </div>
+    <section className="pb-16">
+      <div className="page-shell section-rule pt-8">
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <h2 className="eyebrow">{copyAr.journey.principlesTitle}</h2>
+          <span className="text-xs text-muted-foreground">02</span>
+        </div>
+        <div className="grid gap-x-10 gap-y-7 md:grid-cols-2">
+          {copyAr.journey.principles.map((principle) => (
+            <article key={principle.title} className="soft-rule pt-4">
+              <h3 className="mb-2 text-lg font-bold text-foreground">{principle.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{principle.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
-    <section className="py-16">
-      <div className="container max-w-2xl">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="card-neural p-7 md:p-9"
-        >
+    <section className="pb-16">
+      <div className="page-shell section-rule pt-8">
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <h2 className="eyebrow">{copyAr.journey.proofTitle}</h2>
+          <span className="text-xs text-muted-foreground">03</span>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {copyAr.journey.proofStories.map((story) => (
+            <article key={story.title} className="surface p-5">
+              <h3 className="mb-3 text-lg font-bold text-foreground">{story.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{story.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="pb-16">
+      <div className="page-shell section-rule pt-8">
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <h2 className="eyebrow">{copyAr.journey.timelineTitle}</h2>
+          <span className="text-xs text-muted-foreground">04</span>
+        </div>
+        <Timeline milestones={milestones} />
+      </div>
+    </section>
+
+    <section className="pb-20">
+      <div className="page-shell section-rule pt-8">
+        <div className="max-w-2xl">
           <h2 className="mb-3 text-2xl font-bold text-foreground">{copyAr.blog.title}</h2>
           <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
             {copyAr.blog.subtitle}
           </p>
           <Link
             to={routes.blog}
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
+            className="inline-flex items-center rounded-sm border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary/70"
           >
             {copyAr.home.showAllCta}
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   </Layout>

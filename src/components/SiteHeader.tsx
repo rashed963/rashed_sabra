@@ -1,6 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 import { siteConfig } from "../config/site";
 
 const SiteHeader = () => {
@@ -8,22 +7,16 @@ const SiteHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/30">
-      <div className="container flex h-14 items-center justify-between">
-        {/* Wordmark */}
-        <Link
-          to={siteConfig.navigation[0].href}
-          className="group flex items-center gap-2.5 text-foreground transition-opacity hover:opacity-70"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+    <header className="border-b border-border/80 bg-background">
+      <div className="page-shell flex min-h-20 items-center justify-between gap-6 py-4">
+        <Link to={siteConfig.navigation[0].href} className="min-w-0 text-foreground">
+          <span className="block text-xl font-bold leading-tight">{siteConfig.profile.name}</span>
+          <span className="mt-1 block text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">
+            {siteConfig.profile.role}
           </span>
-          <span className="text-sm font-bold tracking-wide">{siteConfig.profile.name}</span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden sm:flex items-center gap-1">
+        <nav className="hidden items-center gap-6 sm:flex" aria-label="التنقل الرئيسي">
           {siteConfig.navigation.map((link) => {
             const active = pathname === link.href;
             return (
@@ -31,69 +24,49 @@ const SiteHeader = () => {
                 key={link.href}
                 to={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`relative px-4 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+                className={`text-sm font-medium transition-colors ${
                   active
-                    ? "text-primary"
+                    ? "text-foreground underline decoration-border underline-offset-8"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {active && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 rounded-lg bg-primary/10 border border-primary/15"
-                    transition={{ type: "spring", stiffness: 380, damping: 34 }}
-                  />
-                )}
-                <span className="relative">{link.label}</span>
+                {link.label}
               </Link>
             );
           })}
         </nav>
 
-        {/* Mobile menu toggle */}
         <button
-          className="sm:hidden flex flex-col gap-1.5 p-2 text-foreground"
+          type="button"
+          className="rounded-sm border border-border px-3 py-2 text-sm font-medium text-foreground sm:hidden"
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           aria-label="فتح القائمة"
         >
-          <span className={`block h-0.5 w-5 bg-foreground rounded transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block h-0.5 w-5 bg-foreground rounded transition-all ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block h-0.5 w-5 bg-foreground rounded transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          القائمة
         </button>
       </div>
 
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="sm:hidden overflow-hidden border-b border-border/30 bg-background/95 backdrop-blur-xl"
-          >
-            <nav id="mobile-navigation" className="container flex flex-col py-3 gap-1">
-              {siteConfig.navigation.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  aria-current={pathname === link.href ? "page" : undefined}
-                  className={`px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                    pathname === link.href
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {menuOpen && (
+        <div className="border-t border-border/80 bg-background sm:hidden">
+          <nav id="mobile-navigation" className="page-shell flex flex-col py-3" aria-label="التنقل الرئيسي">
+            {siteConfig.navigation.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setMenuOpen(false)}
+                aria-current={pathname === link.href ? "page" : undefined}
+                className={`border-b border-border/60 py-3 text-sm font-medium last:border-b-0 ${
+                  pathname === link.href ? "text-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

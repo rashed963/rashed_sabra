@@ -4,16 +4,16 @@ import { siteConfig } from "../config/site";
 import { copyAr } from "../features/copy/ar";
 
 const SiteFooter = () => (
-  <footer className="mt-24 border-t border-border/30">
-    <div className="container py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-      <p className="order-2 sm:order-1">
-        © {new Date().getFullYear()} {siteConfig.profile.name} — {copyAr.footer.rightsReserved}
+  <footer className="mt-20 border-t border-border/80">
+    <div className="page-shell flex flex-col gap-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+      <p>
+        © {new Date().getFullYear()} {siteConfig.profile.name}. {copyAr.footer.rightsReserved}
       </p>
-      <nav className="order-1 sm:order-2 flex items-center gap-5">
+      <nav className="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="روابط التذييل">
         {siteConfig.navigation
           .filter((item) => item.href !== routes.home)
           .map((item) => (
-            <Link key={item.href} to={item.href} className="hover:text-primary transition-colors">
+            <Link key={item.href} to={item.href} className="transition-colors hover:text-foreground">
               {item.label}
             </Link>
           ))}
@@ -21,7 +21,7 @@ const SiteFooter = () => (
           href={siteConfig.external.linkedIn}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-primary transition-colors"
+          className="transition-colors hover:text-foreground"
         >
           {copyAr.common.linkedInCta}
         </a>

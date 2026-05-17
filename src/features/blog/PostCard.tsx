@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { blogPostPath } from "../../config/routes";
 import { copyAr } from "../copy/ar";
@@ -11,43 +10,34 @@ type PostCardProps = {
   showReadMore?: boolean;
 };
 
-const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: PostCardProps) => (
-  <motion.article
-    key={post.slug}
-    initial={{ opacity: 0, y: 16 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.45, delay: index * 0.07, ease: "easeOut" }}
-    className="card-neural p-6 group"
-  >
-    <div className="mb-3 flex items-center gap-3">
-      <span className="text-xs font-semibold uppercase tracking-wider text-primary">{post.tag}</span>
-      <span className="text-muted-foreground/30">·</span>
-      <span className="text-xs text-muted-foreground/60">
-        {showReadTime ? `${post.readTime} ${copyAr.common.readLabel}` : post.date}
-      </span>
+const PostCard = ({ post, showReadTime = true, showReadMore = true }: PostCardProps) => (
+  <article className="border-b border-border/70 py-7 last:border-b-0">
+    <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+      <span className="font-semibold text-foreground/80">{post.tag}</span>
+      <span aria-hidden="true">·</span>
+      <span>{showReadTime ? `${post.readTime} ${copyAr.common.readLabel}` : post.date}</span>
     </div>
 
-    <h2 className="mb-4 text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary md:text-2xl">
+    <h2 className="mb-3 text-2xl font-bold leading-snug text-foreground">
       <Link to={blogPostPath(post.slug)} className="hover:underline underline-offset-4">
         {post.title}
       </Link>
     </h2>
 
-    <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
+    <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{post.excerpt}</p>
 
     {showReadMore && (
-      <div className="flex items-center justify-between">
-        <time className="text-xs text-muted-foreground/50">{post.date}</time>
+      <div className="mt-5 flex items-center justify-between gap-4">
+        <time className="text-xs text-muted-foreground">{post.date}</time>
         <Link
           to={blogPostPath(post.slug)}
-          className="text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100"
+          className="text-sm font-semibold text-primary hover:underline underline-offset-4"
         >
           {copyAr.common.readPostCta}
         </Link>
       </div>
     )}
-  </motion.article>
+  </article>
 );
 
 export default PostCard;

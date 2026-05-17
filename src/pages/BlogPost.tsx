@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { routes } from "../config/routes";
@@ -15,7 +14,7 @@ const renderBlock = (block: string, index: number) => {
 
     if (level === 1) {
       return (
-        <h2 key={index} className="text-2xl font-bold leading-snug text-foreground md:text-3xl">
+        <h2 key={index} className="pt-4 text-2xl font-bold leading-snug text-foreground md:text-3xl">
           {text}
         </h2>
       );
@@ -23,14 +22,14 @@ const renderBlock = (block: string, index: number) => {
 
     if (level === 2) {
       return (
-        <h3 key={index} className="text-xl font-bold leading-snug text-foreground md:text-2xl">
+        <h3 key={index} className="pt-3 text-xl font-bold leading-snug text-foreground md:text-2xl">
           {text}
         </h3>
       );
     }
 
     return (
-      <h4 key={index} className="text-lg font-semibold leading-snug text-foreground">
+      <h4 key={index} className="pt-2 text-lg font-semibold leading-snug text-foreground">
         {text}
       </h4>
     );
@@ -46,7 +45,7 @@ const renderBlock = (block: string, index: number) => {
     return (
       <blockquote
         key={index}
-        className="border-r-2 border-primary/45 bg-secondary/45 px-4 py-3 text-base leading-relaxed text-foreground/85"
+        className="border-r-2 border-border pr-4 text-base leading-relaxed text-foreground/85"
       >
         {quote}
       </blockquote>
@@ -60,12 +59,9 @@ const renderBlock = (block: string, index: number) => {
 
   if (listLines.length > 0 && listLines.length === block.split("\n").filter(Boolean).length) {
     return (
-      <ul key={index} className="space-y-2 text-base leading-relaxed text-foreground/90">
+      <ul key={index} className="list-disc space-y-2 pr-5 text-base leading-relaxed text-foreground/90">
         {listLines.map((line, lineIndex) => (
-          <li key={`${index}-${lineIndex}`} className="flex items-start gap-2.5">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-            <span>{line.replace(/^-\s+/, "")}</span>
-          </li>
+          <li key={`${index}-${lineIndex}`}>{line.replace(/^-\s+/, "")}</li>
         ))}
       </ul>
     );
@@ -88,62 +84,47 @@ const BlogPost = () => {
 
   return (
     <Layout>
-      <article className="pt-16 pb-24 md:pt-24">
-        <div className="container max-w-2xl">
-          <Link to={routes.blog} className="mb-8 inline-flex text-sm font-medium text-primary hover:underline">
+      <article className="py-16 md:py-24">
+        <div className="reading-shell">
+          <Link to={routes.blog} className="mb-8 inline-flex text-sm font-medium text-primary hover:underline underline-offset-4">
             {copyAr.common.backToBlog}
           </Link>
 
-          <motion.header
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="mb-10"
-          >
-            <div className="mb-3 flex items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">{post.tag}</span>
-              <span className="text-muted-foreground/30">·</span>
-              <time className="text-xs text-muted-foreground/60">{post.date}</time>
-              <span className="text-muted-foreground/30">·</span>
-              <span className="text-xs text-muted-foreground/60">
+          <header className="mb-10">
+            <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <span className="font-semibold text-foreground/80">{post.tag}</span>
+              <span aria-hidden="true">·</span>
+              <time>{post.date}</time>
+              <span aria-hidden="true">·</span>
+              <span>
                 {post.readTime} {copyAr.common.readLabel}
               </span>
             </div>
 
             <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">{post.title}</h1>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">{post.excerpt}</p>
-          </motion.header>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{post.excerpt}</p>
+          </header>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.08, ease: "easeOut" }}
-            className="card-neural space-y-6 p-7 md:p-9"
-          >
+          <div className="section-rule space-y-7 pt-8">
             <img
               src={post.image}
               alt={post.title}
-              className="h-auto w-full rounded-md border border-border object-cover"
+              className="h-auto w-full border border-border object-cover"
               loading="lazy"
             />
             {post.content.map((block, index) => renderBlock(block, index))}
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.12, ease: "easeOut" }}
-            className="mt-6 card-neural p-6"
-          >
+          <div className="mt-10 section-rule pt-6">
             <a
               href={siteConfig.external.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              className="inline-flex items-center rounded-sm border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary/70"
             >
               {copyAr.common.linkedInCta}
             </a>
-          </motion.div>
+          </div>
         </div>
       </article>
     </Layout>

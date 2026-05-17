@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
@@ -12,7 +11,7 @@ const Blog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
   const topicFilters = [
-    { id: "all" as const, label: copyAr.home.showAllCta },
+    { id: "all" as const, label: "كل المقالات" },
     { id: "engineering-leadership" as const, label: journeyThemes[0].title },
     { id: "arabic-nlp" as const, label: journeyThemes[1].title },
     { id: "robotics-simulation" as const, label: journeyThemes[2].title },
@@ -30,36 +29,19 @@ const Blog = () => {
 
   return (
     <Layout>
-      <section className="pt-16 pb-4 md:pt-24 md:pb-8">
-        <div className="container max-w-2xl">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="mb-4 text-sm font-medium tracking-wide text-primary"
-          >
-            {copyAr.blog.eyebrow}
-          </motion.p>
+      <section className="py-16 md:py-24">
+        <div className="page-shell">
+          <div className="max-w-2xl">
+            <p className="eyebrow mb-5">{copyAr.blog.eyebrow}</p>
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-foreground md:text-6xl">
+              {copyAr.blog.title}
+            </h1>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {copyAr.blog.subtitle}
+            </p>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mb-5 text-5xl font-bold md:text-6xl"
-          >
-            {copyAr.blog.title}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.08, ease: "easeOut" }}
-            className="text-base leading-relaxed text-muted-foreground"
-          >
-            {copyAr.blog.subtitle}
-          </motion.p>
-
-          <div className="mt-6 flex flex-wrap gap-2" role="group" aria-label="Blog topic filters">
+          <div className="mt-8 flex flex-wrap gap-x-4 gap-y-2" role="group" aria-label="تصنيف المقالات">
             {topicFilters.map((topic) => {
               const isActive = activeTopic === topic.id;
               return (
@@ -75,10 +57,10 @@ const Blog = () => {
 
                     setSearchParams({ topic: topic.id });
                   }}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  className={`text-sm font-medium underline-offset-4 transition-colors ${
                     isActive
-                      ? "border-primary/35 bg-primary/10 text-primary"
-                      : "border-border text-muted-foreground hover:border-primary/30 hover:text-foreground"
+                      ? "text-foreground underline decoration-border"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {topic.label}
@@ -89,11 +71,13 @@ const Blog = () => {
         </div>
       </section>
 
-      <section className="py-12 pb-24">
-        <div className="container max-w-2xl space-y-4">
-          {visiblePosts.map((post, i) => (
-            <PostCard key={post.slug} post={post} index={i} />
-          ))}
+      <section className="pb-24">
+        <div className="page-shell">
+          <div className="border-y border-border/80">
+            {visiblePosts.map((post, index) => (
+              <PostCard key={post.slug} post={post} index={index} />
+            ))}
+          </div>
         </div>
       </section>
     </Layout>
