@@ -26,24 +26,24 @@ export const Timeline = ({ milestones }: TimelineProps) => (
 
       return (
         <article key={milestone.id} className="grid gap-4 border-b border-border/70 py-7 last:border-b-0 md:grid-cols-[11rem_1fr]">
-          <div className="text-sm text-muted-foreground">
+          <div className="support-copy">
             <time className="block font-semibold tabular-nums text-foreground">{milestone.period}</time>
             <span className="mt-1 block">{typeLabels[milestone.type]}</span>
           </div>
 
           <div>
-            <h3 className="mb-1 text-xl font-bold leading-snug text-foreground">{milestone.title}</h3>
-            <p className="mb-4 text-sm text-muted-foreground">
+            <h3 className="mb-1 text-[1.375rem] font-semibold leading-snug text-foreground">{milestone.title}</h3>
+            <p className="support-copy mb-4">
               {milestone.organization}
               {milestone.location && (
                 <span className="before:mx-1.5 before:content-['·']">{milestone.location}</span>
               )}
             </p>
 
-            <p className="mb-4 text-base leading-relaxed text-foreground/85">{milestone.context}</p>
+            <p className="body-copy mb-4 text-foreground/85">{milestone.context}</p>
 
             {milestone.actions.length > 0 && (
-              <ul className="mb-4 list-disc space-y-2 pr-5 text-sm leading-relaxed text-muted-foreground">
+              <ul className="support-copy mb-4 list-disc space-y-2 pr-5">
                 {milestone.actions.map((action) => (
                   <li key={action}>{action}</li>
                 ))}
@@ -51,7 +51,7 @@ export const Timeline = ({ milestones }: TimelineProps) => (
             )}
 
             {milestone.impact && (
-              <p className="mb-4 border-r-2 border-border pr-4 text-sm leading-relaxed text-foreground/85">
+              <p className="support-copy mb-4 border-r-2 border-border pr-4 text-foreground/85">
                 <span className="font-bold text-foreground">الأثر - </span>
                 {milestone.impact}
               </p>
@@ -62,7 +62,7 @@ export const Timeline = ({ milestones }: TimelineProps) => (
                 {outcomes.map((outcome) => (
                   <span
                     key={outcome}
-                    className="border border-border/80 px-2 py-0.5 text-xs font-medium text-muted-foreground"
+                    className="meta-text border border-border/80 px-2 py-0.5"
                   >
                     {outcome}
                   </span>
@@ -71,7 +71,7 @@ export const Timeline = ({ milestones }: TimelineProps) => (
             )}
 
             {milestone.lesson && (
-              <p className="mt-4 text-sm italic leading-relaxed text-muted-foreground">
+              <p className="support-copy mt-4 italic">
                 "{milestone.lesson}"
               </p>
             )}

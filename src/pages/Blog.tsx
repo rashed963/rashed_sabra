@@ -29,14 +29,14 @@ const Blog = () => {
 
   return (
     <Layout>
-      <section className="py-16 md:py-24">
+      <section className="py-14 md:py-20">
         <div className="page-shell">
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <p className="eyebrow mb-5">{copyAr.blog.eyebrow}</p>
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-foreground md:text-6xl">
+            <h1 className="page-title mb-6">
               {copyAr.blog.title}
             </h1>
-            <p className="text-lg leading-relaxed text-muted-foreground">
+            <p className="lede">
               {copyAr.blog.subtitle}
             </p>
           </div>
@@ -57,7 +57,7 @@ const Blog = () => {
 
                     setSearchParams({ topic: topic.id });
                   }}
-                  className={`text-sm font-medium underline-offset-4 transition-colors ${
+                  className={`button-label underline-offset-4 transition-colors ${
                     isActive
                       ? "text-foreground underline decoration-border"
                       : "text-muted-foreground hover:text-foreground"

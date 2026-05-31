@@ -72,7 +72,7 @@
   html {
     direction: rtl;
     scroll-behavior: smooth;
-    font-size: 17px;
+    font-size: 16px;
   }
 
   body {
@@ -80,6 +80,7 @@
     font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
     font-feature-settings: "kern" 1;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
     line-height: 1.8;
     background:
       radial-gradient(circle at 18% 20%, hsl(177 80% 22% / 0.22), transparent 34rem),
@@ -95,13 +96,13 @@
   h6 {
     font-weight: 700;
     letter-spacing: 0;
-    line-height: 1.28;
+    line-height: 1.22;
   }
 
   p,
   li {
     font-weight: 400;
-    line-height: 1.9;
+    line-height: 1.85;
   }
 
   ::selection {
@@ -124,15 +125,67 @@
   }
 
   .page-shell {
-    @apply container max-w-6xl;
+    @apply mx-auto w-full max-w-6xl px-6;
   }
 
   .reading-shell {
-    @apply container max-w-2xl;
+    @apply mx-auto w-full max-w-2xl px-6;
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground;
+    @apply text-[0.875rem] font-semibold leading-6 text-muted-foreground;
+  }
+
+  .hero-title {
+    color: hsl(var(--foreground));
+    font-size: clamp(2.35rem, 3.9vw, 3.45rem);
+    font-weight: 700;
+    line-height: 1.26;
+    text-wrap: balance;
+  }
+
+  .page-title {
+    color: hsl(var(--foreground));
+    font-size: clamp(2.2rem, 3.2vw, 2.875rem);
+    font-weight: 700;
+    line-height: 1.22;
+    text-wrap: balance;
+  }
+
+  .section-title {
+    color: hsl(var(--foreground));
+    font-size: clamp(1.85rem, 2.65vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.24;
+    text-wrap: balance;
+  }
+
+  .card-title {
+    @apply text-[1.25rem] font-bold leading-[1.45] text-foreground;
+  }
+
+  .lede {
+    @apply text-[1.03125rem] font-normal leading-[2rem] text-muted-foreground md:text-[1.09375rem] md:leading-[2.1rem];
+  }
+
+  .body-copy {
+    @apply text-[1.0625rem] font-normal leading-[2.05rem] text-muted-foreground;
+  }
+
+  .support-copy {
+    @apply text-[0.9375rem] font-normal leading-[1.75rem] text-muted-foreground;
+  }
+
+  .article-copy {
+    @apply text-[1.0625rem] font-normal leading-[2.1rem] text-foreground/90 md:text-[1.125rem] md:leading-[2.25rem];
+  }
+
+  .meta-text {
+    @apply text-[0.84375rem] font-medium leading-[1.45rem] text-muted-foreground;
+  }
+
+  .button-label {
+    @apply text-[0.9375rem] font-semibold leading-6;
   }
 
   .section-rule {
@@ -165,7 +218,7 @@
   }
 
   .accent-pill {
-    @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold;
+    @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.875rem] font-medium leading-6;
     background: hsl(190 58% 13% / 0.82);
     border-color: hsl(174 84% 43% / 0.34);
     color: hsl(190 35% 92%);

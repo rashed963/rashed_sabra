@@ -14,7 +14,7 @@ const renderBlock = (block: string, index: number) => {
 
     if (level === 1) {
       return (
-        <h2 key={index} className="pt-4 text-2xl font-bold leading-snug text-foreground md:text-3xl">
+        <h2 key={index} className="pt-4 text-[1.625rem] font-bold leading-snug text-foreground md:text-[2rem]">
           {text}
         </h2>
       );
@@ -22,14 +22,14 @@ const renderBlock = (block: string, index: number) => {
 
     if (level === 2) {
       return (
-        <h3 key={index} className="pt-3 text-xl font-bold leading-snug text-foreground md:text-2xl">
+        <h3 key={index} className="pt-3 text-[1.375rem] font-bold leading-snug text-foreground md:text-[1.625rem]">
           {text}
         </h3>
       );
     }
 
     return (
-      <h4 key={index} className="pt-2 text-lg font-semibold leading-snug text-foreground">
+      <h4 key={index} className="pt-2 text-[1.125rem] font-semibold leading-7 text-foreground">
         {text}
       </h4>
     );
@@ -45,7 +45,7 @@ const renderBlock = (block: string, index: number) => {
     return (
       <blockquote
         key={index}
-        className="border-r-2 border-border pr-4 text-base leading-relaxed text-foreground/85"
+        className="article-copy border-r-2 border-border pr-4 text-foreground/85"
       >
         {quote}
       </blockquote>
@@ -59,7 +59,7 @@ const renderBlock = (block: string, index: number) => {
 
   if (listLines.length > 0 && listLines.length === block.split("\n").filter(Boolean).length) {
     return (
-      <ul key={index} className="list-disc space-y-2 pr-5 text-base leading-relaxed text-foreground/90">
+      <ul key={index} className="article-copy list-disc space-y-2 pr-5">
         {listLines.map((line, lineIndex) => (
           <li key={`${index}-${lineIndex}`}>{line.replace(/^-\s+/, "")}</li>
         ))}
@@ -68,7 +68,7 @@ const renderBlock = (block: string, index: number) => {
   }
 
   return (
-    <p key={index} className="text-base leading-loose text-foreground/90">
+    <p key={index} className="article-copy">
       {block.replace(/\n/g, " ")}
     </p>
   );
@@ -86,12 +86,12 @@ const BlogPost = () => {
     <Layout>
       <article className="py-16 md:py-24">
         <div className="reading-shell">
-          <Link to={routes.blog} className="mb-8 inline-flex text-sm font-medium text-primary hover:underline underline-offset-4">
+          <Link to={routes.blog} className="button-label mb-8 inline-flex text-primary hover:underline underline-offset-4">
             {copyAr.common.backToBlog}
           </Link>
 
           <header className="mb-10">
-            <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <div className="meta-text mb-4 flex flex-wrap items-center gap-2">
               <span className="font-semibold text-foreground/80">{post.tag}</span>
               <span aria-hidden="true">·</span>
               <time>{post.date}</time>
@@ -101,8 +101,8 @@ const BlogPost = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">{post.title}</h1>
-            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{post.excerpt}</p>
+            <h1 className="page-title">{post.title}</h1>
+            <p className="lede mt-5">{post.excerpt}</p>
           </header>
 
           <div className="section-rule space-y-7 pt-8">
@@ -120,7 +120,7 @@ const BlogPost = () => {
               href={siteConfig.external.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-sm border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary/70"
+              className="button-label inline-flex items-center rounded-sm border border-border px-4 py-2 text-foreground transition-colors hover:bg-secondary/70"
             >
               {copyAr.common.linkedInCta}
             </a>
