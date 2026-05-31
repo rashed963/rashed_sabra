@@ -13,8 +13,8 @@ const Index = () => (
     <div className="site-pattern overflow-hidden">
       <section className="relative py-14 md:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_45%,hsl(var(--primary)/0.16),transparent_24rem)]" />
-        <div className="page-shell relative grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="order-2 lg:order-1">
+        <div dir="ltr" className="page-shell relative grid items-center gap-14 lg:grid-cols-[0.92fr_1.08fr]">
+          <div dir="rtl" className="order-2 lg:order-1">
             <div className="relative mx-auto max-w-md">
               <div className="absolute inset-8 rounded-full border border-primary/15" />
               <div className="glass-panel relative aspect-[4/5] overflow-hidden rounded-[2rem] p-5">
@@ -53,7 +53,7 @@ const Index = () => (
             </div>
           </div>
 
-          <div className="order-1 text-center lg:order-2 lg:text-right">
+          <div dir="rtl" className="order-1 text-center lg:order-2 lg:text-right">
             <p className="accent-pill mb-8">
               <span className="accent-dot" />
               {copyAr.home.eyebrow}
