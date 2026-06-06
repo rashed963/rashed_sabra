@@ -202,14 +202,6 @@
     border-radius: var(--radius);
   }
 
-  .site-pattern {
-    background-image:
-      radial-gradient(circle, hsl(184 88% 48% / 0.16) 1px, transparent 1px),
-      linear-gradient(hsl(184 75% 24% / 0.18) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(184 75% 24% / 0.18) 1px, transparent 1px);
-    background-size: 22px 22px, 88px 88px, 88px 88px;
-  }
-
   .glass-panel {
     background: linear-gradient(145deg, hsl(196 62% 14% / 0.78), hsl(194 64% 9% / 0.5));
     border: 1px solid hsl(178 72% 36% / 0.24);

@@ -10,7 +10,7 @@ const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE).slice(0, 3);
 
 const Index = () => (
   <Layout>
-    <div className="site-pattern overflow-hidden">
+    <div className="overflow-hidden">
       <section className="relative py-12 md:py-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_45%,hsl(var(--primary)/0.16),transparent_24rem)]" />
         <div dir="ltr" className="page-shell relative grid items-center gap-12 lg:grid-cols-[0.92fr_1.08fr] xl:gap-16">

@@ -3,7 +3,7 @@ import { siteConfig } from "../config/site";
 import { copyAr } from "../features/copy/ar";
 
 const SiteFooter = () => (
-  <footer className="site-pattern border-t border-white/10 bg-background">
+  <footer className="border-t border-white/10 bg-background">
     <div className="page-shell grid gap-8 py-10 text-muted-foreground md:grid-cols-[1fr_auto] md:items-end">
       <div>
         <p className="text-[1.5rem] font-bold leading-snug text-foreground">{siteConfig.profile.name}</p>
