@@ -39,18 +39,19 @@ Choose exactly one:
 - `REVISE B`
 - `REJECT B`
 
-Decision: `REVISE B`
+Decision: `APPROVE B`
 
 Date: 2026-06-07
 
-Reason: The future statement competed with the three beliefs when placed inside the same section.
+Reason: Revised Direction B gives identity, beliefs, selected writing, and the Future Threshold distinct roles while preserving the stronger portrait-led composition.
 
-Required revision: Move the statement to a smarter later reveal, separate from `What I Believe`.
+Required revision: None before the polished mockup gate.
 
 ## Gate Status
 
 - Gate 1: Approved on 2026-06-07
-- Gate 2: Revised Direction B pending re-review
-- Polished mockup authorized: No
+- Gate 2: Approved on 2026-06-07
+- Selected direction: Direction B — Centered Human Signal, revised
+- Polished mockup authorized: Yes — one direction only
 - Prototype authorized: No
 - Production implementation authorized: No

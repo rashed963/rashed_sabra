@@ -27,6 +27,14 @@ Open each file directly in a browser. Each page includes fixed-width desktop (`1
 - The future statement appears later as a cinematic threshold after selected thoughts.
 - Strength: more personal and visually distinctive.
 - Risk: slower first-screen scanning and a longer vertical rhythm.
+- Status: Approved on 2026-06-07 after separating the Future Threshold from `What I Believe`.
+
+## Gate Decision
+
+- Selected: Direction B — Centered Human Signal, revised
+- Direction A: Not selected
+- Next authorized artifact: one polished Direction B mockup at desktop and mobile, including reduced-motion and keyboard-focus states
+- Prototype and production implementation remain unauthorized
 
 ## Review Boundary
 

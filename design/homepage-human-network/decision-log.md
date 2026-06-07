@@ -31,9 +31,9 @@
 | D-18 | Treat the belief manifesto and space statement as one cinematic section | Superseded during Gate 2 because the combined section overloaded the beliefs | Superseded |
 | D-19 | Use eventual space motion as looping video plus poster, not GIF | Provides better compression, playback control, and reduced-motion handling | Frozen |
 | D-20 | Borrow the Diamandis section's narrative function, not its expression | Preserves originality by excluding its wording, rocket imagery, signature, and composition | Frozen |
-| D-21 | Select Direction B for focused revision | Its centered portrait and distinctive pacing best match the intended personal presence | Gate 2 candidate |
-| D-22 | Separate the future statement from `What I Believe` | Gives the beliefs room and lets the statement land after readers encounter real writing | Gate 2 candidate |
-| D-23 | Place a cinematic Future Threshold after selected thoughts | Turns the statement into a bridge from published thinking to professional proof | Gate 2 candidate |
+| D-21 | Select Direction B | Its centered portrait and distinctive pacing best match the intended personal presence | Frozen |
+| D-22 | Separate the future statement from `What I Believe` | Gives the beliefs room and lets the statement land after readers encounter real writing | Frozen |
+| D-23 | Place a cinematic Future Threshold after selected thoughts | Turns the statement into a bridge from published thinking to professional proof | Frozen |
 
 ## Explicitly Rejected
 
@@ -63,15 +63,13 @@
 
 ## Gate 2 Decision
 
-- Status: Pending review
-- Current direction: Direction B with one focused revision
-- Owner response: `REVISE B`
-- Revision date: 2026-06-07
-- Required revision: Separate the future statement from `What I Believe` and introduce it later with more deliberate pacing.
-- Candidates:
-  - Direction A: Editorial Split
-  - Direction B: Centered Human Signal — revised candidate
-- Permitted output: Grayscale desktop, tablet, and mobile wireframes only
-- Polished mockup authorized: No
+- Status: Approved
+- Decision: `APPROVE B`
+- Date: 2026-06-07
+- Selected direction: Direction B — Centered Human Signal, revised
+- Reason: The centered portrait establishes personal presence, while the revised pacing gives beliefs, writing, and the Future Threshold separate jobs.
+- Required revisions: None before the polished mockup gate.
+- Direction A status: Not selected
+- Polished mockup authorized: Yes — one Direction B mockup at desktop and mobile, plus reduced-motion and keyboard-focus states
 - Prototype authorized: No
 - Production implementation authorized: No
