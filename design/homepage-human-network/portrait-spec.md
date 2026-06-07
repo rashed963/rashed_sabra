@@ -12,6 +12,15 @@ The portrait is the homepage’s human anchor, not an avatar, background texture
 - Avoid screenshots, compressed messaging-app exports, and images with baked-in text
 - Usage rights must permit publication on the personal website
 
+## Temporary Gate 3 Source
+
+- File: `mockup/assets/portrait-temporary.jpg`
+- Source dimensions: `400x400`
+- Status: Approved by the owner for polished mockup review only
+- Known limitation: compressed square image with a baked-in neural background
+- Treatment: preserve the source, use a contained mask, and do not simulate background removal
+- Replacement: required before prototype approval
+
 ## Preferred Capture
 
 - Orientation: portrait or flexible 4:5 crop
@@ -51,16 +60,22 @@ Keep face, eyes, and essential silhouette inside a central safe region. The netw
 ## Fallbacks
 
 - Wireframes use a neutral labeled silhouette.
-- Polished mockups do not proceed without the real portrait.
+- Polished mockups may use the explicitly approved temporary portrait, but must label it for replacement.
 - If the final image cannot support all crops, request a different source rather than forcing an unsafe crop.
 - Reduced-motion mode uses the same portrait with a static network composition.
 
 ## Approval Checklist
 
-- [ ] Source resolution is sufficient
+- [ ] Final source resolution is sufficient
 - [ ] Face remains clear at 390px
 - [ ] Desktop and mobile crops are approved
 - [ ] Background cleanup is acceptable
 - [ ] Skin tone remains natural
 - [ ] Network does not obscure identity
 - [ ] Image rights are confirmed
+
+Gate 3 temporary status:
+
+- [x] Temporary source approved for mockup review
+- [x] Mockup visibly identifies the source as temporary
+- [ ] Final high-resolution source supplied

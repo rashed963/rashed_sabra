@@ -34,6 +34,8 @@
 | D-21 | Select Direction B | Its centered portrait and distinctive pacing best match the intended personal presence | Frozen |
 | D-22 | Separate the future statement from `What I Believe` | Gives the beliefs room and lets the statement land after readers encounter real writing | Frozen |
 | D-23 | Place a cinematic Future Threshold after selected thoughts | Turns the statement into a bridge from published thinking to professional proof | Frozen |
+| D-24 | Use the supplied `400x400` portrait for Gate 3 only | Unblocks visual evaluation while keeping final portrait quality as a prototype prerequisite | Gate 3 candidate |
+| D-25 | Treat the temporary portrait as a contained editorial image | Its baked-in neural background makes honest masking stronger than simulated extraction | Gate 3 candidate |
 
 ## Explicitly Rejected
 
@@ -71,5 +73,18 @@
 - Required revisions: None before the polished mockup gate.
 - Direction A status: Not selected
 - Polished mockup authorized: Yes — one Direction B mockup at desktop and mobile, plus reduced-motion and keyboard-focus states
+- Prototype authorized: No
+- Production implementation authorized: No
+
+## Gate 3 Decision
+
+- Status: Pending review
+- Artifact: Direction B polished mockup
+- Review states:
+  - Default desktop
+  - Touch/mobile static
+  - Keyboard focus
+  - Reduced motion and Future Threshold poster
+- Temporary portrait replacement required before prototype approval: Yes
 - Prototype authorized: No
 - Production implementation authorized: No
