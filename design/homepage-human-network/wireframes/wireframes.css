@@ -284,6 +284,88 @@ body {
   line-height: 1.12;
 }
 
+.belief-manifesto {
+  padding: 100px 10%;
+  background: #e8e8e4;
+  color: #171717;
+}
+
+.belief-manifesto-inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.belief-manifesto .eyebrow {
+  margin-bottom: 34px;
+}
+
+.belief-manifesto .belief-list {
+  margin: 0;
+}
+
+.belief-manifesto .belief {
+  border-color: #999;
+}
+
+.future-threshold {
+  position: relative;
+  overflow: hidden;
+  min-height: 430px;
+  padding: 90px 8%;
+  background: #1f1f1f;
+  color: #f4f4f1;
+}
+
+.future-threshold::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 28%, #999 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 38%, #bbb 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 82%, #888 0 1px, transparent 2px);
+  background-size: 130px 120px, 190px 170px, 230px 210px;
+  content: "";
+  opacity: 0.4;
+}
+
+.future-threshold-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: 250px;
+  grid-template-columns: 0.75fr 1.25fr;
+  align-items: center;
+  gap: 80px;
+}
+
+.future-kicker {
+  color: #bbb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.future-kicker i {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 22px;
+  background: #777;
+}
+
+.future-statement {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.04;
+  text-transform: uppercase;
+}
+
+.future-statement span {
+  display: block;
+  white-space: nowrap;
+}
+
 .content-section {
   padding: 96px 7%;
 }
@@ -492,37 +574,6 @@ body {
   justify-content: center;
 }
 
-.direction-b .manifesto {
-  padding-top: 110px;
-  padding-bottom: 110px;
-}
-
-.direction-b .manifesto-inner {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-.direction-b .belief-list {
-  grid-column: 2;
-  grid-row: 1;
-  margin: 0;
-}
-
-.direction-b .closing-block {
-  position: sticky;
-  top: 40px;
-  grid-column: 1;
-  grid-row: 1;
-  padding-top: 18px;
-}
-
-.direction-b .closing-statement {
-  margin: 36px 0 0;
-  text-align: start;
-}
-
 .direction-b .article-grid {
   grid-template-columns: 0.95fr 1.05fr;
   align-items: start;
@@ -584,6 +635,8 @@ body {
 }
 
 .tablet .manifesto,
+.tablet .belief-manifesto,
+.tablet .future-threshold,
 .tablet .content-section,
 .tablet .proof,
 .tablet .journey {
@@ -633,21 +686,13 @@ body {
   text-align: start;
 }
 
-.tablet.direction-b .manifesto-inner {
+.tablet .future-threshold-inner {
   grid-template-columns: 1fr;
-  gap: 44px;
+  gap: 48px;
 }
 
-.tablet.direction-b .belief-list,
-.tablet.direction-b .closing-block,
-.mobile.direction-b .belief-list,
-.mobile.direction-b .closing-block {
-  grid-column: 1;
-  grid-row: auto;
-}
-
-.tablet.direction-b .closing-block {
-  position: static;
+.tablet .future-statement {
+  font-size: 46px;
 }
 
 .tablet.direction-b .article-card:first-child {
@@ -722,6 +767,8 @@ body {
 }
 
 .mobile .manifesto,
+.mobile .belief-manifesto,
+.mobile .future-threshold,
 .mobile .content-section,
 .mobile .proof,
 .mobile .journey {
@@ -746,6 +793,28 @@ body {
 
 .mobile .closing-statement {
   font-size: 30px;
+}
+
+.mobile .belief-manifesto .eyebrow {
+  margin-bottom: 28px;
+}
+
+.mobile .belief-manifesto .belief-list {
+  margin-bottom: 0;
+}
+
+.mobile .future-threshold {
+  min-height: 420px;
+}
+
+.mobile .future-threshold-inner {
+  min-height: 290px;
+  grid-template-columns: 1fr;
+  gap: 54px;
+}
+
+.mobile .future-statement {
+  font-size: 24px;
 }
 
 .mobile .section-heading {
@@ -818,19 +887,6 @@ body {
   width: 100%;
 }
 
-.mobile.direction-b .manifesto-inner {
-  grid-template-columns: 1fr;
-  gap: 42px;
-}
-
-.mobile.direction-b .closing-block {
-  position: static;
-}
-
-.mobile.direction-b .closing-statement {
-  text-align: center;
-}
-
 @media (max-width: 1500px) {
   .review-shell {
     overflow-x: auto;
@@ -848,5 +904,22 @@ body:has(.viewport-group:target) .review-shell {
 }
 
 body:has(.viewport-group:target) .viewport-group:target {
+  margin: 0 auto;
+}
+
+body:has(.future-threshold:target) .review-header,
+body:has(.future-threshold:target) .viewport-label,
+body:has(.future-threshold:target) .viewport-group:not(:has(.future-threshold:target)),
+body:has(.future-threshold:target) .artboard:has(.future-threshold:target) > :not(.future-threshold:target) {
+  display: none;
+}
+
+body:has(.future-threshold:target) .review-shell {
+  min-width: 0;
+  padding: 24px;
+}
+
+body:has(.future-threshold:target) .viewport-group,
+body:has(.future-threshold:target) .artboard {
   margin: 0 auto;
 }

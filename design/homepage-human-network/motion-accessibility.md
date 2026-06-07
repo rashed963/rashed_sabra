@@ -7,23 +7,23 @@ The hero interaction communicates a living system under human direction. Motion 
 ## Motion Scope
 
 - Motion is concentrated in the hero.
-- A second, non-interactive motion area is permitted only in the approved post-hero belief manifesto.
+- A second, non-interactive motion area is permitted only in the approved Future Threshold after selected writing.
 - The portrait remains stable.
 - Network paths may drift subtly, respond to pointer proximity, and converge toward a warm decision signal.
 - Pointer response must be restrained and bounded; no chasing cursor or rapid parallax.
-- Outside the hero and belief manifesto, sections use no continuous background animation.
+- Outside the hero and Future Threshold, sections use no continuous background animation.
 - Scroll-triggered transitions, if later approved, are limited to opacity and small transforms.
 
-## Belief Manifesto Motion
+## Future Threshold Motion
 
 - Use a short, seamless, muted looping WebM/MP4 asset with a static poster image.
 - Do not use GIF as the production format.
 - The video is decorative: empty alt semantics, no controls required, and no information carried by motion.
-- Keep movement slow and low contrast behind the belief paragraphs.
-- Add a dark overlay so every belief and the closing statement remain readable at every frame.
+- Keep movement slow and low contrast behind the editorial cue and statement.
+- Add a dark overlay so the statement remains readable at every frame.
 - Do not autoplay audio.
 - Pause or remove the video when reduced motion is requested.
-- Loading or playback failure displays the poster with the complete statement.
+- Loading or playback failure displays the poster with the complete cue and statement.
 - Avoid rapid travel, camera rotation, flashes, meteors, or high-contrast bursts.
 
 ## Technical Constraints For Prototype
@@ -82,7 +82,7 @@ The polished mockup and prototype must show:
 4. Reduced-motion desktop
 5. Touch/mobile static behavior
 6. Portrait-loading or portrait-failure fallback
-7. Belief-manifesto video poster and playback-failure fallback
+7. Future Threshold video poster and playback-failure fallback
 
 ## Gate Criteria
 
@@ -90,4 +90,4 @@ The polished mockup and prototype must show:
 - No interactive control is hidden under the visual layer.
 - The hero remains usable by keyboard and touch.
 - Motion adds meaning and character without becoming the page’s primary subject.
-- The beliefs and closing statement remain fully legible over both video and poster states.
+- The Future Threshold cue and statement remain fully legible over both video and poster states.

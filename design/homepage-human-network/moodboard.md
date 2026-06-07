@@ -93,7 +93,7 @@ Calibrate visual quality and interaction principles without copying another site
 - Arabic display typography with quieter Latin technical labels
 - Layered depth concentrated around the portrait
 - Calm editorial sections below the hero
-- One cinematic starfield interlude between principles and writing
+- One cinematic starfield threshold after selected writing
 - Visible whitespace and strong reading order
 
 ## Avoid List
@@ -120,11 +120,18 @@ Add links or images here before Gate 2 approval:
 ## Belief Manifesto Direction
 
 - Placement: directly after the hero and before selected thoughts
-- Role: explain Rashed's worldview, then create a brief cinematic transition into his writing
+- Role: explain Rashed's worldview in a calm editorial passage
+- Background: restrained and quiet; no space footage behind the belief paragraphs
+- Foreground: three concise English beliefs with generous reading space
+
+## Future Threshold Direction
+
+- Placement: after selected thoughts and before professional proof
+- Role: connect demonstrated thinking to the intention to shape what comes next
+- Editorial cue: `A principle for what comes next`
 - Background: slow, low-contrast deep-space atmosphere with strong navy continuity
-- Foreground: three concise English beliefs followed by one centered closing statement
+- Foreground: the future statement as one deliberate three-line reveal
 - Asset direction: original or properly licensed looping video with a static poster
-- Keep the belief paragraphs in a calm, highly legible area; allow the closing statement to carry the strongest cinematic emphasis
 - Avoid rockets, planets, astronauts, signatures, stock sci-fi interfaces, and unrelated cosmic decoration
 - The starfield should visually connect to the knowledge network through restrained light and depth, not through repeated circuit graphics
 

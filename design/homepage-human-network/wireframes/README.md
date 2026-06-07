@@ -22,8 +22,9 @@ Open each file directly in a browser. Each page includes fixed-width desktop (`1
 
 - Portrait and network are the dominant opening anchor.
 - Identity and thesis form a centered statement beneath the portrait.
-- The manifesto uses an asymmetric editorial split.
+- `What I Believe` is a calm editorial passage.
 - Selected thoughts are staggered and proof becomes a vertical sequence.
+- The future statement appears later as a cinematic threshold after selected thoughts.
 - Strength: more personal and visually distinctive.
 - Risk: slower first-screen scanning and a longer vertical rhythm.
 

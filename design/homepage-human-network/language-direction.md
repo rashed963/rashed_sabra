@@ -25,7 +25,8 @@ Use nested markup with `lang="en"` and `dir="ltr"` for:
 - `NLP`
 - `MSc in Big Data Systems`
 - Product names, company names, and URLs
-- The complete `What I Believe` manifesto and closing statement
+- The complete `What I Believe` manifesto
+- The Future Threshold cue and statement
 
 Do not force English terms into RTL character order.
 

@@ -27,7 +27,7 @@ There are intentionally no wireframes, mockups, prototype files, React component
 9. Are the portrait requirements realistic for the available photo?
 10. Are the language, motion, and accessibility constraints acceptable?
 11. Does `What I Believe` belong directly after the hero?
-12. Do its beliefs and cinematic closing represent Rashed without feeling generic or derivative?
+12. Do its beliefs represent Rashed without feeling generic or derivative?
 
 ## Decision
 
@@ -56,4 +56,5 @@ Reviewer: Owner
 - Provisional belief language: English
 - Provisional manifesto wording: `THE BEST WAY TO PREDICT THE FUTURE IS TO CREATE IT.`
 - Manifesto attribution: None
+- Gate 2 revision: Future statement separated from `What I Believe` and moved after selected writing
 - Gate 2 authorized: Yes — two grayscale wireframe directions only

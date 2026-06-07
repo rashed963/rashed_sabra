@@ -55,7 +55,15 @@ Limits:
 - No claims about abundance, global scale, or impact that Rashed cannot personally substantiate
 - No signature graphic or imitation of another person's authorship marks
 
-### Closing Statement
+## Future Threshold
+
+### Editorial Cue
+
+`A principle for what comes next`
+
+The cue is intentionally quieter than the statement. It connects the two real articles to the site's future-building point of view without presenting the line as another belief paragraph.
+
+### Statement
 
 > THE BEST WAY TO
 > PREDICT THE FUTURE
@@ -64,7 +72,8 @@ Limits:
 - Attribution: none during design exploration
 - Presentation: uppercase display treatment may be explored in mockups
 - Maximum: three or four short visual lines
-- Purpose: close the belief manifesto and transition into real published thoughts
+- Placement: after selected thoughts and before professional proof
+- Purpose: create a later emotional threshold after readers have encountered real thinking
 
 This wording is provisional. The better-sourced Alan Kay form uses “invent it,” so the current “create it” wording must not be attributed to Alan Kay without changing the text and reapproving the content.
 
@@ -142,5 +151,5 @@ These labels do not authorize production navigation changes.
 - No Build / Think / Learn / Write labels.
 - No “قيد البناء” cards.
 - No generic claims such as “future-ready,” “innovation,” or “transforming tomorrow.”
-- The approved English belief manifesto and its closing statement are the only exceptions to the general avoidance of future-oriented slogan language.
+- The approved English belief manifesto and separate Future Threshold are the only exceptions to the general avoidance of future-oriented slogan language.
 - No consulting offer, availability banner, or sales promise in phase one.

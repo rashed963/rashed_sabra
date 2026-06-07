@@ -28,9 +28,12 @@
 | D-15 | Isolated prototype before production | Keeps design validation separate from repository architecture | Frozen |
 | D-16 | One post-hero `What I Believe` manifesto | Explains the worldview behind the work before presenting articles and proof | Frozen |
 | D-17 | Use the provisional English “create it” wording without attribution | Preserves the reference the user likes while avoiding an unsupported attribution | Frozen |
-| D-18 | Treat the belief manifesto and space statement as one cinematic section | Avoids duplicate motivational interludes and keeps motion concentrated | Frozen |
+| D-18 | Treat the belief manifesto and space statement as one cinematic section | Superseded during Gate 2 because the combined section overloaded the beliefs | Superseded |
 | D-19 | Use eventual space motion as looping video plus poster, not GIF | Provides better compression, playback control, and reduced-motion handling | Frozen |
 | D-20 | Borrow the Diamandis section's narrative function, not its expression | Preserves originality by excluding its wording, rocket imagery, signature, and composition | Frozen |
+| D-21 | Select Direction B for focused revision | Its centered portrait and distinctive pacing best match the intended personal presence | Gate 2 candidate |
+| D-22 | Separate the future statement from `What I Believe` | Gives the beliefs room and lets the statement land after readers encounter real writing | Gate 2 candidate |
+| D-23 | Place a cinematic Future Threshold after selected thoughts | Turns the statement into a bridge from published thinking to professional proof | Gate 2 candidate |
 
 ## Explicitly Rejected
 
@@ -61,9 +64,13 @@
 ## Gate 2 Decision
 
 - Status: Pending review
+- Current direction: Direction B with one focused revision
+- Owner response: `REVISE B`
+- Revision date: 2026-06-07
+- Required revision: Separate the future statement from `What I Believe` and introduce it later with more deliberate pacing.
 - Candidates:
   - Direction A: Editorial Split
-  - Direction B: Centered Human Signal
+  - Direction B: Centered Human Signal — revised candidate
 - Permitted output: Grayscale desktop, tablet, and mobile wireframes only
 - Polished mockup authorized: No
 - Prototype authorized: No
