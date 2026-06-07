@@ -6,6 +6,10 @@ import { siteConfig } from "../config/site";
 const SiteHeader = () => {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isLinkActive = (href: string) =>
+    href === routes.home
+      ? pathname === href
+      : pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -28,7 +32,7 @@ const SiteHeader = () => {
 
         <nav className="site-navigation" aria-label="التنقل الرئيسي">
           {siteConfig.navigation.map((link, index) => {
-            const active = pathname === link.href;
+            const active = isLinkActive(link.href);
             return (
               <Link
                 key={`${link.href}-${index}`}
@@ -71,8 +75,8 @@ const SiteHeader = () => {
                 key={`${link.href}-${index}`}
                 to={link.href}
                 onClick={() => setMenuOpen(false)}
-                aria-current={pathname === link.href ? "page" : undefined}
-                className={pathname === link.href ? "is-active" : undefined}
+                aria-current={isLinkActive(link.href) ? "page" : undefined}
+                className={isLinkActive(link.href) ? "is-active" : undefined}
               >
                 {link.label}
               </Link>

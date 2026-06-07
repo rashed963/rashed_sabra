@@ -20,30 +20,31 @@ interface TimelineProps {
 }
 
 export const Timeline = ({ milestones }: TimelineProps) => (
-  <div className="border-y border-border/80">
-    {milestones.map((milestone) => {
+  <div className="journey-timeline">
+    {milestones.map((milestone, index) => {
       const outcomes = milestone.outcomes ?? fallbackOutcomes[milestone.id] ?? [];
 
       return (
-        <article key={milestone.id} className="grid gap-4 border-b border-border/70 py-7 last:border-b-0 md:grid-cols-[11rem_1fr]">
-          <div className="support-copy">
-            <time className="block font-semibold tabular-nums text-foreground">{milestone.period}</time>
-            <span className="mt-1 block">{typeLabels[milestone.type]}</span>
+        <article key={milestone.id} className="journey-timeline__item">
+          <div className="journey-timeline__meta">
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <time>{milestone.period}</time>
+            <b>{typeLabels[milestone.type]}</b>
           </div>
 
-          <div>
-            <h3 className="mb-1 text-[1.375rem] font-semibold leading-snug text-foreground">{milestone.title}</h3>
-            <p className="support-copy mb-4">
+          <div className="journey-timeline__content">
+            <h3>{milestone.title}</h3>
+            <p className="journey-timeline__organization">
               {milestone.organization}
               {milestone.location && (
                 <span className="before:mx-1.5 before:content-['·']">{milestone.location}</span>
               )}
             </p>
 
-            <p className="body-copy mb-4 text-foreground/85">{milestone.context}</p>
+            <p className="journey-timeline__context">{milestone.context}</p>
 
             {milestone.actions.length > 0 && (
-              <ul className="support-copy mb-4 list-disc space-y-2 pr-5">
+              <ul className="journey-timeline__actions">
                 {milestone.actions.map((action) => (
                   <li key={action}>{action}</li>
                 ))}
@@ -51,19 +52,16 @@ export const Timeline = ({ milestones }: TimelineProps) => (
             )}
 
             {milestone.impact && (
-              <p className="support-copy mb-4 border-r-2 border-border pr-4 text-foreground/85">
-                <span className="font-bold text-foreground">الأثر - </span>
+              <p className="journey-timeline__impact">
+                <span>الأثر · </span>
                 {milestone.impact}
               </p>
             )}
 
             {outcomes.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="journey-timeline__outcomes">
                 {outcomes.map((outcome) => (
-                  <span
-                    key={outcome}
-                    className="meta-text border border-border/80 px-2 py-0.5"
-                  >
+                  <span key={outcome}>
                     {outcome}
                   </span>
                 ))}
@@ -71,7 +69,7 @@ export const Timeline = ({ milestones }: TimelineProps) => (
             )}
 
             {milestone.lesson && (
-              <p className="support-copy mt-4 italic">
+              <p className="journey-timeline__lesson">
                 "{milestone.lesson}"
               </p>
             )}

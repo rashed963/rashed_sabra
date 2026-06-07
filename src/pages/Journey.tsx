@@ -8,30 +8,34 @@ import { milestones, journeyThemes } from "../features/journey/content";
 
 const Journey = () => (
   <Layout>
-    <section className="py-14 md:py-20">
+    <div className="site-page journey-page">
+    <section className="interior-hero" aria-labelledby="journey-title">
       <div className="page-shell">
-        <div className="max-w-2xl">
-          <p className="eyebrow mb-5">{copyAr.journey.eyebrow}</p>
-          <h1 className="page-title mb-6">
+        <div className="interior-hero__copy">
+          <p className="section-label">
+            <span>01</span>
+            {copyAr.journey.eyebrow}
+          </p>
+          <h1 id="journey-title" className="interior-title">
             {copyAr.journey.titlePrefix} {copyAr.journey.titleHighlight}
           </h1>
-          <p className="lede">
+          <p className="interior-lede">
             {copyAr.journey.subtitle}
           </p>
         </div>
 
-        <div className="mt-9 flex flex-wrap gap-3">
+        <div className="editorial-actions">
           <a
             href={siteConfig.external.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            className="button-label inline-flex items-center rounded-sm border border-border px-4 py-2 text-foreground transition-colors hover:bg-secondary/70"
+            className="editorial-button editorial-button--primary"
           >
             {copyAr.common.linkedInCta}
           </a>
           <Link
             to={routes.blog}
-            className="button-label inline-flex items-center rounded-sm border border-border px-4 py-2 text-foreground transition-colors hover:bg-secondary/70"
+            className="editorial-button"
           >
             {copyAr.home.blogCta}
           </Link>
@@ -39,84 +43,98 @@ const Journey = () => (
       </div>
     </section>
 
-    <section className="pb-16">
-      <div className="page-shell section-rule pt-8">
-        <div className="mb-8 flex items-baseline justify-between gap-4">
-          <h2 className="eyebrow">{copyAr.journey.themesTitle}</h2>
-          <span className="meta-text">01</span>
+    <section className="paper-section journey-section" aria-labelledby="journey-themes">
+      <div className="page-shell">
+        <div className="section-heading">
+          <div>
+            <p className="section-label"><span>02</span><span lang="en" dir="ltr">Working themes</span></p>
+            <h2 id="journey-themes">{copyAr.journey.themesTitle}</h2>
+          </div>
         </div>
-        <div className="grid gap-0 border-y border-border/80 md:grid-cols-3">
+        <div className="journey-themes">
           {journeyThemes.map((theme) => (
-            <article key={theme.title} className="border-b border-border/70 py-5 md:border-b-0 md:border-l md:px-5 md:first:pr-0 md:last:border-l-0 md:last:pl-0">
-              <p className="meta-text mb-2">{theme.num}</p>
-              <h3 className="mb-2 text-[1.125rem] font-semibold leading-7 text-foreground">{theme.title}</h3>
-              <p className="support-copy">{theme.description}</p>
+            <article key={theme.title}>
+              <p>{theme.num}</p>
+              <h3>{theme.title}</h3>
+              <p>{theme.description}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section className="pb-16">
-      <div className="page-shell section-rule pt-8">
-        <div className="mb-8 flex items-baseline justify-between gap-4">
-          <h2 className="eyebrow">{copyAr.journey.principlesTitle}</h2>
-          <span className="meta-text">02</span>
+    <section className="journey-section" aria-labelledby="journey-principles">
+      <div className="page-shell">
+        <div className="section-heading">
+          <div>
+            <p className="section-label"><span>03</span><span lang="en" dir="ltr">Operating principles</span></p>
+            <h2 id="journey-principles">{copyAr.journey.principlesTitle}</h2>
+          </div>
         </div>
-        <div className="grid gap-x-10 gap-y-7 md:grid-cols-2">
-          {copyAr.journey.principles.map((principle) => (
-            <article key={principle.title} className="soft-rule pt-4">
-              <h3 className="mb-2 text-[1.125rem] font-semibold leading-7 text-foreground">{principle.title}</h3>
-              <p className="support-copy">{principle.body}</p>
+        <div className="journey-principles">
+          {copyAr.journey.principles.map((principle, index) => (
+            <article key={principle.title}>
+              <b>{String(index + 1).padStart(2, "0")}</b>
+              <div>
+                <h3>{principle.title}</h3>
+                <p>{principle.body}</p>
+              </div>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section className="pb-16">
-      <div className="page-shell section-rule pt-8">
-        <div className="mb-8 flex items-baseline justify-between gap-4">
-          <h2 className="eyebrow">{copyAr.journey.proofTitle}</h2>
-          <span className="meta-text">03</span>
+    <section className="paper-section journey-section" aria-labelledby="journey-proof">
+      <div className="page-shell">
+        <div className="section-heading">
+          <div>
+            <p className="section-label"><span>04</span><span lang="en" dir="ltr">Professional proof</span></p>
+            <h2 id="journey-proof">{copyAr.journey.proofTitle}</h2>
+          </div>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {copyAr.journey.proofStories.map((story) => (
-            <article key={story.title} className="surface p-5">
-              <h3 className="mb-3 text-[1.125rem] font-semibold leading-7 text-foreground">{story.title}</h3>
-              <p className="support-copy">{story.body}</p>
+        <div className="journey-proof">
+          {copyAr.journey.proofStories.map((story, index) => (
+            <article key={story.title}>
+              <b>{String(index + 1).padStart(2, "0")}</b>
+              <h3>{story.title}</h3>
+              <p>{story.body}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section className="pb-16">
-      <div className="page-shell section-rule pt-8">
-        <div className="mb-8 flex items-baseline justify-between gap-4">
-          <h2 className="eyebrow">{copyAr.journey.timelineTitle}</h2>
-          <span className="meta-text">04</span>
+    <section className="journey-section" aria-labelledby="journey-timeline">
+      <div className="page-shell">
+        <div className="section-heading">
+          <div>
+            <p className="section-label"><span>05</span><span lang="en" dir="ltr">Selected path</span></p>
+            <h2 id="journey-timeline">{copyAr.journey.timelineTitle}</h2>
+          </div>
         </div>
         <Timeline milestones={milestones} />
       </div>
     </section>
 
-    <section className="pb-20">
-      <div className="page-shell section-rule pt-8">
-        <div className="max-w-2xl">
-          <h2 className="mb-3 text-[1.5rem] font-bold leading-snug text-foreground">{copyAr.blog.title}</h2>
-          <p className="support-copy mb-6">
+    <section className="journey-closing" aria-labelledby="journey-writing">
+      <div className="page-shell">
+        <div>
+          <p className="section-label"><span>06</span><span lang="en" dir="ltr">Ideas in practice</span></p>
+          <h2 id="journey-writing">{copyAr.blog.title}</h2>
+          <p>
             {copyAr.blog.subtitle}
           </p>
           <Link
             to={routes.blog}
-            className="button-label inline-flex items-center rounded-sm border border-border px-4 py-2 text-foreground transition-colors hover:bg-secondary/70"
+            className="editorial-button editorial-button--light"
           >
             {copyAr.home.showAllCta}
           </Link>
         </div>
       </div>
     </section>
+    </div>
   </Layout>
 );
 

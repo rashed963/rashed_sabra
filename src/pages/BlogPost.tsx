@@ -14,7 +14,7 @@ const renderBlock = (block: string, index: number) => {
 
     if (level === 1) {
       return (
-        <h2 key={index} className="pt-4 text-[1.625rem] font-bold leading-snug text-foreground md:text-[2rem]">
+        <h2 key={index} className="article-heading article-heading--primary">
           {text}
         </h2>
       );
@@ -22,14 +22,14 @@ const renderBlock = (block: string, index: number) => {
 
     if (level === 2) {
       return (
-        <h3 key={index} className="pt-3 text-[1.375rem] font-bold leading-snug text-foreground md:text-[1.625rem]">
+        <h3 key={index} className="article-heading article-heading--secondary">
           {text}
         </h3>
       );
     }
 
     return (
-      <h4 key={index} className="pt-2 text-[1.125rem] font-semibold leading-7 text-foreground">
+      <h4 key={index} className="article-heading article-heading--tertiary">
         {text}
       </h4>
     );
@@ -43,10 +43,7 @@ const renderBlock = (block: string, index: number) => {
       .join(" ");
 
     return (
-      <blockquote
-        key={index}
-        className="article-copy border-r-2 border-border pr-4 text-foreground/85"
-      >
+      <blockquote key={index} className="article-quote">
         {quote}
       </blockquote>
     );
@@ -59,7 +56,7 @@ const renderBlock = (block: string, index: number) => {
 
   if (listLines.length > 0 && listLines.length === block.split("\n").filter(Boolean).length) {
     return (
-      <ul key={index} className="article-copy list-disc space-y-2 pr-5">
+      <ul key={index} className="article-list">
         {listLines.map((line, lineIndex) => (
           <li key={`${index}-${lineIndex}`}>{line.replace(/^-\s+/, "")}</li>
         ))}
@@ -68,7 +65,7 @@ const renderBlock = (block: string, index: number) => {
   }
 
   return (
-    <p key={index} className="article-copy">
+    <p key={index} className="article-paragraph">
       {block.replace(/\n/g, " ")}
     </p>
   );
@@ -84,15 +81,16 @@ const BlogPost = () => {
 
   return (
     <Layout>
-      <article className="py-16 md:py-24">
-        <div className="reading-shell">
-          <Link to={routes.blog} className="button-label mb-8 inline-flex text-primary hover:underline underline-offset-4">
+      <article className="site-page article-page">
+        <header className="interior-hero article-hero">
+          <div className="reading-shell">
+          <Link to={routes.blog} className="editorial-back-link">
             {copyAr.common.backToBlog}
           </Link>
 
-          <header className="mb-10">
-            <div className="meta-text mb-4 flex flex-wrap items-center gap-2">
-              <span className="font-semibold text-foreground/80">{post.tag}</span>
+          <div className="article-hero__copy">
+            <div className="editorial-meta">
+              <span className="editorial-meta__strong">{post.tag}</span>
               <span aria-hidden="true">·</span>
               <time>{post.date}</time>
               <span aria-hidden="true">·</span>
@@ -101,31 +99,43 @@ const BlogPost = () => {
               </span>
             </div>
 
-            <h1 className="page-title">{post.title}</h1>
-            <p className="lede mt-5">{post.excerpt}</p>
-          </header>
+            <h1 className="interior-title">{post.title}</h1>
+            <p className="interior-lede">{post.excerpt}</p>
+          </div>
+          </div>
+        </header>
 
-          <div className="section-rule space-y-7 pt-8">
+        <div className="paper-section article-reading">
+          <div className="reading-shell">
             <img
               src={post.image}
               alt={post.title}
-              className="h-auto w-full border border-border object-cover"
-              loading="lazy"
+              className="article-cover"
             />
-            {post.content.map((block, index) => renderBlock(block, index))}
+            <div className="article-body">
+              {post.content.map((block, index) => renderBlock(block, index))}
+            </div>
           </div>
+        </div>
 
-          <div className="mt-10 section-rule pt-6">
+        <footer className="article-next">
+          <div className="reading-shell">
+            <p className="section-label">
+              <span>03</span>
+              <span lang="en" dir="ltr">Continue the conversation</span>
+            </p>
+            <h2>هل تفتح هذه الفكرة سؤالًا في عملك؟</h2>
+            <p>يمكنك متابعة النقاش والكتابات الجديدة عبر LinkedIn.</p>
             <a
               href={siteConfig.external.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              className="button-label inline-flex items-center rounded-sm border border-border px-4 py-2 text-foreground transition-colors hover:bg-secondary/70"
+              className="editorial-button editorial-button--primary"
             >
               {copyAr.common.linkedInCta}
             </a>
           </div>
-        </div>
+        </footer>
       </article>
     </Layout>
   );

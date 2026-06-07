@@ -29,19 +29,38 @@ const Blog = () => {
 
   return (
     <Layout>
-      <section className="py-14 md:py-20">
+      <div className="site-page">
+      <section className="interior-hero" aria-labelledby="blog-title">
         <div className="page-shell">
-          <div className="max-w-3xl">
-            <p className="eyebrow mb-5">{copyAr.blog.eyebrow}</p>
-            <h1 className="page-title mb-6">
+          <div className="interior-hero__copy">
+            <p className="section-label">
+              <span>01</span>
+              {copyAr.blog.eyebrow}
+            </p>
+            <h1 id="blog-title" className="interior-title">
               {copyAr.blog.title}
             </h1>
-            <p className="lede">
+            <p className="interior-lede">
               {copyAr.blog.subtitle}
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 flex flex-wrap gap-x-4 gap-y-2" role="group" aria-label="تصنيف المقالات">
+      <section className="paper-section blog-index" aria-labelledby="blog-index-title">
+        <div className="page-shell">
+          <div className="section-heading">
+            <div>
+              <p className="section-label">
+                <span>02</span>
+                <span lang="en" dir="ltr">Writing archive</span>
+              </p>
+              <h2 id="blog-index-title">أفكار عملية، مرتبة بهدوء.</h2>
+            </div>
+            <p>اختر محورًا أو ابدأ من أحدث كتابة.</p>
+          </div>
+
+          <div className="topic-filter" role="group" aria-label="تصنيف المقالات">
             {topicFilters.map((topic) => {
               const isActive = activeTopic === topic.id;
               return (
@@ -57,29 +76,24 @@ const Blog = () => {
 
                     setSearchParams({ topic: topic.id });
                   }}
-                  className={`button-label underline-offset-4 transition-colors ${
-                    isActive
-                      ? "text-foreground underline decoration-border"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={isActive ? "is-active" : undefined}
                 >
                   {topic.label}
                 </button>
               );
             })}
           </div>
-        </div>
-      </section>
-
-      <section className="pb-24">
-        <div className="page-shell">
-          <div className="border-y border-border/80">
+          <div className="editorial-posts">
             {visiblePosts.map((post, index) => (
               <PostCard key={post.slug} post={post} index={index} />
             ))}
+            {visiblePosts.length === 0 && (
+              <p className="blog-empty">لا توجد مقالات منشورة ضمن هذا المحور حاليًا.</p>
+            )}
           </div>
         </div>
       </section>
+      </div>
     </Layout>
   );
 };
