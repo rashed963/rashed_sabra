@@ -26,6 +26,9 @@
 | D-13 | Compact proof plus Journey link | Establishes credibility without recreating the CV on the homepage | Frozen candidate |
 | D-14 | Deep navy, teal, warm decision signal | Evolves the existing identity while distinguishing system activity from human choice | Frozen candidate |
 | D-15 | Isolated prototype before production | Keeps design validation separate from repository architecture | Frozen candidate |
+| D-16 | One mid-page cinematic space manifesto | Adds an emotional future-building statement without complicating the identity-first hero | Frozen candidate |
+| D-17 | Use the provisional English “create it” wording without attribution | Preserves the reference the user likes while avoiding an unsupported attribution | Frozen candidate |
+| D-18 | Implement eventual space motion as looping video plus poster, not GIF | Provides better compression, playback control, and reduced-motion handling | Frozen candidate |
 
 ## Explicitly Rejected
 

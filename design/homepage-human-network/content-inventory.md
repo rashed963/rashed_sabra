@@ -52,6 +52,23 @@ Limits per pillar:
 - Description: maximum 95 characters where practical
 - No icons or technology logos are required for comprehension
 
+## Space Manifesto
+
+### Provisional Copy
+
+> THE BEST WAY TO
+> PREDICT THE FUTURE
+> IS TO CREATE IT.
+
+- Language: English
+- Direction: LTR
+- Attribution: none during design exploration
+- Presentation: uppercase display treatment may be explored in mockups
+- Maximum: three or four short visual lines
+- Purpose: transition from principles into real published thoughts
+
+This wording is provisional. The better-sourced Alan Kay form uses “invent it,” so the current “create it” wording must not be attributed to Alan Kay without changing the text and reapproving the content.
+
 ## Selected Thoughts
 
 ### First Thought
@@ -126,4 +143,5 @@ These labels do not authorize production navigation changes.
 - No Build / Think / Learn / Write labels.
 - No “قيد البناء” cards.
 - No generic claims such as “future-ready,” “innovation,” or “transforming tomorrow.”
+- The approved English manifesto is the only exception to the general avoidance of future-oriented slogan language.
 - No consulting offer, availability banner, or sales promise in phase one.

@@ -81,6 +81,7 @@ Calibrate visual quality and interaction principles without copying another site
 - Arabic display typography with quieter Latin technical labels
 - Layered depth concentrated around the portrait
 - Calm editorial sections below the hero
+- One cinematic starfield interlude between principles and writing
 - Visible whitespace and strong reading order
 
 ## Avoid List
@@ -101,7 +102,17 @@ Add links or images here before Gate 2 approval:
 
 | Reference | What resonates | What to avoid |
 |---|---|---|
-| Pending |  |  |
+| Peter website space section — user-provided screenshot | Deep blue moving starfield, centered manifesto, emotional pause, sense of actively creating the future | Copying the exact asset, spreading space imagery across the site, or letting the section feel like a motivational template |
+
+## Space Manifesto Direction
+
+- Placement: between the thought pillars and selected thoughts
+- Role: a brief cinematic transition, not a content category
+- Background: slow deep-space motion with strong navy continuity
+- Foreground: one centered English statement
+- Asset direction: original or properly licensed looping video with a static poster
+- Avoid literal rockets, planets, astronauts, stock sci-fi interfaces, and unrelated cosmic decoration
+- The starfield should visually connect to the knowledge network through restrained light and depth, not through repeated circuit graphics
 
 ## Gate 2 Input
 

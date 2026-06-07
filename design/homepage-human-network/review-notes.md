@@ -26,6 +26,8 @@ There are intentionally no wireframes, mockups, prototype files, React component
 8. Are any non-goals incorrectly excluding something essential?
 9. Are the portrait requirements realistic for the available photo?
 10. Are the language, motion, and accessibility constraints acceptable?
+11. Does the English space manifesto belong between the pillars and selected thoughts?
+12. Does its future-building message represent Rashed without feeling generic?
 
 ## Decision
 
@@ -50,5 +52,7 @@ Reviewer:
 ## Notes
 
 - User-supplied portrait status: Pending
-- User-supplied visual references: Pending
+- User-supplied visual references: Space-manifesto screenshot received
+- Provisional manifesto wording: `THE BEST WAY TO PREDICT THE FUTURE IS TO CREATE IT.`
+- Manifesto attribution: None
 - Gate 2 authorized: No
