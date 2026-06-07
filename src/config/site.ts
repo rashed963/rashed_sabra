@@ -10,9 +10,8 @@ export const siteConfig = {
     linkedIn: synced.profile.linkedIn,
   },
   navigation: [
-    { href: routes.home, label: "من أنا" },
-    { href: routes.blog, label: "المدونة" },
-    { href: routes.journey, label: "الرحلة المهنية" },
-    { href: routes.blog, label: "مقالات" },
+    { href: routes.home, label: "الرئيسية" },
+    { href: routes.blog, label: "أفكاري" },
+    { href: routes.journey, label: "رحلتي" },
   ],
 } as const;

@@ -13,7 +13,7 @@ The review page contains:
 
 `assets/portrait-temporary.jpg` is approved only for this design review. It is a `400x400` compressed image with a baked-in neural background.
 
-Before prototype approval, replace it with:
+For the final portrait update, replace it with:
 
 - A recent high-resolution portrait
 - At least `2400px` on the long edge

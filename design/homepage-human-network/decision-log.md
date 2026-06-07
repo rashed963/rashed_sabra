@@ -25,7 +25,7 @@
 | D-12 | Three beliefs: human judgment, leadership clarity, accountable AI | Matches the strongest overlap between background and published writing | Frozen |
 | D-13 | Compact proof plus Journey link | Establishes credibility without recreating the CV on the homepage | Frozen |
 | D-14 | Deep navy, teal, warm decision signal | Evolves the existing identity while distinguishing system activity from human choice | Frozen |
-| D-15 | Isolated prototype before production | Keeps design validation separate from repository architecture | Frozen |
+| D-15 | Isolated prototype before production | Superseded after the owner approved the polished mockup and chose direct implementation | Superseded |
 | D-16 | One post-hero `What I Believe` manifesto | Explains the worldview behind the work before presenting articles and proof | Frozen |
 | D-17 | Use the provisional English “create it” wording without attribution | Preserves the reference the user likes while avoiding an unsupported attribution | Frozen |
 | D-18 | Treat the belief manifesto and space statement as one cinematic section | Superseded during Gate 2 because the combined section overloaded the beliefs | Superseded |
@@ -34,8 +34,9 @@
 | D-21 | Select Direction B | Its centered portrait and distinctive pacing best match the intended personal presence | Frozen |
 | D-22 | Separate the future statement from `What I Believe` | Gives the beliefs room and lets the statement land after readers encounter real writing | Frozen |
 | D-23 | Place a cinematic Future Threshold after selected thoughts | Turns the statement into a bridge from published thinking to professional proof | Frozen |
-| D-24 | Use the supplied `400x400` portrait for Gate 3 only | Unblocks visual evaluation while keeping final portrait quality as a prototype prerequisite | Gate 3 candidate |
-| D-25 | Treat the temporary portrait as a contained editorial image | Its baked-in neural background makes honest masking stronger than simulated extraction | Gate 3 candidate |
+| D-24 | Use the supplied `400x400` portrait as a temporary production asset | Unblocks implementation while keeping final portrait replacement explicitly tracked | Frozen |
+| D-25 | Treat the temporary portrait as a contained editorial image | Its baked-in neural background makes honest masking stronger than simulated extraction | Frozen |
+| D-26 | Skip the isolated prototype and implement the approved mockup directly | Saves time and tokens after the visual and responsive direction was already approved | Frozen |
 
 ## Explicitly Rejected
 
@@ -78,13 +79,15 @@
 
 ## Gate 3 Decision
 
-- Status: Pending review
+- Status: Approved
+- Decision: `APPROVE MOCKUP`
+- Date: 2026-06-07
 - Artifact: Direction B polished mockup
 - Review states:
   - Default desktop
   - Touch/mobile static
   - Keyboard focus
   - Reduced motion and Future Threshold poster
-- Temporary portrait replacement required before prototype approval: Yes
-- Prototype authorized: No
-- Production implementation authorized: No
+- Temporary portrait replacement: Deferred by owner; track as a post-implementation asset update
+- Prototype: Skipped by owner
+- Production implementation authorized: Yes — homepage only, preserving existing Blog and Journey routes

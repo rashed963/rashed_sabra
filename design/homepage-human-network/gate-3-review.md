@@ -38,9 +38,9 @@ Do not evaluate:
 
 ## Temporary Portrait
 
-The current `400x400` image is approved for this mockup only. Its neural background is part of the source image.
+The current `400x400` image is approved as a temporary production asset. Its neural background is part of the source image.
 
-Before prototype approval:
+Before treating the portrait as final:
 
 - Supply a high-resolution portrait
 - Confirm publication rights
@@ -67,18 +67,18 @@ Choose exactly one:
 - `REVISE MOCKUP`
 - `REJECT MOCKUP`
 
-Decision:
+Decision: `APPROVE MOCKUP`
 
-Date:
+Date: 2026-06-07
 
-Reason:
+Reason: The owner approved the Direction B visual system and requested direct production implementation to avoid spending time and tokens on a separate prototype.
 
-Required revision:
+Required revision: None before production implementation.
 
 ## Gate Status
 
 - Gate 1: Approved on 2026-06-07
 - Gate 2: Approved on 2026-06-07
-- Gate 3: Pending review
-- Prototype authorized: No
-- Production implementation authorized: No
+- Gate 3: Approved on 2026-06-07
+- Prototype: Skipped by owner
+- Production implementation authorized: Yes — approved homepage scope only
