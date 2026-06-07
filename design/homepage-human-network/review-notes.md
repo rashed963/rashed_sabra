@@ -37,11 +37,11 @@ Choose exactly one:
 - `REVISE` — Update only the named Gate 1 documents, then review again.
 - `REJECT` — Reopen positioning before any layout exploration.
 
-Decision:
+Decision: `APPROVE`
 
-Date:
+Date: 2026-06-07
 
-Reviewer:
+Reviewer: Owner
 
 ## Required Revisions
 
@@ -56,4 +56,4 @@ Reviewer:
 - Provisional belief language: English
 - Provisional manifesto wording: `THE BEST WAY TO PREDICT THE FUTURE IS TO CREATE IT.`
 - Manifesto attribution: None
-- Gate 2 authorized: No
+- Gate 2 authorized: Yes — two grayscale wireframe directions only

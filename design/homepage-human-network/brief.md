@@ -3,7 +3,7 @@
 ## Gate
 
 - Gate: 1 — Strategy and content
-- Status: Pending approval
+- Status: Approved on 2026-06-07
 - Production code: Frozen
 - Next permitted step after approval: Two grayscale homepage wireframe directions
 
@@ -125,4 +125,4 @@ Choose exactly one:
 - `REVISE`
 - `REJECT`
 
-Approval freezes this brief. Any later strategic change returns the project to Gate 1.
+Approved by the owner on 2026-06-07. This brief is frozen. Any later strategic change returns the project to Gate 1.

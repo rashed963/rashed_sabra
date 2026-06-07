@@ -3,7 +3,7 @@
 ## Status
 
 - Gate: 1
-- Copy status: Frozen candidate pending Gate 1 approval
+- Copy status: Frozen for wireframe evaluation; final wording remains reviewable before polished mockup
 - Language: Arabic-first with selective English terminology
 
 ## Hero
