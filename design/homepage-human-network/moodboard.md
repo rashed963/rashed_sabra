@@ -61,6 +61,18 @@ Calibrate visual quality and interaction principles without copying another site
 - Avoid:
   - An overly plain visual system for this project
 
+### Peter Diamandis
+
+- URL: https://www.diamandis.com/
+- Borrow:
+  - A personal belief manifesto immediately after identity is established
+  - A clear worldview that explains the work and content that follow
+  - Cinematic atmosphere used as an emotional frame for authored convictions
+- Avoid:
+  - Reusing his language, abundance thesis, rocket imagery, signature, or exact composition
+  - Claims of global impact or scale that are not Rashed's own
+  - Turning the homepage into a motivational-speaker or futurist brand
+
 ## Direction Words
 
 - Personal
@@ -102,16 +114,18 @@ Add links or images here before Gate 2 approval:
 
 | Reference | What resonates | What to avoid |
 |---|---|---|
-| Peter website space section — user-provided screenshot | Deep blue moving starfield, centered manifesto, emotional pause, sense of actively creating the future | Copying the exact asset, spreading space imagery across the site, or letting the section feel like a motivational template |
+| Diamandis closing space section — user-provided screenshot | Deep blue moving starfield, centered manifesto, emotional pause, sense of actively creating the future | Copying the exact asset, spreading space imagery across the site, or letting the section feel like a motivational template |
+| Diamandis `What I Believe` section — user-provided screenshot and live page | A personal worldview stated directly before proof and content | Copying the rocket, wording, signature, scale claims, typography, or layout |
 
-## Space Manifesto Direction
+## Belief Manifesto Direction
 
-- Placement: between the thought pillars and selected thoughts
-- Role: a brief cinematic transition, not a content category
-- Background: slow deep-space motion with strong navy continuity
-- Foreground: one centered English statement
+- Placement: directly after the hero and before selected thoughts
+- Role: explain Rashed's worldview, then create a brief cinematic transition into his writing
+- Background: slow, low-contrast deep-space atmosphere with strong navy continuity
+- Foreground: three concise English beliefs followed by one centered closing statement
 - Asset direction: original or properly licensed looping video with a static poster
-- Avoid literal rockets, planets, astronauts, stock sci-fi interfaces, and unrelated cosmic decoration
+- Keep the belief paragraphs in a calm, highly legible area; allow the closing statement to carry the strongest cinematic emphasis
+- Avoid rockets, planets, astronauts, signatures, stock sci-fi interfaces, and unrelated cosmic decoration
 - The starfield should visually connect to the knowledge network through restrained light and depth, not through repeated circuit graphics
 
 ## Gate 2 Input

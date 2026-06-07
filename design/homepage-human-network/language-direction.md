@@ -25,7 +25,7 @@ Use nested markup with `lang="en"` and `dir="ltr"` for:
 - `NLP`
 - `MSc in Big Data Systems`
 - Product names, company names, and URLs
-- The complete space-manifesto statement
+- The complete `What I Believe` manifesto and closing statement
 
 Do not force English terms into RTL character order.
 
@@ -65,7 +65,7 @@ Do not force English terms into RTL character order.
 - No inactive language switch.
 - No machine-translated duplicate copy.
 - English technical terms are retained only when they are natural and more precise than an awkward translation.
-- The English space manifesto is an explicitly approved visual statement, not a second homepage language.
+- The English belief manifesto is an explicitly approved candidate section, not a second homepage language.
 
 ## Validation
 

@@ -22,13 +22,15 @@
 | D-09 | Real portrait is the visual center | Makes the site unmistakably personal | Frozen candidate |
 | D-10 | One focused interactive hero | Delivers memorability without turning the page into a motion showcase | Frozen candidate |
 | D-11 | Curated thoughts replace taxonomy | Two real articles do not justify a permanent browsing system | Frozen candidate |
-| D-12 | Three thought pillars: trust, leadership, systems | Matches the strongest overlap between background and published writing | Frozen candidate |
+| D-12 | Three beliefs: human judgment, leadership clarity, accountable AI | Matches the strongest overlap between background and published writing | Frozen candidate |
 | D-13 | Compact proof plus Journey link | Establishes credibility without recreating the CV on the homepage | Frozen candidate |
 | D-14 | Deep navy, teal, warm decision signal | Evolves the existing identity while distinguishing system activity from human choice | Frozen candidate |
 | D-15 | Isolated prototype before production | Keeps design validation separate from repository architecture | Frozen candidate |
-| D-16 | One mid-page cinematic space manifesto | Adds an emotional future-building statement without complicating the identity-first hero | Frozen candidate |
+| D-16 | One post-hero `What I Believe` manifesto | Explains the worldview behind the work before presenting articles and proof | Frozen candidate |
 | D-17 | Use the provisional English “create it” wording without attribution | Preserves the reference the user likes while avoiding an unsupported attribution | Frozen candidate |
-| D-18 | Implement eventual space motion as looping video plus poster, not GIF | Provides better compression, playback control, and reduced-motion handling | Frozen candidate |
+| D-18 | Treat the belief manifesto and space statement as one cinematic section | Avoids duplicate motivational interludes and keeps motion concentrated | Frozen candidate |
+| D-19 | Use eventual space motion as looping video plus poster, not GIF | Provides better compression, playback control, and reduced-motion handling | Frozen candidate |
+| D-20 | Borrow the Diamandis section's narrative function, not its expression | Preserves originality by excluding its wording, rocket imagery, signature, and composition | Frozen candidate |
 
 ## Explicitly Rejected
 

@@ -32,40 +32,39 @@ Maximum: 170 Arabic characters where practical; no more than three desktop lines
 
 No third hero action.
 
-## Thought Pillars
+## What I Believe
 
-### AI موثوق وتحت قيادة الإنسان
+### Eyebrow
 
-> الذكاء الاصطناعي كقدرة تحتاج حدودًا واضحة، حوكمة، وقابلية للفحص.
+`WHAT I BELIEVE`
 
-### قيادة المنتج والتقنية
+### Provisional Beliefs
 
-> بناء وضوح مشترك بين المنتج، الهندسة، الجودة، والقرار التنفيذي.
+> I believe technology should expand human judgment, not quietly replace it.
+>
+> I believe strong product and technology leadership turns complexity into shared clarity: clear decisions, clear ownership, and systems teams can trust.
+>
+> I believe AI earns its place through evidence. It should be understandable, testable, and accountable to the people affected by it.
 
-### أنظمة تسليم يمكن الاعتماد عليها
+Limits:
 
-> تحويل الغموض إلى ملكية واضحة، التزامات قابلة للمتابعة، وتحسين مستمر.
+- Language: English during the current design exploration
+- Direction: LTR
+- Three belief paragraphs only
+- Each paragraph: no more than two desktop lines where practical
+- No claims about abundance, global scale, or impact that Rashed cannot personally substantiate
+- No signature graphic or imitation of another person's authorship marks
 
-Limits per pillar:
-
-- Title: one or two lines
-- Description: maximum 95 characters where practical
-- No icons or technology logos are required for comprehension
-
-## Space Manifesto
-
-### Provisional Copy
+### Closing Statement
 
 > THE BEST WAY TO
 > PREDICT THE FUTURE
 > IS TO CREATE IT.
 
-- Language: English
-- Direction: LTR
 - Attribution: none during design exploration
 - Presentation: uppercase display treatment may be explored in mockups
 - Maximum: three or four short visual lines
-- Purpose: transition from principles into real published thoughts
+- Purpose: close the belief manifesto and transition into real published thoughts
 
 This wording is provisional. The better-sourced Alan Kay form uses “invent it,” so the current “create it” wording must not be attributed to Alan Kay without changing the text and reapproving the content.
 
@@ -143,5 +142,5 @@ These labels do not authorize production navigation changes.
 - No Build / Think / Learn / Write labels.
 - No “قيد البناء” cards.
 - No generic claims such as “future-ready,” “innovation,” or “transforming tomorrow.”
-- The approved English manifesto is the only exception to the general avoidance of future-oriented slogan language.
+- The approved English belief manifesto and its closing statement are the only exceptions to the general avoidance of future-oriented slogan language.
 - No consulting offer, availability banner, or sales promise in phase one.
