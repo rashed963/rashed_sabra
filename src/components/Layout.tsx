@@ -1,5 +1,6 @@
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
+import CursorHalo from "./CursorHalo";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,6 +9,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="site-layout">
+      <CursorHalo />
       <a
         href="#main-content"
         className="skip-link"
