@@ -9,8 +9,13 @@ describe("blog selectors", () => {
   });
 
   it("finds post by slug in Arabic set", () => {
-    const post = getBlogPostBySlug("automation-where-to-start", "ar");
+    const post = getBlogPostBySlug("organizational-intelligence-leadership", "ar");
     expect(post).toBeDefined();
-    expect(post?.title.length).toBeGreaterThan(0);
+    expect(post?.title).toBe("هل نصمّم الشركات حول الهرم… أم حول الذكاء؟");
+    expect(post?.image).toBe("/blog/organizational-intelligence.jpg");
+  });
+
+  it("does not publish the article template", () => {
+    expect(getBlogPostBySlug("your-article-slug", "ar")).toBeUndefined();
   });
 });

@@ -6,6 +6,18 @@ import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import { copyAr } from "../features/copy/ar";
 import { getBlogPostBySlug } from "../features/blog/selectors";
 
+const renderInline = (text: string) =>
+  text
+    .split(/(\*\*.+?\*\*)/g)
+    .filter(Boolean)
+    .map((part, index) =>
+      part.startsWith("**") && part.endsWith("**") ? (
+        <strong key={index}>{part.slice(2, -2)}</strong>
+      ) : (
+        part
+      ),
+    );
+
 const renderBlock = (block: string, index: number) => {
   const headingMatch = block.match(/^(#{1,3})\s+(.+)$/);
   if (headingMatch) {
@@ -15,7 +27,7 @@ const renderBlock = (block: string, index: number) => {
     if (level === 1) {
       return (
         <h2 key={index} className="article-heading article-heading--primary">
-          {text}
+          {renderInline(text)}
         </h2>
       );
     }
@@ -23,14 +35,14 @@ const renderBlock = (block: string, index: number) => {
     if (level === 2) {
       return (
         <h3 key={index} className="article-heading article-heading--secondary">
-          {text}
+          {renderInline(text)}
         </h3>
       );
     }
 
     return (
       <h4 key={index} className="article-heading article-heading--tertiary">
-        {text}
+        {renderInline(text)}
       </h4>
     );
   }
@@ -44,7 +56,7 @@ const renderBlock = (block: string, index: number) => {
 
     return (
       <blockquote key={index} className="article-quote">
-        {quote}
+        {renderInline(quote)}
       </blockquote>
     );
   }
@@ -58,7 +70,7 @@ const renderBlock = (block: string, index: number) => {
     return (
       <ul key={index} className="article-list">
         {listLines.map((line, lineIndex) => (
-          <li key={`${index}-${lineIndex}`}>{line.replace(/^-\s+/, "")}</li>
+          <li key={`${index}-${lineIndex}`}>{renderInline(line.replace(/^-\s+/, ""))}</li>
         ))}
       </ul>
     );
@@ -66,7 +78,7 @@ const renderBlock = (block: string, index: number) => {
 
   return (
     <p key={index} className="article-paragraph">
-      {block.replace(/\n/g, " ")}
+      {renderInline(block.replace(/\n/g, " "))}
     </p>
   );
 };
