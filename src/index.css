@@ -802,12 +802,17 @@
   }
 
   .journey-timeline {
-    @apply grid border-y border-primary/20 lg:grid-cols-[minmax(17rem,0.72fr)_minmax(0,1.55fr)];
+    @apply grid gap-10 lg:grid-cols-[minmax(17rem,0.72fr)_minmax(0,1.55fr)] lg:gap-16;
   }
 
   .journey-timeline__index {
-    @apply grid grid-cols-4 border-b border-primary/20 pb-1 lg:block lg:border-b-0 lg:border-l lg:pb-0;
+    @apply relative grid grid-cols-4 lg:block lg:py-5;
     scrollbar-width: none;
+  }
+
+  .journey-timeline__index::before {
+    content: "";
+    @apply absolute left-[12.5%] right-[12.5%] top-[1.55rem] h-px bg-primary/25 lg:bottom-12 lg:right-[1.13rem] lg:top-12 lg:h-auto lg:w-px;
   }
 
   .journey-timeline__index::-webkit-scrollbar {
@@ -815,50 +820,47 @@
   }
 
   .journey-timeline__index-item {
-    @apply relative grid min-w-0 grid-cols-[1rem_minmax(0,1fr)] gap-x-2 overflow-hidden border-l border-primary/15 px-3 py-5 text-right transition-colors last:border-l-0 lg:grid-cols-[1rem_5.25rem_minmax(0,1fr)] lg:gap-x-4 lg:border-b lg:border-l-0 lg:px-6 lg:py-7 lg:last:border-b-0;
+    @apply relative grid min-w-0 grid-cols-1 justify-items-center gap-y-3 px-1 pb-2 pt-4 text-center transition duration-300 lg:grid-cols-[2.25rem_5.25rem_minmax(0,1fr)] lg:justify-items-stretch lg:gap-x-4 lg:px-0 lg:py-7 lg:text-right;
   }
 
   .journey-timeline__index-item:hover,
   .journey-timeline__index-item:focus-visible {
-    background: hsl(var(--primary) / 0.045);
+    color: hsl(var(--primary));
   }
 
   .journey-timeline__index-item:focus-visible {
     @apply outline-none;
-    box-shadow: inset 0 0 0 2px hsl(var(--accent));
-  }
-
-  .journey-timeline__index-item[aria-pressed="true"] {
-    background:
-      linear-gradient(90deg, transparent, hsl(var(--primary) / 0.065)),
-      hsl(var(--card) / 0.24);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 2px hsl(var(--accent));
   }
 
   .journey-timeline__index-marker {
-    @apply relative mt-1.5 h-2.5 w-2.5 rounded-full border border-primary/65 transition duration-300;
+    @apply relative z-10 col-start-1 row-start-1 h-3 w-3 rounded-full border border-primary/70 bg-background transition duration-300 lg:mr-[0.57rem] lg:mt-1.5;
   }
 
   .journey-timeline__index-marker::after {
     content: "";
-    @apply absolute inset-1/2 h-px w-7 -translate-y-1/2 bg-primary/25 opacity-0 transition-opacity lg:right-full lg:left-auto lg:w-8;
+    @apply absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 scale-50 rounded-full border border-primary/0 opacity-0 transition duration-300;
   }
 
   .journey-timeline__index-item[aria-pressed="true"] .journey-timeline__index-marker {
-    @apply border-primary bg-primary;
-    box-shadow: 0 0 16px hsl(var(--primary) / 0.58);
+    @apply scale-125 border-primary bg-primary;
+    box-shadow:
+      0 0 0 5px hsl(var(--primary) / 0.1),
+      0 0 24px hsl(var(--primary) / 0.65);
   }
 
   .journey-timeline__index-item[aria-pressed="true"] .journey-timeline__index-marker::after {
-    @apply opacity-100;
+    @apply scale-100 border-primary/30 opacity-100;
   }
 
   .journey-timeline__index-meta {
-    @apply col-start-2 row-start-1 flex items-center gap-2 whitespace-nowrap text-[0.6875rem] text-muted-foreground lg:block;
+    @apply col-start-1 row-start-2 flex items-center gap-2 whitespace-nowrap text-[0.6875rem] text-muted-foreground transition-colors lg:col-start-2 lg:row-start-1 lg:block;
     font-family: var(--font-mono);
   }
 
   .journey-timeline__index-meta > span {
-    @apply text-primary;
+    @apply text-muted-foreground transition-colors;
   }
 
   .journey-timeline__index-meta time {
@@ -866,11 +868,11 @@
   }
 
   .journey-timeline__index-copy {
-    @apply hidden min-w-0 lg:col-start-3 lg:row-start-1 lg:block;
+    @apply hidden min-w-0 transition duration-300 lg:col-start-3 lg:row-start-1 lg:block;
   }
 
   .journey-timeline__index-copy strong {
-    @apply block overflow-hidden text-[1rem] leading-7 text-foreground transition-colors lg:text-[1.05rem];
+    @apply block overflow-hidden text-[1rem] leading-7 text-foreground/75 transition-colors lg:text-[1.05rem];
     font-family: var(--font-display);
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -885,19 +887,23 @@
     @apply text-primary;
   }
 
-  .journey-timeline__stage {
-    @apply relative min-w-0 overflow-hidden px-6 py-9 sm:px-9 lg:min-h-[42rem] lg:px-12 lg:py-12;
-    animation: journey-stage-in 360ms ease both;
-    background:
-      linear-gradient(hsl(var(--primary) / 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--primary) / 0.025) 1px, transparent 1px);
-    background-size: 56px 56px;
+  .journey-timeline__index-item[aria-pressed="true"] .journey-timeline__index-meta > span {
+    @apply text-primary;
   }
 
-  .journey-timeline__stage::after {
+  .journey-timeline__index-item[aria-pressed="true"] .journey-timeline__index-copy {
+    @apply lg:-translate-x-2;
+  }
+
+  .journey-timeline__stage {
+    @apply relative min-w-0 px-1 pb-6 sm:px-4 lg:min-h-[39rem] lg:px-0 lg:py-10;
+    animation: journey-stage-in 360ms ease both;
+  }
+
+  .journey-timeline__stage::before {
     content: "";
-    @apply pointer-events-none absolute -bottom-36 -left-28 h-72 w-72 rounded-full border border-primary/10;
-    box-shadow: 0 0 0 3.5rem hsl(var(--primary) / 0.02);
+    @apply pointer-events-none absolute -right-16 top-4 h-48 w-48 rounded-full opacity-50 blur-3xl;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.13), transparent 68%);
   }
 
   .journey-timeline__stage-header,
@@ -917,11 +923,11 @@
 
   .journey-timeline__stage-kicker > span:first-child::after {
     content: "";
-    @apply mr-3 inline-block h-px w-8 align-middle bg-primary/45;
+    @apply mr-3 inline-block h-px w-12 align-middle bg-gradient-to-l from-primary/55 to-transparent;
   }
 
   .journey-timeline__stage h3 {
-    @apply mt-5 max-w-3xl text-[1.65rem] leading-[1.5] text-foreground sm:text-[1.85rem] md:text-[2.35rem];
+    @apply mt-6 max-w-3xl text-[1.75rem] leading-[1.5] text-foreground sm:text-[2rem] md:text-[2.5rem];
   }
 
   .journey-timeline__organization {
@@ -929,11 +935,11 @@
   }
 
   .journey-timeline__content {
-    @apply mt-8 max-w-3xl border-t border-primary/15 pt-7;
+    @apply mt-10 max-w-3xl;
   }
 
   .journey-timeline__context {
-    @apply text-[1.0625rem] leading-8 text-foreground/90;
+    @apply max-w-2xl text-[1.0625rem] leading-8 text-foreground/90;
   }
 
   .journey-timeline__actions {
@@ -945,7 +951,12 @@
   }
 
   .journey-timeline__impact {
-    @apply mt-7 border-r-2 border-accent/65 py-1 pr-5 text-[0.9375rem] leading-7 text-foreground/85;
+    @apply relative mt-9 max-w-2xl py-1 pr-6 text-[0.9375rem] leading-7 text-foreground/85;
+  }
+
+  .journey-timeline__impact::before {
+    content: "";
+    @apply absolute bottom-0 right-0 top-0 w-px bg-gradient-to-b from-primary via-accent to-transparent;
   }
 
   .journey-timeline__impact span {
@@ -966,7 +977,7 @@
   }
 
   .journey-timeline__stage-footer {
-    @apply mt-10 flex items-center gap-4 text-[0.6875rem] text-muted-foreground;
+    @apply mt-12 flex max-w-2xl items-center gap-4 text-[0.6875rem] text-muted-foreground;
     font-family: var(--font-mono);
   }
 
