@@ -19,6 +19,7 @@ function loadBlogPosts(): BlogPost[] {
         date: parsed.frontmatter.dateDisplay,
         publishedAt: parsed.frontmatter.date,
         language: parsed.frontmatter.language,
+        topic: parsed.frontmatter.topic,
         tag: parsed.frontmatter.tag,
         readTime: parsed.frontmatter.readTime,
         image: parsed.frontmatter.image,

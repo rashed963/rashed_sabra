@@ -7,6 +7,7 @@ tag: قيادة المنتج والتقنية
 readTime: ٥ د
 image: /blog/organizational-intelligence.jpg
 language: ar
+topic: engineering-leadership
 ---
 استمعت مؤخرًا إلى محاضرة عن فكرة مثيرة اسمها **Organizational Singularity**.
 الفكرة الأساسية ليست فقط أن الشركات ستستخدم الذكاء الاصطناعي أكثر. هذا أصبح واضحًا تقريبًا للجميع.

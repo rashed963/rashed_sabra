@@ -7,6 +7,7 @@ tag: أتمتة
 readTime: ٧ د
 image: /blog/cover-1.png
 language: ar
+topic: robotics-simulation
 ---
 كلما دخلت مشروع أتمتة ذكية، يتكرر سؤال واحد: لم يعد "أي تقنية نستخدم؟" بل أصبح: "ما الذي يحدث فعلاً؟"
 

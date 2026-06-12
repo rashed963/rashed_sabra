@@ -1,25 +1,36 @@
-import type { BlogPost } from "./types";
+import type { BlogLanguage, BlogPost, BlogTopicId } from "./types";
 
-export type BlogTopicId = "engineering-leadership" | "arabic-nlp" | "robotics-simulation" | "general";
+export type { BlogTopicId } from "./types";
 
-export function getBlogTopic(post: BlogPost): BlogTopicId {
-  const haystack = `${post.slug} ${post.tag} ${post.title} ${post.excerpt}`.toLowerCase();
+export const blogTopics: ReadonlyArray<{
+  id: BlogTopicId;
+  labels: Record<BlogLanguage, string>;
+}> = [
+  {
+    id: "engineering-leadership",
+    labels: { ar: "قيادة المنتج والهندسة", en: "Product and engineering leadership" },
+  },
+  {
+    id: "arabic-nlp",
+    labels: { ar: "اللغة العربية والذكاء الاصطناعي", en: "Arabic language and AI" },
+  },
+  {
+    id: "robotics-simulation",
+    labels: { ar: "الأتمتة والمحاكاة", en: "Automation and simulation" },
+  },
+  {
+    id: "general",
+    labels: { ar: "أفكار عامة", en: "General" },
+  },
+];
 
-  if (/(single-question|leadership|manager|team|ownership)/.test(haystack)) {
-    return "engineering-leadership";
-  }
-
-  if (/(nlp|language|arabic)/.test(haystack)) {
-    return "arabic-nlp";
-  }
-
-  if (/(automation|robot|cad|simulation|rpa)/.test(haystack)) {
-    return "robotics-simulation";
-  }
-
-  return "general";
+export function getBlogTopicOptions(language: BlogLanguage) {
+  return blogTopics.map((topic) => ({
+    id: topic.id,
+    label: topic.labels[language],
+  }));
 }
 
 export function getPostsByTopic(posts: BlogPost[], topic: BlogTopicId) {
-  return posts.filter((post) => getBlogTopic(post) === topic);
+  return posts.filter((post) => post.topic === topic);
 }

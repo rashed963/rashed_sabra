@@ -4,6 +4,12 @@ import process from "node:process";
 
 const CONTENT_DIR = path.resolve("src/content/blog");
 const SUPPORTED_LANGUAGES = new Set(["ar", "en"]);
+const SUPPORTED_TOPICS = new Set([
+  "engineering-leadership",
+  "arabic-nlp",
+  "robotics-simulation",
+  "general",
+]);
 
 function getArgValue(name) {
   const index = process.argv.findIndex((arg) => arg === `--${name}`);
@@ -33,6 +39,11 @@ function fail(message) {
 const language = getArgValue("lang") ?? "ar";
 if (!SUPPORTED_LANGUAGES.has(language)) {
   fail("Unsupported --lang value. Use 'ar' or 'en'.");
+}
+
+const topic = getArgValue("topic") ?? "general";
+if (!SUPPORTED_TOPICS.has(topic)) {
+  fail(`Unsupported --topic value. Use one of: ${[...SUPPORTED_TOPICS].join(", ")}.`);
 }
 
 const inputSlug = getArgValue("slug");
@@ -73,6 +84,7 @@ tag: ${tag}
 readTime: ${readTime}
 image: ${image}
 language: ${language}
+topic: ${topic}
 ---
 ${bodyTemplate}
 `;

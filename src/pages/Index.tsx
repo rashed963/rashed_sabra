@@ -3,12 +3,9 @@ import HumanNetworkHero from "../components/HumanNetworkHero";
 import Layout from "../components/Layout";
 import { blogPostPath, routes } from "../config/routes";
 import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
-import { getAllBlogPosts } from "../features/blog/selectors";
+import { getLatestBlogPosts } from "../features/blog/selectors";
 
-const selectedSlugs = ["automation-where-to-start", "automation-single-question"];
-const posts = selectedSlugs
-  .map((slug) => getAllBlogPosts(DEFAULT_BLOG_LANGUAGE).find((post) => post.slug === slug))
-  .filter((post) => post !== undefined);
+const posts = getLatestBlogPosts(2, DEFAULT_BLOG_LANGUAGE);
 
 const beliefs = [
   "I believe technology should expand human judgment, not quietly replace it.",

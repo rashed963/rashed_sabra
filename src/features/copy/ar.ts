@@ -6,71 +6,8 @@ export const copyAr = {
     linkedInCta: "LinkedIn ↗",
   },
   home: {
-    eyebrow: "Product & Technology Leader",
-    titleLines: {
-      first: "أبني فرقًا.",
-      second: "أقود منتجات.",
-      thirdPrefix: "وأحوّل التقنية إلى",
-      thirdAccent: "نتائج موثوقة.",
-    },
-    title:
-      "أبني فرقًا. أقود منتجات. وأحوّل التقنية إلى نتائج موثوقة.",
-    subtitle:
-      "أعمل عند تقاطع المنتج، الهندسة، الجودة، والذكاء الاصطناعي لتحويل الأفكار المعقدة إلى برمجيات قابلة للتسليم والتوسع.",
-    journeyCta: "اقرأ الرحلة المهنية",
     blogCta: "تصفح المدونة",
-    announcement:
-      "أكتب عن بناء المنتجات، قيادة الفرق التقنية، والذكاء الاصطناعي العملي",
-    announcementCta: "اقرأ أحدث المقالات ←",
-    latestPostsTitle: "كتابات مختارة",
     showAllCta: "عرض الكل ←",
-    proofTitle: "ما أركز عليه",
-    profileInitials: "RS",
-    profileName: "راشد",
-    profileLabel: "قيادة منتج وتقنية",
-    profilePills: [
-      "قيادة المنتج",
-      "هندسة البرمجيات",
-      "AI/NLP",
-      "Delivery Reliability",
-    ],
-    stats: [
-      { value: "+10", label: "سنوات في البرمجة والمنتج" },
-      { value: "AI/NLP", label: "خلفية أكاديمية وتقنية" },
-      { value: "Product", label: "قيادة المنتج والتقنية" },
-      { value: "Delivery", label: "موثوقية التسليم" },
-      { value: "Quality", label: "بناء أنظمة جودة" },
-    ],
-    about: {
-      eyebrow: "من أنا",
-      headingFirst: "حلّال مشاكل.",
-      headingSecond: "قائد منتج.",
-      headingAccent: "ومهندس قريب من التقنية.",
-      body:
-        "أقود العمل بين المنتج، التطوير، الجودة، والإصدار. أركّز على جعل الأولويات أوضح، القرارات أكثر قابلية للتنفيذ، والفرق أكثر قدرة على التسليم بثقة.",
-      cards: [
-        "قيادة المنتج والهندسة",
-        "موثوقية التسليم",
-        "AI/NLP",
-        "جودة البرمجيات",
-        "Release Management",
-        "Software Architecture",
-      ],
-    },
-    proofItems: [
-      {
-        title: "قيادة المنتج والهندسة",
-        body: "بناء وضوح مشترك بين المنتج، التطوير، الجودة، والإصدار.",
-      },
-      {
-        title: "Delivery Reliability",
-        body: "تحويل العمل اليومي إلى آليات متابعة ومسؤوليات واضحة وتحسين مستمر.",
-      },
-      {
-        title: "عمق تقني في AI/NLP",
-        body: "خلفية أكاديمية وعملية تساعدني على تقييم التقنية الحديثة دون ضجيج.",
-      },
-    ],
   },
   blog: {
     eyebrow: "كتابات داعمة للرحلة",
@@ -129,9 +66,5 @@ export const copyAr = {
     title: "404",
     subtitle: "الصفحة غير موجودة",
     backHomeCta: "العودة إلى الرئيسية",
-  },
-  footer: {
-    rightsReserved: "كل الحقوق محفوظة",
-    tagline: "Product & Technology Leader",
   },
 } as const;

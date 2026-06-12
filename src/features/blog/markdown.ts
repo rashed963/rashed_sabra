@@ -11,6 +11,12 @@ const frontmatterSchema = z.object({
   readTime: z.string().min(1),
   image: z.string().min(1),
   language: z.enum(["ar", "en"]),
+  topic: z.enum([
+    "engineering-leadership",
+    "arabic-nlp",
+    "robotics-simulation",
+    "general",
+  ]),
 });
 
 export type BlogFrontmatter = z.infer<typeof frontmatterSchema>;

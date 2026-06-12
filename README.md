@@ -7,16 +7,16 @@ Vite + React + TypeScript frontend for an Arabic personal site.
 - `npm run build`: production build
 - `npm run preview`: preview production build
 - `npm run lint`: run ESLint
+- `npm run typecheck`: run TypeScript checks
 - `npm test`: run Vitest once
 - `npm run test:watch`: run Vitest in watch mode
-- `npm run article:new -- --slug your-slug --lang ar`: generate a new markdown article file
+- `npm run article:new -- --slug your-slug --lang ar --topic general`: generate a new markdown article file
 
 ## Stack
 - React 18
 - Vite 5
 - TypeScript
 - Tailwind CSS
-- shadcn/ui primitives
 - React Router
 
 ## Project Structure
@@ -27,7 +27,6 @@ Vite + React + TypeScript frontend for an Arabic personal site.
 - `src/features/journey/` journey domain types/content
 - `src/pages/` route-level pages
 - `src/components/` shared layout/presentation components
-- `src/components/ui/` shadcn/ui primitives
 
 ## Minimal-Change Files (for future updates)
 For most content and navigation updates, edit only these files:
@@ -35,8 +34,7 @@ For most content and navigation updates, edit only these files:
 - `src/config/routes.ts`
 - `src/features/copy/ar.ts`
 - `src/content/blog/*.md`
-- `src/features/journey/data.ts`
-- `src/features/journey/content.ts`
+- `src/content/journey/**/*.md`
 
 ## Maintenance Rules
 - Use `npm` as the package manager (single lockfile policy).
@@ -47,11 +45,12 @@ For most content and navigation updates, edit only these files:
 
 ## Blog Authoring (Admin Workflow)
 1. Generate a file:
-   - `npm run article:new -- --slug your-article-slug --lang ar`
+   - `npm run article:new -- --slug your-article-slug --lang ar --topic general`
 2. Open the generated file under `src/content/blog/`.
 3. Fill frontmatter and markdown body.
 4. Run `npm run dev` and verify the article appears on `/blog`.
 
 Notes:
 - Supported languages: `ar`, `en`
+- Supported topics: `engineering-leadership`, `arabic-nlp`, `robotics-simulation`, `general`
 - Admin helper route exists at `/admin/articles/new` in development only and is hidden from main navigation.

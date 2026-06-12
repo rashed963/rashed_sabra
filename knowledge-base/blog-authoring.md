@@ -4,11 +4,17 @@
 Create blog posts as markdown files for reliable, versioned publishing.
 
 ## Command
-`npm run article:new -- --slug your-article-slug --lang ar`
+`npm run article:new -- --slug your-article-slug --lang ar --topic general`
 
 ## Supported languages
 - `ar`
 - `en`
+
+## Supported topics
+- `engineering-leadership`
+- `arabic-nlp`
+- `robotics-simulation`
+- `general`
 
 ## Workflow
 1. Run the command above.
