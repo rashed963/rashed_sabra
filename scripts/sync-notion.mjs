@@ -87,6 +87,7 @@ async function syncBlogPosts() {
     const date = getText(props["Date"]);
     const tag = getText(props["Tag"]);
     const language = getText(props["Language"]) || "ar";
+    const topic = getText(props["Topic"]) || "general";
     const readTime = getText(props["Read Time"]);
     const image = getText(props["Image"]) || "/placeholder.svg";
 
@@ -101,7 +102,7 @@ async function syncBlogPosts() {
 
     fs.writeFileSync(
       path.join(BLOG_DIR, filename),
-      `---\nslug: ${slug}\ntitle: ${title}\nexcerpt: ${excerpt}\ndate: ${date}\ntag: ${tag}\nreadTime: ${readTime}\nimage: ${image}\nlanguage: ${language}\n---\n${body}\n`,
+      `---\nslug: ${slug}\ntitle: ${title}\nexcerpt: ${excerpt}\ndate: ${date}\ntag: ${tag}\nreadTime: ${readTime}\nimage: ${image}\nlanguage: ${language}\ntopic: ${topic}\n---\n${body}\n`,
       { encoding: "utf8" },
     );
     console.log(`  ✓ blog/${filename}`);
@@ -171,15 +172,7 @@ async function syncConfig() {
 
   const synced = {
     profile: {
-      name: flat["profile_name"] ?? "",
-      role: flat["profile_role"] ?? "",
       linkedIn: flat["linkedin_url"] ?? "",
-    },
-    hero: {
-      eyebrow: flat["hero_eyebrow"] ?? "",
-      title: flat["hero_title"] ?? "",
-      titleHighlight: flat["hero_title_highlight"] ?? "",
-      subtitle: flat["hero_subtitle"] ?? "",
     },
   };
 

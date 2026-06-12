@@ -7,6 +7,7 @@ tag: قيادة تقنية
 readTime: ٥ د
 image: /blog/cover-2.png
 language: ar
+topic: engineering-leadership
 ---
 بعد كشف الإجراء الحقيقي، يظهر سؤال لا تحلّه أي تقنية، وهو: من المسؤول عن النتيجة؟
 

@@ -4,17 +4,14 @@ import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import PostCard from "../features/blog/PostCard";
 import { copyAr } from "../features/copy/ar";
 import { getAllBlogPosts } from "../features/blog/selectors";
-import { journeyThemes } from "../features/journey/content";
-import { getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
+import { getBlogTopicOptions, getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
 
 const Blog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
   const topicFilters = [
     { id: "all" as const, label: "كل المقالات" },
-    { id: "engineering-leadership" as const, label: journeyThemes[0].title },
-    { id: "arabic-nlp" as const, label: journeyThemes[1].title },
-    { id: "robotics-simulation" as const, label: journeyThemes[2].title },
+    ...getBlogTopicOptions(DEFAULT_BLOG_LANGUAGE),
   ];
 
   const requestedTopic = searchParams.get("topic");

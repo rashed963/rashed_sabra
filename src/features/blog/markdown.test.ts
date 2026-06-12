@@ -10,6 +10,7 @@ tag: Test
 readTime: 3 min
 image: /placeholder.svg
 language: en
+topic: general
 ---
 # Internal heading
 
@@ -25,6 +26,7 @@ describe("parseMarkdownPost", () => {
 
     expect(parsed.frontmatter.slug).toBe("test-post");
     expect(parsed.frontmatter.language).toBe("en");
+    expect(parsed.frontmatter.topic).toBe("general");
     expect(parsed.frontmatter.date).toBe("2026-02-25");
     expect(parsed.frontmatter.dateDisplay.length).toBeGreaterThan(0);
     expect(parsed.content[0]).toBe("# Internal heading");

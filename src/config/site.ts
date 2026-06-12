@@ -4,7 +4,6 @@ import synced from "./synced-content.json";
 export const siteConfig = {
   profile: {
     name: "راشد صبرة",
-    role: "Product & Technology Leader",
   },
   external: {
     linkedIn: synced.profile.linkedIn,

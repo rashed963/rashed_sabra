@@ -47,3 +47,11 @@
 - Added `aria-current`, `aria-expanded`, and `aria-controls` semantics to navigation controls in `src/components/SiteHeader.tsx`.
 - Added `aria-pressed` and labeled grouping for topic filter chips in `src/pages/Blog.tsx`.
 - Revalidated with lint, test, and production build.
+
+## Phase 9: Maintenance and Content Model Cleanup
+- Removed the unused generated UI component library, toast/hooks utilities, stale homepage markdown pipeline, and placeholder test.
+- Removed their unused runtime and development dependencies and simplified Vite, Tailwind, and ESLint configuration.
+- Added `getLatestBlogPosts` and switched the homepage from fixed article slugs to the latest two published posts.
+- Replaced inferred keyword categorization with explicit `topic` frontmatter and localized topic labels.
+- Updated article generation, Notion sync, and authoring documentation for topic metadata.
+- Added TypeScript checking to production builds and enabled unused local/parameter enforcement.
