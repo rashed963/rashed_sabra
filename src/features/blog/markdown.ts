@@ -19,7 +19,7 @@ const frontmatterSchema = z.object({
   ]),
 });
 
-export type BlogFrontmatter = z.infer<typeof frontmatterSchema>;
+type BlogFrontmatter = z.infer<typeof frontmatterSchema>;
 
 type ParsedMarkdown = {
   frontmatter: BlogFrontmatter & { dateDisplay: string };

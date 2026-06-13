@@ -21,7 +21,7 @@ const themeFrontmatterSchema = z.object({
   description: z.string().min(1),
 });
 
-export type JourneyTheme = z.infer<typeof themeFrontmatterSchema>;
+type JourneyTheme = z.infer<typeof themeFrontmatterSchema>;
 
 function parseBulletList(body: string): string[] {
   return body

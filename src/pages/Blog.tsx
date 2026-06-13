@@ -50,11 +50,11 @@ const Blog = () => {
             <div>
               <p className="section-label">
                 <span>02</span>
-                <span lang="en" dir="ltr">Writing archive</span>
+                <span>أرشيف الكتابات</span>
               </p>
-              <h2 id="blog-index-title">أفكار عملية، مرتبة بهدوء.</h2>
+              <h2 id="blog-index-title">أفكار عملية من واقع العمل.</h2>
             </div>
-            <p>اختر محورًا أو ابدأ من أحدث كتابة.</p>
+            <p>اختر موضوعًا أو ابدأ بالأحدث.</p>
           </div>
 
           <div className="topic-filter" role="group" aria-label="تصنيف المقالات">
