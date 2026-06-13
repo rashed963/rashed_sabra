@@ -28,6 +28,10 @@ Vite + React + TypeScript frontend for an Arabic personal site.
 - `src/pages/` route-level pages
 - `src/components/` shared layout/presentation components
 
+## CV Asset
+Place the public English CV at `public/cv/rashed-sabra-cv.pdf`. The `/cv` dossier
+checks this path before showing the embedded desktop viewer or mobile PDF handoff.
+
 ## Minimal-Change Files (for future updates)
 For most content and navigation updates, edit only these files:
 - `src/config/site.ts`

@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "../config/routes";
 import { siteConfig } from "../config/site";
+import { copyAr } from "../features/copy/ar";
 
 const SiteHeader = () => {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const [menuOpen, setMenuOpen] = useState(false);
+  const cvState = {
+    from: `${location.pathname}${location.search}${location.hash}`,
+  };
   const isLinkActive = (href: string) =>
     href === routes.home
       ? pathname === href
@@ -46,14 +51,25 @@ const SiteHeader = () => {
           })}
         </nav>
 
-        <a
-          href={siteConfig.external.linkedIn}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="site-header__linkedin"
-        >
-          LinkedIn
-        </a>
+        <div className="site-header__utilities">
+          <Link
+            to={routes.cv}
+            state={cvState}
+            className="site-header__cv"
+            lang="en"
+            dir="ltr"
+          >
+            {copyAr.common.cvNavLabel}
+          </Link>
+          <a
+            href={siteConfig.external.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-header__linkedin"
+          >
+            LinkedIn
+          </a>
+        </div>
 
         <button
           type="button"
@@ -81,6 +97,16 @@ const SiteHeader = () => {
                 {link.label}
               </Link>
             ))}
+            <Link
+              to={routes.cv}
+              state={cvState}
+              onClick={() => setMenuOpen(false)}
+              className="site-mobile-navigation__cv"
+              lang="en"
+              dir="ltr"
+            >
+              {copyAr.common.cvNavLabel}
+            </Link>
             <a
               href={siteConfig.external.linkedIn}
               target="_blank"

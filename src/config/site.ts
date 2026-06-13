@@ -8,6 +8,12 @@ export const siteConfig = {
   external: {
     linkedIn: synced.profile.linkedIn,
   },
+  documents: {
+    cv: {
+      url: "/cv/rashed-sabra-cv.pdf",
+      downloadName: "Rashed-Sabra-CV.pdf",
+    },
+  },
   navigation: [
     { href: routes.home, label: "الرئيسية" },
     { href: routes.blog, label: "أفكاري" },
