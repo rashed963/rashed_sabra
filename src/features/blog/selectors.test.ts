@@ -8,6 +8,19 @@ describe("blog selectors", () => {
     expect(posts.every((post) => post.language === "ar")).toBe(true);
   });
 
+  it("loads the authored English editions", () => {
+    const arabicPosts = getAllBlogPosts("ar");
+    const posts = getAllBlogPosts("en");
+
+    expect(posts.every((post) => post.language === "en")).toBe(true);
+    expect(posts.map((post) => post.slug).sort()).toEqual(
+      arabicPosts.map((post) => post.slug).sort(),
+    );
+    expect(getBlogPostBySlug("organizational-intelligence-leadership", "en")?.title).toBe(
+      "Are we designing organizations around hierarchy or intelligence?",
+    );
+  });
+
   it("finds post by slug in Arabic set", () => {
     const post = getBlogPostBySlug("organizational-intelligence-leadership", "ar");
     expect(post).toBeDefined();

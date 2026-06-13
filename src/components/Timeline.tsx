@@ -1,26 +1,18 @@
 import { useState } from "react";
-import type { Milestone, MilestoneType } from "../features/journey/types";
+import { useLanguage } from "../features/i18n/language";
+import type { Milestone } from "../features/journey/types";
 
-const fallbackOutcomes: Record<string, string[]> = {
-  masters: ["AI", "NLP", "أنظمة بيانات"],
-  "l-one": ["Software Engineering", "Robotics Simulation", "CAD"],
-  "wianco-lead": ["قيادة هندسية", "Delivery Reliability", "ملكية واضحة"],
-  "ai-direction": ["Product & Technology", "AI Governance", "Technical Strategy"],
-};
-
-const typeLabels: Record<MilestoneType, string> = {
-  education: "تعليم",
-  role: "دور تقني",
-  leadership: "قيادة",
-  product: "منتج",
-  ai: "AI",
-};
+const getFallbackOutcomes = (
+  fallbacks: Readonly<Record<string, readonly string[]>>,
+  milestoneId: string,
+) => fallbacks[milestoneId] ?? [];
 
 interface TimelineProps {
   milestones: Milestone[];
 }
 
 export const Timeline = ({ milestones }: TimelineProps) => {
+  const { copy } = useLanguage();
   const orderedMilestones = [...milestones].reverse();
   const [selectedId, setSelectedId] = useState(orderedMilestones[0]?.id ?? "");
   const selectedMilestone =
@@ -34,13 +26,14 @@ export const Timeline = ({ milestones }: TimelineProps) => {
     (milestone) => milestone.id === selectedMilestone.id,
   );
   const outcomes =
-    selectedMilestone.outcomes ?? fallbackOutcomes[selectedMilestone.id] ?? [];
+    selectedMilestone.outcomes ??
+    getFallbackOutcomes(copy.journey.fallbackOutcomes, selectedMilestone.id);
 
   return (
     <div className="journey-timeline">
       <div
         className="journey-timeline__index"
-        aria-label="محطات المسار المهني"
+        aria-label={copy.journey.timelineAriaLabel}
       >
         {orderedMilestones.map((milestone, index) => {
           const isSelected = milestone.id === selectedMilestone.id;
@@ -77,7 +70,7 @@ export const Timeline = ({ milestones }: TimelineProps) => {
         <header className="journey-timeline__stage-header">
           <div className="journey-timeline__stage-kicker">
             <span>{String(selectedIndex + 1).padStart(2, "0")}</span>
-            <span>{typeLabels[selectedMilestone.type]}</span>
+            <span>{copy.journey.typeLabels[selectedMilestone.type]}</span>
             <time>{selectedMilestone.period}</time>
           </div>
 
@@ -105,7 +98,7 @@ export const Timeline = ({ milestones }: TimelineProps) => {
 
           {selectedMilestone.impact && (
             <p className="journey-timeline__impact">
-              <span>الأثر · </span>
+              <span>{copy.journey.impactLabel} · </span>
               {selectedMilestone.impact}
             </p>
           )}

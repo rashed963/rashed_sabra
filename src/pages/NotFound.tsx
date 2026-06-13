@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Layout from "../components/Layout";
-import { routes } from "../config/routes";
-import { copyAr } from "../features/copy/ar";
+import { useLanguage } from "../features/i18n/language";
 
 const NotFound = () => {
   const location = useLocation();
+  const { routes, copy } = useLanguage();
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
@@ -22,12 +22,12 @@ const NotFound = () => {
         <div className="not-found__copy">
           <p className="section-label">
             <span>00</span>
-            <span>تعذر العثور على الصفحة</span>
+            <span>{copy.notFound.label}</span>
           </p>
-          <h1 id="not-found-title">{copyAr.notFound.title}</h1>
-          <p>{copyAr.notFound.subtitle}</p>
+          <h1 id="not-found-title">{copy.notFound.title}</h1>
+          <p>{copy.notFound.subtitle}</p>
           <Link to={routes.home} className="editorial-button editorial-button--primary">
-            {copyAr.notFound.backHomeCta}
+            {copy.notFound.backHomeCta}
           </Link>
         </div>
       </section>

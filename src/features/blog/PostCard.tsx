@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { blogPostPath } from "../../config/routes";
-import { copyAr } from "../copy/ar";
+import { useLanguage } from "../i18n/language";
 import type { BlogPost } from "./types";
 
 type PostCardProps = {
@@ -8,10 +8,13 @@ type PostCardProps = {
   index: number;
 };
 
-const PostCard = ({ post, index }: PostCardProps) => (
-  <article className="editorial-post">
+const PostCard = ({ post, index }: PostCardProps) => {
+  const { language, copy } = useLanguage();
+
+  return (
+    <article className="editorial-post">
     <Link
-      to={blogPostPath(post.slug)}
+      to={blogPostPath(post.slug, language)}
       className="editorial-post__image"
       aria-label={post.title}
     >
@@ -26,11 +29,11 @@ const PostCard = ({ post, index }: PostCardProps) => (
       <div className="editorial-meta">
         <span className="editorial-meta__strong">{post.tag}</span>
         <span aria-hidden="true">·</span>
-        <span>{post.readTime} {copyAr.common.readLabel}</span>
+        <span>{post.readTime} {copy.common.readLabel}</span>
       </div>
 
       <h2>
-        <Link to={blogPostPath(post.slug)}>
+        <Link to={blogPostPath(post.slug, language)}>
           {post.title}
         </Link>
       </h2>
@@ -40,14 +43,15 @@ const PostCard = ({ post, index }: PostCardProps) => (
       <div className="editorial-post__footer">
         <time>{post.date}</time>
         <Link
-          to={blogPostPath(post.slug)}
+          to={blogPostPath(post.slug, language)}
           className="editorial-text-link"
         >
-          {copyAr.common.readPostCta}
+          {copy.common.readPostCta}
         </Link>
       </div>
     </div>
-  </article>
-);
+    </article>
+  );
+};
 
 export default PostCard;

@@ -1,26 +1,30 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Timeline } from "../components/Timeline";
-import { routes } from "../config/routes";
 import { siteConfig } from "../config/site";
-import { copyAr } from "../features/copy/ar";
-import { milestones, journeyThemes } from "../features/journey/content";
+import { useLanguage } from "../features/i18n/language";
+import { getJourneyThemes, getMilestones } from "../features/journey/content";
 
-const Journey = () => (
-  <Layout>
+const Journey = () => {
+  const { language, routes, copy } = useLanguage();
+  const milestones = getMilestones(language);
+  const journeyThemes = getJourneyThemes(language);
+
+  return (
+    <Layout>
     <div className="site-page journey-page">
     <section className="interior-hero" aria-labelledby="journey-title">
       <div className="page-shell">
         <div className="interior-hero__copy">
           <p className="section-label">
             <span>01</span>
-            {copyAr.journey.eyebrow}
+            {copy.journey.eyebrow}
           </p>
           <h1 id="journey-title" className="interior-title">
-            {copyAr.journey.titlePrefix} {copyAr.journey.titleHighlight}
+            {copy.journey.titlePrefix} {copy.journey.titleHighlight}
           </h1>
           <p className="interior-lede">
-            {copyAr.journey.subtitle}
+            {copy.journey.subtitle}
           </p>
         </div>
 
@@ -30,7 +34,7 @@ const Journey = () => (
             state={{ from: routes.journey }}
             className="editorial-button editorial-button--primary"
           >
-            {copyAr.common.cvCta}
+            {copy.common.cvCta}
           </Link>
           <a
             href={siteConfig.external.linkedIn}
@@ -38,7 +42,7 @@ const Journey = () => (
             rel="noopener noreferrer"
             className="editorial-button"
           >
-            {copyAr.common.linkedInCta}
+            {copy.common.linkedInCta}
           </a>
         </div>
       </div>
@@ -48,8 +52,8 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>02</span><span>محاور العمل</span></p>
-            <h2 id="journey-themes">{copyAr.journey.themesTitle}</h2>
+            <p className="section-label"><span>02</span><span>{copy.journey.themesLabel}</span></p>
+            <h2 id="journey-themes">{copy.journey.themesTitle}</h2>
           </div>
         </div>
         <div className="journey-themes">
@@ -68,12 +72,12 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>03</span><span>مبادئ العمل</span></p>
-            <h2 id="journey-principles">{copyAr.journey.principlesTitle}</h2>
+            <p className="section-label"><span>03</span><span>{copy.journey.principlesLabel}</span></p>
+            <h2 id="journey-principles">{copy.journey.principlesTitle}</h2>
           </div>
         </div>
         <div className="journey-principles">
-          {copyAr.journey.principles.map((principle, index) => (
+          {copy.journey.principles.map((principle, index) => (
             <article key={principle.title}>
               <b>{String(index + 1).padStart(2, "0")}</b>
               <div>
@@ -90,12 +94,12 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>04</span><span>أثر مهني</span></p>
-            <h2 id="journey-proof">{copyAr.journey.proofTitle}</h2>
+            <p className="section-label"><span>04</span><span>{copy.journey.proofLabel}</span></p>
+            <h2 id="journey-proof">{copy.journey.proofTitle}</h2>
           </div>
         </div>
         <div className="journey-proof">
-          {copyAr.journey.proofStories.map((story, index) => (
+          {copy.journey.proofStories.map((story, index) => (
             <article key={story.title}>
               <b>{String(index + 1).padStart(2, "0")}</b>
               <h3>{story.title}</h3>
@@ -110,8 +114,8 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>05</span><span>محطات مختارة</span></p>
-            <h2 id="journey-timeline">{copyAr.journey.timelineTitle}</h2>
+            <p className="section-label"><span>05</span><span>{copy.journey.timelineLabel}</span></p>
+            <h2 id="journey-timeline">{copy.journey.timelineTitle}</h2>
           </div>
         </div>
         <Timeline milestones={milestones} />
@@ -121,22 +125,23 @@ const Journey = () => (
     <section className="journey-closing" aria-labelledby="journey-writing">
       <div className="page-shell">
         <div>
-          <p className="section-label"><span>06</span><span>أفكار من الممارسة</span></p>
-          <h2 id="journey-writing">{copyAr.blog.title}</h2>
+          <p className="section-label"><span>06</span><span>{copy.journey.writingLabel}</span></p>
+          <h2 id="journey-writing">{copy.blog.title}</h2>
           <p>
-            {copyAr.blog.subtitle}
+            {copy.blog.subtitle}
           </p>
           <Link
             to={routes.blog}
             className="editorial-button editorial-button--light"
           >
-            {copyAr.home.showAllCta}
+            {copy.home.showAllCta}
           </Link>
         </div>
       </div>
     </section>
     </div>
-  </Layout>
-);
+    </Layout>
+  );
+};
 
 export default Journey;

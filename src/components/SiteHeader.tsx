@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { routes } from "../config/routes";
 import { siteConfig } from "../config/site";
-import { copyAr } from "../features/copy/ar";
+import { useLanguage } from "../features/i18n/language";
 
 const SiteHeader = () => {
   const location = useLocation();
+  const { language, direction, routes, switchPath, copy } = useLanguage();
   const { pathname } = location;
   const [menuOpen, setMenuOpen] = useState(false);
   const cvState = {
@@ -15,6 +15,11 @@ const SiteHeader = () => {
     href === routes.home
       ? pathname === href
       : pathname === href || pathname.startsWith(`${href}/`);
+  const navigation = [
+    { href: routes.home, label: copy.navigation.home },
+    { href: routes.blog, label: copy.navigation.blog },
+    { href: routes.journey, label: copy.navigation.journey },
+  ];
 
   useEffect(() => {
     setMenuOpen(false);
@@ -22,21 +27,21 @@ const SiteHeader = () => {
 
   return (
     <header className="site-header">
-      <div dir="ltr" className="site-header__inner">
+      <div className="site-header__inner" dir={direction}>
         <Link
           to={routes.home}
-          dir="rtl"
+          dir={direction}
           className="site-brand"
         >
           <span className="site-brand__mark" aria-hidden="true" />
           <span>
-            <strong>{siteConfig.profile.name}</strong>
+            <strong>{siteConfig.profile.name[language]}</strong>
             <small lang="en" dir="ltr">Product &amp; Technology · AI</small>
           </span>
         </Link>
 
-        <nav className="site-navigation" aria-label="التنقل الرئيسي">
-          {siteConfig.navigation.map((link, index) => {
+        <nav className="site-navigation" aria-label={copy.common.primaryNavigation}>
+          {navigation.map((link, index) => {
             const active = isLinkActive(link.href);
             return (
               <Link
@@ -53,13 +58,22 @@ const SiteHeader = () => {
 
         <div className="site-header__utilities">
           <Link
+            to={switchPath}
+            className="site-language-switch"
+            aria-label={copy.common.switchLanguage}
+            lang={language === "ar" ? "en" : "ar"}
+            dir={language === "ar" ? "ltr" : "rtl"}
+          >
+            {copy.common.switchLanguageShort}
+          </Link>
+          <Link
             to={routes.cv}
             state={cvState}
             className="site-header__cv"
             lang="en"
             dir="ltr"
           >
-            {copyAr.common.cvNavLabel}
+            {copy.common.cvNavLabel}
           </Link>
           <a
             href={siteConfig.external.linkedIn}
@@ -77,16 +91,16 @@ const SiteHeader = () => {
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
-          aria-label={menuOpen ? "إغلاق القائمة" : "فتح القائمة"}
+          aria-label={menuOpen ? copy.common.closeMenu : copy.common.openMenu}
         >
-          القائمة
+          {copy.common.menu}
         </button>
       </div>
 
       {menuOpen && (
         <div className="site-mobile-panel">
-          <nav id="mobile-navigation" className="site-mobile-navigation" aria-label="التنقل الرئيسي">
-            {siteConfig.navigation.map((link, index) => (
+          <nav id="mobile-navigation" className="site-mobile-navigation" aria-label={copy.common.primaryNavigation}>
+            {navigation.map((link, index) => (
               <Link
                 key={`${link.href}-${index}`}
                 to={link.href}
@@ -98,6 +112,16 @@ const SiteHeader = () => {
               </Link>
             ))}
             <Link
+              to={switchPath}
+              onClick={() => setMenuOpen(false)}
+              className="site-mobile-navigation__language"
+              aria-label={copy.common.switchLanguage}
+              lang={language === "ar" ? "en" : "ar"}
+              dir={language === "ar" ? "ltr" : "rtl"}
+            >
+              {copy.common.switchLanguageShort}
+            </Link>
+            <Link
               to={routes.cv}
               state={cvState}
               onClick={() => setMenuOpen(false)}
@@ -105,7 +129,7 @@ const SiteHeader = () => {
               lang="en"
               dir="ltr"
             >
-              {copyAr.common.cvNavLabel}
+              {copy.common.cvNavLabel}
             </Link>
             <a
               href={siteConfig.external.linkedIn}
