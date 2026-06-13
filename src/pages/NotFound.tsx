@@ -22,7 +22,7 @@ const NotFound = () => {
         <div className="not-found__copy">
           <p className="section-label">
             <span>00</span>
-            <span lang="en" dir="ltr">Signal not found</span>
+            <span>تعذر العثور على الصفحة</span>
           </p>
           <h1 id="not-found-title">{copyAr.notFound.title}</h1>
           <p>{copyAr.notFound.subtitle}</p>

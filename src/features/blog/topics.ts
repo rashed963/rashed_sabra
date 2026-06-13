@@ -2,17 +2,17 @@ import type { BlogLanguage, BlogPost, BlogTopicId } from "./types";
 
 export type { BlogTopicId } from "./types";
 
-export const blogTopics: ReadonlyArray<{
+const blogTopics: ReadonlyArray<{
   id: BlogTopicId;
   labels: Record<BlogLanguage, string>;
 }> = [
   {
     id: "engineering-leadership",
-    labels: { ar: "قيادة المنتج والهندسة", en: "Product and engineering leadership" },
+    labels: { ar: "Product & Technology", en: "Product and engineering leadership" },
   },
   {
     id: "arabic-nlp",
-    labels: { ar: "اللغة العربية والذكاء الاصطناعي", en: "Arabic language and AI" },
+    labels: { ar: "اللغة العربية وAI", en: "Arabic language and AI" },
   },
   {
     id: "robotics-simulation",

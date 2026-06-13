@@ -20,7 +20,7 @@ function makePost(slug: string, topic: BlogPost["topic"]): BlogPost {
 
 describe("blog topics", () => {
   it("provides localized topic labels", () => {
-    expect(getBlogTopicOptions("ar")[0].label).toBe("قيادة المنتج والهندسة");
+    expect(getBlogTopicOptions("ar")[0].label).toBe("Product & Technology");
     expect(getBlogTopicOptions("en")[0].label).toBe("Product and engineering leadership");
   });
 

@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { Milestone, MilestoneType } from "../features/journey/types";
 
 const fallbackOutcomes: Record<string, string[]> = {
-  masters: ["AI/NLP", "قاعدة أكاديمية", "أنظمة بيانات"],
-  "l-one": ["Software Engineering", "Robotics Simulation", "CAD workflows"],
+  masters: ["AI", "NLP", "أنظمة بيانات"],
+  "l-one": ["Software Engineering", "Robotics Simulation", "CAD"],
   "wianco-lead": ["قيادة هندسية", "Delivery Reliability", "ملكية واضحة"],
   "ai-direction": ["Product & Technology", "AI Governance", "Technical Strategy"],
 };

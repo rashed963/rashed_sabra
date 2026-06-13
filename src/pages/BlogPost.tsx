@@ -134,10 +134,10 @@ const BlogPost = () => {
           <div className="reading-shell">
             <p className="section-label">
               <span>03</span>
-              <span lang="en" dir="ltr">Continue the conversation</span>
+              <span>تابع النقاش</span>
             </p>
-            <h2>هل تفتح هذه الفكرة سؤالًا في عملك؟</h2>
-            <p>يمكنك متابعة النقاش والكتابات الجديدة عبر LinkedIn.</p>
+            <h2>هل تفتح الفكرة سؤالًا في عملك؟</h2>
+            <p>تابع النقاش والكتابات الجديدة على LinkedIn.</p>
             <a
               href={siteConfig.external.linkedIn}
               target="_blank"

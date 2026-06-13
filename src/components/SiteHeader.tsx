@@ -26,7 +26,7 @@ const SiteHeader = () => {
           <span className="site-brand__mark" aria-hidden="true" />
           <span>
             <strong>{siteConfig.profile.name}</strong>
-            <small lang="en" dir="ltr">Product · Technology · AI</small>
+            <small lang="en" dir="ltr">Product &amp; Technology · AI</small>
           </span>
         </Link>
 

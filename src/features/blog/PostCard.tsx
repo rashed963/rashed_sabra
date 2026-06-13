@@ -6,11 +6,9 @@ import type { BlogPost } from "./types";
 type PostCardProps = {
   post: BlogPost;
   index: number;
-  showReadTime?: boolean;
-  showReadMore?: boolean;
 };
 
-const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: PostCardProps) => (
+const PostCard = ({ post, index }: PostCardProps) => (
   <article className="editorial-post">
     <Link
       to={blogPostPath(post.slug)}
@@ -28,7 +26,7 @@ const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: Pos
       <div className="editorial-meta">
         <span className="editorial-meta__strong">{post.tag}</span>
         <span aria-hidden="true">·</span>
-        <span>{showReadTime ? `${post.readTime} ${copyAr.common.readLabel}` : post.date}</span>
+        <span>{post.readTime} {copyAr.common.readLabel}</span>
       </div>
 
       <h2>
@@ -39,17 +37,15 @@ const PostCard = ({ post, index, showReadTime = true, showReadMore = true }: Pos
 
       <p>{post.excerpt}</p>
 
-      {showReadMore && (
-        <div className="editorial-post__footer">
-          <time>{post.date}</time>
-          <Link
-            to={blogPostPath(post.slug)}
-            className="editorial-text-link"
-          >
-            {copyAr.common.readPostCta}
-          </Link>
-        </div>
-      )}
+      <div className="editorial-post__footer">
+        <time>{post.date}</time>
+        <Link
+          to={blogPostPath(post.slug)}
+          className="editorial-text-link"
+        >
+          {copyAr.common.readPostCta}
+        </Link>
+      </div>
     </div>
   </article>
 );

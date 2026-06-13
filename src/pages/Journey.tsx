@@ -47,7 +47,7 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>02</span><span lang="en" dir="ltr">Working themes</span></p>
+            <p className="section-label"><span>02</span><span>محاور العمل</span></p>
             <h2 id="journey-themes">{copyAr.journey.themesTitle}</h2>
           </div>
         </div>
@@ -67,7 +67,7 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>03</span><span lang="en" dir="ltr">Operating principles</span></p>
+            <p className="section-label"><span>03</span><span>مبادئ العمل</span></p>
             <h2 id="journey-principles">{copyAr.journey.principlesTitle}</h2>
           </div>
         </div>
@@ -89,7 +89,7 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>04</span><span lang="en" dir="ltr">Professional proof</span></p>
+            <p className="section-label"><span>04</span><span>أثر مهني</span></p>
             <h2 id="journey-proof">{copyAr.journey.proofTitle}</h2>
           </div>
         </div>
@@ -109,7 +109,7 @@ const Journey = () => (
       <div className="page-shell">
         <div className="section-heading">
           <div>
-            <p className="section-label"><span>05</span><span lang="en" dir="ltr">Selected path</span></p>
+            <p className="section-label"><span>05</span><span>محطات مختارة</span></p>
             <h2 id="journey-timeline">{copyAr.journey.timelineTitle}</h2>
           </div>
         </div>
@@ -120,7 +120,7 @@ const Journey = () => (
     <section className="journey-closing" aria-labelledby="journey-writing">
       <div className="page-shell">
         <div>
-          <p className="section-label"><span>06</span><span lang="en" dir="ltr">Ideas in practice</span></p>
+          <p className="section-label"><span>06</span><span>أفكار من الممارسة</span></p>
           <h2 id="journey-writing">{copyAr.blog.title}</h2>
           <p>
             {copyAr.blog.subtitle}
