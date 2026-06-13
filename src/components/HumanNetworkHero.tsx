@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { siteConfig } from "../config/site";
+import { useLanguage } from "../features/i18n/language";
 
 const HumanNetworkHero = () => {
+  const { language } = useLanguage();
   const signalRef = useRef<HTMLDivElement>(null);
   const [portraitFailed, setPortraitFailed] = useState(false);
 
@@ -69,7 +72,7 @@ const HumanNetworkHero = () => {
             onError={() => setPortraitFailed(true)}
           />
         ) : (
-          <figcaption>راشد صبرة</figcaption>
+          <figcaption>{siteConfig.profile.name[language]}</figcaption>
         )}
       </figure>
     </div>

@@ -66,9 +66,13 @@
   }
 
   html {
-    direction: rtl;
     scroll-behavior: smooth;
     font-size: 16px;
+  }
+
+  html[lang="en"] {
+    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-display: 'IBM Plex Sans', system-ui, sans-serif;
   }
 
   body {
@@ -233,10 +237,13 @@
 
   .site-header__inner {
     @apply mx-auto grid min-h-[5.25rem] w-full max-w-[90rem] grid-cols-[1fr_auto] items-center gap-5 px-5 sm:px-8 lg:grid-cols-[auto_1fr_auto] lg:px-12;
+    grid-template-areas: "brand menu";
   }
 
   .site-brand {
-    @apply col-start-2 row-start-1 flex min-w-0 items-center justify-self-end gap-3 text-right lg:col-start-3;
+    @apply flex min-w-0 items-center justify-self-start gap-3;
+    grid-area: brand;
+    text-align: start;
   }
 
   .site-brand__mark {
@@ -264,7 +271,8 @@
   }
 
   .site-navigation {
-    @apply col-start-2 row-start-1 hidden items-center justify-self-center gap-8 text-sm text-muted-foreground lg:flex;
+    @apply hidden items-center justify-self-center gap-8 text-sm text-muted-foreground lg:flex;
+    grid-area: navigation;
   }
 
   .site-navigation a,
@@ -277,13 +285,15 @@
   }
 
   .site-header__utilities {
-    @apply col-start-1 row-start-1 hidden items-center gap-2 lg:flex;
+    @apply hidden items-center justify-self-end gap-2 lg:flex;
+    grid-area: utilities;
   }
 
   .site-header__linkedin,
   .site-header__cv,
+  .site-language-switch,
   .site-menu-toggle {
-    @apply col-start-1 row-start-1 inline-flex w-fit items-center rounded-full border border-primary/35 px-4 py-2 text-sm text-foreground transition-colors hover:border-primary hover:text-primary;
+    @apply inline-flex w-fit items-center rounded-full border border-primary/35 px-4 py-2 text-sm text-foreground transition-colors hover:border-primary hover:text-primary;
   }
 
   .site-header__cv {
@@ -291,8 +301,14 @@
     font-family: var(--font-mono);
   }
 
+  .site-language-switch {
+    @apply border-primary/45 px-3 text-primary;
+    font-family: var(--font-mono);
+  }
+
   .site-menu-toggle {
-    @apply lg:hidden;
+    @apply justify-self-end lg:hidden;
+    grid-area: menu;
   }
 
   .site-mobile-panel {
@@ -317,6 +333,11 @@
 
   .site-mobile-navigation__cv {
     @apply mt-3 w-fit rounded-full border border-accent/55 px-4 text-accent;
+    font-family: var(--font-mono);
+  }
+
+  .site-mobile-navigation__language {
+    @apply mt-3 w-fit rounded-full border border-primary/45 px-4 text-primary;
     font-family: var(--font-mono);
   }
 
@@ -852,7 +873,8 @@
   }
 
   .article-list {
-    @apply list-disc space-y-2 pr-6;
+    @apply list-disc space-y-2;
+    padding-inline-start: 1.5rem;
   }
 
   .article-list li::marker {
@@ -876,7 +898,9 @@
   }
 
   .article-quote {
-    @apply my-10 border-r-2 py-2 pr-6 text-[1.2rem] font-medium leading-9 md:text-[1.35rem] md:leading-10;
+    @apply my-10 py-2 text-[1.2rem] font-medium leading-9 md:text-[1.35rem] md:leading-10;
+    border-inline-start-width: 2px;
+    padding-inline-start: 1.5rem;
     border-color: hsl(var(--paper-signal));
     color: hsl(var(--paper-muted));
   }
@@ -1134,7 +1158,8 @@
   }
 
   .journey-timeline__actions {
-    @apply mt-6 list-disc space-y-2 pr-5 text-[0.9375rem] leading-7 text-muted-foreground;
+    @apply mt-6 list-disc space-y-2 text-[0.9375rem] leading-7 text-muted-foreground;
+    padding-inline-start: 1.25rem;
   }
 
   .journey-timeline__actions li::marker {
@@ -1142,12 +1167,14 @@
   }
 
   .journey-timeline__impact {
-    @apply relative mt-9 max-w-2xl py-1 pr-6 text-[0.9375rem] leading-7 text-foreground/85;
+    @apply relative mt-9 max-w-2xl py-1 text-[0.9375rem] leading-7 text-foreground/85;
+    padding-inline-start: 1.5rem;
   }
 
   .journey-timeline__impact::before {
     content: "";
-    @apply absolute bottom-0 right-0 top-0 w-px bg-gradient-to-b from-primary via-accent to-transparent;
+    @apply absolute bottom-0 top-0 w-px bg-gradient-to-b from-primary via-accent to-transparent;
+    inset-inline-start: 0;
   }
 
   .journey-timeline__impact span {
@@ -1658,6 +1685,50 @@
     @apply mt-4 max-w-3xl text-base leading-8 lg:text-[1.0625rem];
     color: hsl(var(--paper-muted));
   }
+}
+
+html[dir="ltr"] .site-footer__inner,
+html[dir="ltr"] .site-footer nav {
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .site-header__inner {
+    grid-template-areas: "brand navigation utilities";
+  }
+
+  html[dir="ltr"] .journey-timeline__index::before {
+    left: 1.13rem;
+    right: auto;
+  }
+
+  html[dir="ltr"] .journey-timeline__index-item {
+    text-align: left;
+  }
+
+  html[dir="ltr"] .journey-timeline__index-marker {
+    margin-left: 0.57rem;
+    margin-right: 0;
+  }
+
+  html[dir="ltr"] .journey-timeline__index-item[aria-pressed="true"] .journey-timeline__index-copy {
+    transform: translateX(0.5rem);
+  }
+}
+
+html[dir="ltr"] .journey-timeline__stage::before {
+  left: -4rem;
+  right: auto;
+}
+
+html[dir="ltr"] .journey-timeline__stage-kicker > span:first-child::after {
+  margin-left: 0.75rem;
+  margin-right: 0;
+  background: linear-gradient(to right, hsl(var(--primary) / 0.55), transparent);
+}
+
+html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
+  background: linear-gradient(to right, hsl(var(--primary) / 0.45), transparent);
 }
 
 @keyframes homepage-orbit {

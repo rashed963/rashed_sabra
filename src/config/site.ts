@@ -1,9 +1,11 @@
-import { routes } from "./routes";
 import synced from "./synced-content.json";
 
 export const siteConfig = {
   profile: {
-    name: "راشد صبرة",
+    name: {
+      ar: "راشد صبرة",
+      en: "Rashed Sabra",
+    },
   },
   external: {
     linkedIn: synced.profile.linkedIn,
@@ -14,9 +16,4 @@ export const siteConfig = {
       downloadName: "Rashed-Sabra-CV.pdf",
     },
   },
-  navigation: [
-    { href: routes.home, label: "الرئيسية" },
-    { href: routes.blog, label: "أفكاري" },
-    { href: routes.journey, label: "رحلتي" },
-  ],
 } as const;

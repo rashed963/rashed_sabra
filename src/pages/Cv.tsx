@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { routes } from "../config/routes";
 import { siteConfig } from "../config/site";
-import { copyAr } from "../features/copy/ar";
+import { useLanguage } from "../features/i18n/language";
 
 type PdfStatus = "checking" | "available" | "missing";
 
@@ -12,17 +11,17 @@ interface CvLocationState {
 
 const mobilePdfQuery = "(max-width: 767px)";
 
-const isSafeReturnPath = (path: unknown): path is string =>
-  typeof path === "string" &&
-  path.startsWith("/") &&
-  path !== routes.cv &&
-  !path.startsWith(`${routes.cv}?`) &&
-  !path.startsWith(`${routes.cv}#`);
-
 const Cv = () => {
+  const { direction, routes, copy } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state as CvLocationState | null;
+  const isSafeReturnPath = (path: unknown): path is string =>
+    typeof path === "string" &&
+    path.startsWith("/") &&
+    path !== routes.cv &&
+    !path.startsWith(`${routes.cv}?`) &&
+    !path.startsWith(`${routes.cv}#`);
   const returnPath = isSafeReturnPath(state?.from) ? state.from : routes.home;
   const { url: pdfUrl, downloadName } = siteConfig.documents.cv;
   const [pdfStatus, setPdfStatus] = useState<PdfStatus>("checking");
@@ -33,15 +32,6 @@ const Cv = () => {
   const closeDossier = useCallback(() => {
     navigate(returnPath, { replace: true });
   }, [navigate, returnPath]);
-
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "Rashed Sabra — Curriculum Vitae";
-
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(mobilePdfQuery);
@@ -85,13 +75,13 @@ const Cv = () => {
   }, [closeDossier]);
 
   const documentActions = pdfStatus !== "missing" && (
-    <div className="cv-dossier__actions" dir="rtl">
+    <div className="cv-dossier__actions" dir={direction}>
       <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
-        {copyAr.common.cvOpen}
+        {copy.common.cvOpen}
         <span aria-hidden="true">↗</span>
       </a>
       <a href={pdfUrl} download={downloadName}>
-        {copyAr.common.cvDownload}
+        {copy.common.cvDownload}
         <span aria-hidden="true">↓</span>
       </a>
     </div>
@@ -106,11 +96,11 @@ const Cv = () => {
           type="button"
           className="cv-dossier__close"
           onClick={closeDossier}
-          aria-label={copyAr.common.cvClose}
+          aria-label={copy.common.cvClose}
           autoFocus
         >
           <span aria-hidden="true">×</span>
-          <span dir="rtl">{copyAr.common.cvClose}</span>
+          <span dir={direction}>{copy.common.cvClose}</span>
         </button>
 
         <div className="cv-dossier__identity" aria-label="Rashed Sabra curriculum vitae">
@@ -159,32 +149,32 @@ const Cv = () => {
 
           <div className="cv-document__viewport">
             {pdfStatus === "checking" && (
-              <div className="cv-document__state" role="status" dir="rtl">
+              <div className="cv-document__state" role="status" dir={direction}>
                 <span className="cv-document__loader" aria-hidden="true" />
-                <p>{copyAr.common.cvChecking}</p>
+                <p>{copy.common.cvChecking}</p>
               </div>
             )}
 
             {pdfStatus === "missing" && (
-              <div className="cv-document__state" role="alert" dir="rtl">
+              <div className="cv-document__state" role="alert" dir={direction}>
                 <span className="cv-document__file-mark" aria-hidden="true">PDF</span>
-                <h2>{copyAr.common.cvMissingTitle}</h2>
-                <p>{copyAr.common.cvMissingBody}</p>
+                <h2>{copy.common.cvMissingTitle}</h2>
+                <p>{copy.common.cvMissingBody}</p>
               </div>
             )}
 
             {pdfStatus === "available" && useNativeViewer && (
-              <div className="cv-document__state cv-document__state--mobile" dir="rtl">
+              <div className="cv-document__state cv-document__state--mobile" dir={direction}>
                 <span className="cv-document__file-mark" aria-hidden="true">PDF</span>
-                <h2>{copyAr.common.cvMobileTitle}</h2>
-                <p>{copyAr.common.cvMobileBody}</p>
+                <h2>{copy.common.cvMobileTitle}</h2>
+                <p>{copy.common.cvMobileBody}</p>
                 <a
                   href={pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cv-document__open"
                 >
-                  {copyAr.common.cvOpen}
+                  {copy.common.cvOpen}
                   <span aria-hidden="true">↗</span>
                 </a>
               </div>

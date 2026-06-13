@@ -1,9 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import { routes } from "../config/routes";
 import { siteConfig } from "../config/site";
-import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
-import { copyAr } from "../features/copy/ar";
+import { useLanguage } from "../features/i18n/language";
 import { getBlogPostBySlug } from "../features/blog/selectors";
 
 const renderInline = (text: string) =>
@@ -84,8 +82,9 @@ const renderBlock = (block: string, index: number) => {
 };
 
 const BlogPost = () => {
+  const { language, routes, copy } = useLanguage();
   const { slug } = useParams<{ slug: string }>();
-  const post = getBlogPostBySlug(slug, DEFAULT_BLOG_LANGUAGE);
+  const post = getBlogPostBySlug(slug, language);
 
   if (!post) {
     return <Navigate to={routes.blog} replace />;
@@ -97,7 +96,7 @@ const BlogPost = () => {
         <header className="interior-hero article-hero">
           <div className="reading-shell">
           <Link to={routes.blog} className="editorial-back-link">
-            {copyAr.common.backToBlog}
+            {copy.common.backToBlog}
           </Link>
 
           <div className="article-hero__copy">
@@ -107,7 +106,7 @@ const BlogPost = () => {
               <time>{post.date}</time>
               <span aria-hidden="true">·</span>
               <span>
-                {post.readTime} {copyAr.common.readLabel}
+                {post.readTime} {copy.common.readLabel}
               </span>
             </div>
 
@@ -134,17 +133,17 @@ const BlogPost = () => {
           <div className="reading-shell">
             <p className="section-label">
               <span>03</span>
-              <span>تابع النقاش</span>
+              <span>{copy.blog.discussionLabel}</span>
             </p>
-            <h2>هل تفتح الفكرة سؤالًا في عملك؟</h2>
-            <p>تابع النقاش والكتابات الجديدة على LinkedIn.</p>
+            <h2>{copy.blog.discussionTitle}</h2>
+            <p>{copy.blog.discussionBody}</p>
             <a
               href={siteConfig.external.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
               className="editorial-button editorial-button--primary"
             >
-              {copyAr.common.linkedInCta}
+              {copy.common.linkedInCta}
             </a>
           </div>
         </footer>

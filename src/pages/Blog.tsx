@@ -1,17 +1,17 @@
 import { useSearchParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import { DEFAULT_BLOG_LANGUAGE } from "../features/blog/constants";
 import PostCard from "../features/blog/PostCard";
-import { copyAr } from "../features/copy/ar";
+import { useLanguage } from "../features/i18n/language";
 import { getAllBlogPosts } from "../features/blog/selectors";
 import { getBlogTopicOptions, getPostsByTopic, type BlogTopicId } from "../features/blog/topics";
 
 const Blog = () => {
+  const { language, copy } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
-  const posts = getAllBlogPosts(DEFAULT_BLOG_LANGUAGE);
+  const posts = getAllBlogPosts(language);
   const topicFilters = [
-    { id: "all" as const, label: "كل المقالات" },
-    ...getBlogTopicOptions(DEFAULT_BLOG_LANGUAGE),
+    { id: "all" as const, label: copy.blog.allPosts },
+    ...getBlogTopicOptions(language),
   ];
 
   const requestedTopic = searchParams.get("topic");
@@ -32,13 +32,13 @@ const Blog = () => {
           <div className="interior-hero__copy">
             <p className="section-label">
               <span>01</span>
-              {copyAr.blog.eyebrow}
+              {copy.blog.eyebrow}
             </p>
             <h1 id="blog-title" className="interior-title">
-              {copyAr.blog.title}
+              {copy.blog.title}
             </h1>
             <p className="interior-lede">
-              {copyAr.blog.subtitle}
+              {copy.blog.subtitle}
             </p>
           </div>
         </div>
@@ -50,14 +50,14 @@ const Blog = () => {
             <div>
               <p className="section-label">
                 <span>02</span>
-                <span>أرشيف الكتابات</span>
+                <span>{copy.blog.archiveLabel}</span>
               </p>
-              <h2 id="blog-index-title">أفكار عملية من واقع العمل.</h2>
+              <h2 id="blog-index-title">{copy.blog.archiveTitle}</h2>
             </div>
-            <p>اختر موضوعًا أو ابدأ بالأحدث.</p>
+            <p>{copy.blog.archiveHint}</p>
           </div>
 
-          <div className="topic-filter" role="group" aria-label="تصنيف المقالات">
+          <div className="topic-filter" role="group" aria-label={copy.blog.filterLabel}>
             {topicFilters.map((topic) => {
               const isActive = activeTopic === topic.id;
               return (
@@ -85,7 +85,7 @@ const Blog = () => {
               <PostCard key={post.slug} post={post} index={index} />
             ))}
             {visiblePosts.length === 0 && (
-              <p className="blog-empty">لا توجد مقالات منشورة ضمن هذا المحور حاليًا.</p>
+              <p className="blog-empty">{copy.blog.empty}</p>
             )}
           </div>
         </div>
