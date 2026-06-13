@@ -276,13 +276,19 @@
     @apply text-foreground;
   }
 
+  .site-header__utilities {
+    @apply col-start-1 row-start-1 hidden items-center gap-2 lg:flex;
+  }
+
   .site-header__linkedin,
+  .site-header__cv,
   .site-menu-toggle {
     @apply col-start-1 row-start-1 inline-flex w-fit items-center rounded-full border border-primary/35 px-4 py-2 text-sm text-foreground transition-colors hover:border-primary hover:text-primary;
   }
 
-  .site-header__linkedin {
-    @apply hidden lg:inline-flex;
+  .site-header__cv {
+    @apply border-accent/55 px-3 text-accent hover:border-accent hover:text-accent;
+    font-family: var(--font-mono);
   }
 
   .site-menu-toggle {
@@ -309,6 +315,11 @@
     @apply mt-3 w-fit rounded-full border border-primary/40 px-4 py-2 text-foreground;
   }
 
+  .site-mobile-navigation__cv {
+    @apply mt-3 w-fit rounded-full border border-accent/55 px-4 text-accent;
+    font-family: var(--font-mono);
+  }
+
   .site-footer {
     @apply border-t border-primary/15 text-muted-foreground;
     background: hsl(var(--night-deep));
@@ -333,6 +344,204 @@
 
   .site-layout {
     @apply flex min-h-screen flex-col bg-background;
+  }
+
+  .cv-dossier {
+    @apply relative min-h-screen overflow-hidden text-foreground;
+    direction: ltr;
+    background:
+      linear-gradient(hsl(var(--primary) / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.035) 1px, transparent 1px),
+      radial-gradient(circle at 84% 16%, hsl(var(--primary) / 0.13), transparent 31rem),
+      hsl(var(--night-deep));
+    background-size: 72px 72px, 72px 72px, auto, auto;
+  }
+
+  .cv-dossier::before {
+    content: "";
+    @apply pointer-events-none absolute -bottom-48 -left-44 h-[34rem] w-[34rem] rounded-full border border-accent/15;
+    box-shadow:
+      0 0 0 5rem hsl(var(--accent) / 0.025),
+      0 0 0 10rem hsl(var(--accent) / 0.015);
+  }
+
+  .cv-dossier__signal {
+    @apply pointer-events-none absolute right-[8%] top-0 h-40 w-px bg-gradient-to-b from-accent/80 to-transparent;
+  }
+
+  .cv-dossier__toolbar {
+    @apply relative z-10 mx-auto grid min-h-[6.5rem] w-full max-w-[96rem] grid-cols-[1fr_auto_1fr] items-center gap-6 border-b border-primary/15 px-6 lg:px-10;
+    animation: cv-dossier-enter 480ms ease-out both;
+  }
+
+  .cv-dossier__close {
+    @apply inline-flex w-fit items-center gap-3 rounded-full border border-primary/30 px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-foreground;
+  }
+
+  .cv-dossier__close > span:first-child {
+    @apply text-xl font-light leading-none text-primary;
+  }
+
+  .cv-dossier__identity {
+    @apply flex items-center gap-3 justify-self-center;
+  }
+
+  .cv-dossier__identity > span {
+    @apply h-3 w-3 rounded-full bg-primary;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.85);
+  }
+
+  .cv-dossier__identity p {
+    @apply leading-none;
+  }
+
+  .cv-dossier__identity strong,
+  .cv-dossier__identity small {
+    @apply block;
+  }
+
+  .cv-dossier__identity strong {
+    @apply text-sm font-semibold tracking-wide text-foreground;
+    font-family: var(--font-display);
+  }
+
+  .cv-dossier__identity small {
+    @apply mt-1 text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground;
+    font-family: var(--font-mono);
+  }
+
+  .cv-dossier__actions {
+    @apply flex items-center justify-self-end gap-2;
+  }
+
+  .cv-dossier__actions a,
+  .cv-document__open {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-primary/30 px-4 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary;
+  }
+
+  .cv-dossier__actions a:last-child {
+    @apply border-primary bg-primary text-primary-foreground hover:text-primary-foreground;
+  }
+
+  .cv-dossier__body {
+    @apply relative z-[2] mx-auto grid w-full max-w-[80rem] grid-cols-[minmax(13rem,14rem)_minmax(0,1fr)] items-start gap-8 px-6 pb-8 pt-7;
+    min-height: calc(100svh - 6.5rem);
+  }
+
+  .cv-dossier__intro {
+    @apply flex h-full flex-col border-r border-primary/15 py-6 pr-6 opacity-90;
+    animation: cv-dossier-enter 520ms 80ms ease-out both;
+  }
+
+  .cv-dossier__eyebrow {
+    @apply text-[0.6875rem] font-medium uppercase tracking-[0.15em] text-primary;
+    font-family: var(--font-mono);
+  }
+
+  .cv-dossier__intro h1 {
+    @apply mt-5 text-[1.55rem] font-semibold leading-[1.32] text-balance;
+  }
+
+  .cv-dossier__summary {
+    @apply mt-4 text-[0.875rem] leading-7 text-muted-foreground;
+  }
+
+  .cv-dossier__facts {
+    @apply mt-10 border-t border-primary/15;
+  }
+
+  .cv-dossier__facts div {
+    @apply border-b border-primary/10 py-4;
+  }
+
+  .cv-dossier__facts dt {
+    @apply text-[0.625rem] uppercase tracking-[0.18em] text-muted-foreground;
+    font-family: var(--font-mono);
+  }
+
+  .cv-dossier__facts dd {
+    @apply mt-1.5 text-[0.8125rem] font-medium leading-6 text-foreground;
+  }
+
+  .cv-document {
+    @apply flex min-h-[36rem] flex-col overflow-hidden rounded-lg border border-primary/15 bg-[hsl(var(--paper))] shadow-[0_20px_60px_hsl(var(--night-deep)/0.5)];
+    height: clamp(38rem, calc(100svh - 10rem), 48rem);
+    animation: cv-document-enter 620ms 120ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .cv-document__topline {
+    @apply grid min-h-12 grid-cols-[1fr_auto_1fr] items-center border-b px-4 text-[0.625rem] tracking-[0.12em];
+    border-color: hsl(var(--paper-rule) / 0.7);
+    color: hsl(var(--paper-muted));
+    font-family: var(--font-mono);
+  }
+
+  .cv-document__topline > div {
+    @apply flex gap-1.5;
+  }
+
+  .cv-document__topline > div span {
+    @apply h-2 w-2 rounded-full;
+    background: hsl(var(--paper-rule));
+  }
+
+  .cv-document__topline > div span:first-child {
+    background: hsl(var(--paper-signal));
+  }
+
+  .cv-document__topline > p:nth-child(2) {
+    @apply justify-self-center;
+  }
+
+  .cv-document__topline > p:last-child {
+    @apply justify-self-end;
+  }
+
+  .cv-document__viewport {
+    @apply relative min-h-0 flex-1 bg-[hsl(var(--paper))];
+  }
+
+  .cv-document__embed {
+    @apply absolute inset-0 h-full w-full border-0;
+  }
+
+  .cv-document__state {
+    @apply absolute inset-0 flex flex-col items-center justify-center px-6 text-center;
+    color: hsl(var(--paper-ink));
+  }
+
+  .cv-document__state h2 {
+    @apply mt-6 max-w-lg text-2xl;
+  }
+
+  .cv-document__state > p {
+    @apply mt-3 max-w-md text-sm leading-7;
+    color: hsl(var(--paper-muted));
+  }
+
+  .cv-document__loader {
+    @apply h-10 w-10 rounded-full border-2;
+    border-color: hsl(var(--paper-rule));
+    border-top-color: hsl(var(--paper-signal));
+    animation: cv-loader-spin 800ms linear infinite;
+  }
+
+  .cv-document__file-mark {
+    @apply grid h-20 w-16 place-items-center rounded-sm border text-xs font-bold tracking-widest;
+    border-color: hsl(var(--paper-signal));
+    color: hsl(var(--paper-signal));
+    font-family: var(--font-mono);
+    box-shadow: 0.45rem 0.45rem 0 hsl(var(--paper-rule) / 0.35);
+  }
+
+  .cv-document__open {
+    @apply mt-7 border-transparent bg-[hsl(var(--paper-signal))] px-6 text-white hover:border-transparent hover:text-white;
+  }
+
+  .cv-dossier a:focus-visible,
+  .cv-dossier button:focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 4px;
   }
 
   .cursor-halo {
@@ -1492,6 +1701,34 @@
   }
 }
 
+@keyframes cv-dossier-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cv-document-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cv-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 640px) {
   .site-header__inner {
     overflow: hidden;
@@ -1551,7 +1788,113 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cv-dossier__body {
+    @apply grid-cols-1;
+  }
+
+  .cv-dossier__intro {
+    @apply grid h-auto grid-cols-[1fr_auto] items-end gap-8 border-r-0 py-3 pr-0;
+  }
+
+  .cv-dossier__intro > div:first-child {
+    @apply max-w-xl;
+  }
+
+  .cv-dossier__facts {
+    @apply mt-0 grid min-w-64 grid-cols-2 border-b border-primary/15;
+  }
+
+  .cv-dossier__facts div {
+    @apply border-b-0 px-4 first:border-r first:pl-0;
+    border-color: hsl(var(--primary) / 0.12);
+  }
+
+  .cv-document {
+    height: clamp(32rem, calc(100svh - 18rem), 42rem);
+  }
+}
+
 @media (max-width: 767px) {
+  .cv-dossier {
+    @apply w-full min-w-0 max-w-full overflow-x-hidden overflow-y-visible;
+  }
+
+  .cv-dossier__toolbar {
+    @apply w-full min-w-0 max-w-full grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3 px-5 py-4;
+  }
+
+  .cv-dossier__close > span:last-child {
+    @apply sr-only;
+  }
+
+  .cv-dossier__close {
+    @apply h-10 w-10 justify-center p-0;
+  }
+
+  .cv-dossier__identity {
+    @apply hidden;
+  }
+
+  .cv-dossier__actions {
+    @apply col-span-2 col-start-1 grid w-full min-w-0 max-w-full grid-cols-2;
+  }
+
+  .cv-dossier__actions a {
+    @apply min-w-0 overflow-hidden px-2 py-2 text-center text-[0.6875rem] leading-5;
+  }
+
+  .cv-dossier__body {
+    @apply mx-5 w-auto min-w-0 max-w-full grid-cols-1 gap-2 px-0 pb-5 pt-2;
+    min-height: auto;
+  }
+
+  .cv-dossier__intro {
+    @apply h-auto min-w-0 border-r-0 py-6 pr-0 opacity-100;
+  }
+
+  .cv-dossier__intro h1 {
+    @apply mt-4 max-w-full break-words text-[1.75rem];
+  }
+
+  .cv-dossier__summary {
+    @apply mt-4 max-w-xl;
+  }
+
+  .cv-dossier__facts {
+    @apply mt-7 grid grid-cols-2;
+  }
+
+  .cv-dossier__facts div {
+    @apply border-b-0 border-r px-4 first:pl-0;
+    border-color: hsl(var(--primary) / 0.12);
+  }
+
+  .cv-dossier__facts div:nth-child(2) {
+    @apply border-r-0;
+  }
+
+  .cv-document {
+    @apply w-full min-w-0 min-h-[28rem];
+    height: min(62svh, 36rem);
+  }
+
+  .cv-document__topline {
+    @apply grid-cols-[auto_minmax(0,1fr)_auto];
+  }
+
+  .cv-document__topline > p:nth-child(2) {
+    @apply max-w-full truncate px-2;
+  }
+
+  .cv-document__state {
+    @apply overflow-hidden px-5;
+  }
+
+  .cv-document__state h2 {
+    @apply max-w-full text-xl leading-8;
+  }
+
   .editorial-post {
     grid-template-columns: 2rem minmax(0, 1fr);
   }
@@ -1612,7 +1955,11 @@
   .human-network__svg,
   .human-network__portrait,
   .homepage-stars,
-  .journey-timeline__stage {
+  .journey-timeline__stage,
+  .cv-dossier__toolbar,
+  .cv-dossier__intro,
+  .cv-document,
+  .cv-document__loader {
     animation: none !important;
     transition: none !important;
   }

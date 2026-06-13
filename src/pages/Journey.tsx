@@ -25,20 +25,21 @@ const Journey = () => (
         </div>
 
         <div className="editorial-actions">
+          <Link
+            to={routes.cv}
+            state={{ from: routes.journey }}
+            className="editorial-button editorial-button--primary"
+          >
+            {copyAr.common.cvCta}
+          </Link>
           <a
             href={siteConfig.external.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            className="editorial-button editorial-button--primary"
+            className="editorial-button"
           >
             {copyAr.common.linkedInCta}
           </a>
-          <Link
-            to={routes.blog}
-            className="editorial-button"
-          >
-            {copyAr.home.blogCta}
-          </Link>
         </div>
       </div>
     </section>
