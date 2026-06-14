@@ -2057,10 +2057,28 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
 @layer components {
   .journey-page {
-    --journey-paper: hsl(var(--paper));
-    --journey-ink: hsl(var(--paper-ink));
-    --journey-muted: hsl(var(--paper-muted));
     --journey-signal: hsl(var(--primary));
+    @apply relative;
+    background:
+      radial-gradient(circle at 14% 30%, hsl(var(--primary) / 0.07), transparent 32rem),
+      radial-gradient(circle at 86% 68%, hsl(var(--cosmos-glow) / 0.11), transparent 35rem),
+      linear-gradient(hsl(var(--primary) / 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.018) 1px, transparent 1px),
+      hsl(var(--background));
+    background-size: auto, auto, 72px 72px, 72px 72px, auto;
+  }
+
+  .journey-page::before {
+    content: "";
+    @apply pointer-events-none absolute bottom-24 top-[40rem] w-px;
+    inset-inline-start: max(1.5rem, calc((100% - 72rem) / 2 + 2rem));
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--primary) / 0.05),
+      hsl(var(--primary) / 0.48) 22%,
+      hsl(var(--primary) / 0.16) 76%,
+      transparent
+    );
   }
 
   .journey-kicker,
@@ -2121,15 +2139,9 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   .journey-hero__noise span:nth-child(4) { @apply right-[25%] top-[66%] w-14; animation-delay: -3.1s; }
   .journey-hero__noise span:nth-child(5) { @apply right-[12%] top-[76%] w-5; animation-delay: -0.7s; }
 
-  .journey-thesis,
-  .journey-turning,
-  .journey-method,
-  .journey-journal {
-    color: var(--journey-ink);
-  }
-
   .journey-thesis {
-    @apply py-20 md:py-28;
+    @apply border-b border-primary/10 py-20 md:py-28;
+    background: linear-gradient(180deg, hsl(var(--card) / 0.28), transparent);
   }
 
   .journey-thesis__inner {
@@ -2138,10 +2150,6 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-section-index {
     @apply text-primary;
-  }
-
-  .paper-section .journey-section-index {
-    color: hsl(var(--paper-signal));
   }
 
   .journey-thesis h2,
@@ -2154,38 +2162,65 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-thesis__inner > p {
     @apply text-[1.0625rem] leading-8 md:text-[1.1875rem] md:leading-9;
-    color: var(--journey-muted);
+    color: hsl(var(--muted-foreground));
   }
 
   .journey-progression {
-    @apply col-span-full grid grid-cols-2 border-y md:grid-cols-4;
-    border-color: hsl(var(--paper-rule));
+    @apply relative col-span-full grid gap-8 border border-primary/15 bg-card/35 p-6 md:grid-cols-4 md:gap-5 md:p-8;
+    box-shadow: inset 0 1px 0 hsl(var(--primary) / 0.05);
+  }
+
+  .journey-progression::before,
+  .journey-progression::after {
+    content: "";
+    @apply absolute hidden h-px md:block;
+    top: 4.35rem;
+  }
+
+  .journey-progression::before {
+    inset-inline: 8% 49%;
+    background: repeating-linear-gradient(
+      to right,
+      hsl(var(--primary) / 0.65) 0 5px,
+      transparent 5px 11px
+    );
+  }
+
+  .journey-progression::after {
+    inset-inline: 49% 8%;
+    background: linear-gradient(to right, hsl(var(--primary) / 0.42), hsl(var(--primary)));
   }
 
   .journey-progression li {
-    @apply relative flex min-h-24 items-center gap-3 px-4 text-lg font-semibold md:px-6;
-    border-inline-end: 1px solid hsl(var(--paper-rule));
+    @apply relative z-10 grid grid-cols-[1.5rem_1fr] gap-x-3 gap-y-2;
   }
 
-  .journey-progression li:last-child {
-    border-inline-end: 0;
-  }
-
-  .journey-progression li::after {
-    content: "";
-    @apply absolute top-1/2 h-px w-5;
-    inset-inline-end: -0.65rem;
-    background: hsl(var(--paper-signal));
-  }
-
-  .journey-progression li:last-child::after {
-    display: none;
-  }
-
-  .journey-progression span {
-    @apply text-[0.625rem] font-medium;
-    color: hsl(var(--paper-signal));
+  .journey-progression__number {
+    @apply col-start-1 row-start-1 self-center text-[0.625rem] font-medium text-primary;
     font-family: var(--font-mono);
+  }
+
+  .journey-progression__node {
+    @apply col-start-2 row-start-1 h-5 w-5 rounded-full border-4 border-card bg-primary;
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.65),
+      0 0 20px hsl(var(--primary) / 0.28);
+  }
+
+  .journey-progression li:first-child .journey-progression__node {
+    background: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0 2px,
+      hsl(var(--card)) 2px 4px
+    );
+  }
+
+  .journey-progression strong {
+    @apply col-span-2 mt-2 text-lg text-foreground;
+  }
+
+  .journey-progression small {
+    @apply col-span-2 text-[0.8125rem] leading-6 text-muted-foreground;
   }
 
   .journey-chapters,
@@ -2200,10 +2235,6 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-section-heading > p:last-child {
     @apply mt-5 max-w-2xl text-base leading-8 text-muted-foreground;
-  }
-
-  .journey-section-heading--paper h2 {
-    color: var(--journey-ink);
   }
 
   .journey-chapter-list {
@@ -2281,7 +2312,20 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-chapter__time {
-    @apply text-muted-foreground lg:pt-1;
+    @apply max-w-md text-muted-foreground lg:pt-1 lg:text-right;
+  }
+
+  html[dir="rtl"] .journey-chapter__time {
+    @apply lg:text-left;
+  }
+
+  .journey-context {
+    @apply mt-6 flex flex-wrap gap-2;
+  }
+
+  .journey-context li {
+    @apply rounded-full border border-accent/35 bg-accent/5 px-3 py-1 text-[0.6875rem] text-accent;
+    font-family: var(--font-mono);
   }
 
   .journey-chapter__body {
@@ -2305,72 +2349,133 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     font-family: var(--font-mono);
   }
 
-  .journey-motif {
-    @apply relative grid min-h-36 content-center gap-3 border border-primary/15 p-5;
+  .journey-graph {
+    @apply relative min-h-64 overflow-hidden border border-primary/15;
     background: linear-gradient(145deg, hsl(var(--card) / 0.8), hsl(var(--background) / 0.35));
   }
 
-  .journey-motif::before {
+  .journey-graph::before {
     content: "";
-    @apply absolute inset-0 opacity-50;
-    background: linear-gradient(90deg, transparent 49.7%, hsl(var(--primary) / 0.25) 50%, transparent 50.3%);
+    @apply absolute inset-0 opacity-35;
+    background:
+      linear-gradient(hsl(var(--primary) / 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.055) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
-  .journey-motif span {
-    @apply relative z-10 w-fit border border-primary/25 bg-background/80 px-3 py-1.5 text-[0.625rem] uppercase tracking-wider text-muted-foreground;
+  .journey-graph svg {
+    @apply absolute inset-0 z-[1] h-full w-full;
+  }
+
+  .journey-graph path {
+    fill: none;
+    stroke: hsl(var(--primary) / 0.48);
+    stroke-width: 0.8;
+    stroke-dasharray: 2.5 2.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .journey-chapter--3 .journey-graph path,
+  .journey-chapter--4 .journey-graph path {
+    stroke-dasharray: none;
+  }
+
+  .journey-graph span {
+    @apply absolute z-[2] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/35 bg-background/90 px-3 py-2 text-center text-[0.6rem] uppercase tracking-wider text-muted-foreground;
     font-family: var(--font-mono);
+    box-shadow: 0 8px 24px hsl(var(--night-deep) / 0.45);
   }
 
-  .journey-motif span:nth-child(even) {
-    @apply justify-self-end border-accent/25;
+  html[dir="rtl"] .journey-graph span {
+    transform: translate(50%, -50%);
   }
 
-  .journey-chapter--1 .journey-motif span {
-    transform: translateX(var(--noise-offset, 0));
+  html[dir="rtl"] .journey-graph svg {
+    transform: scaleX(-1);
   }
 
-  .journey-chapter--1 .journey-motif span:nth-child(1) { --noise-offset: 13%; }
-  .journey-chapter--1 .journey-motif span:nth-child(2) { --noise-offset: -9%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(1) { inset-inline-start: 12%; top: 20%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(2) { inset-inline-start: 18%; top: 76%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(3) { inset-inline-start: 54%; top: 48%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(4) { inset-inline-start: 86%; top: 50%; }
+  .journey-chapter--2 .journey-graph span:nth-of-type(1) { inset-inline-start: 12%; top: 50%; }
+  .journey-chapter--2 .journey-graph span:nth-of-type(2) { inset-inline-start: 38%; top: 24%; }
+  .journey-chapter--2 .journey-graph span:nth-of-type(3) { inset-inline-start: 38%; top: 76%; }
+  .journey-chapter--2 .journey-graph span:nth-of-type(4) { inset-inline-start: 86%; top: 50%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(1) { inset-inline-start: 8%; top: 50%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(2) { inset-inline-start: 28%; top: 22%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(3) { inset-inline-start: 50%; top: 50%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(4) { inset-inline-start: 72%; top: 22%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(5) { inset-inline-start: 88%; top: 70%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(1) { inset-inline-start: 10%; top: 20%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(2) { inset-inline-start: 10%; top: 80%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(3) { inset-inline-start: 50%; top: 12%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(4) { inset-inline-start: 50%; top: 88%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(5) { inset-inline-start: 88%; top: 24%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(6) { inset-inline-start: 88%; top: 76%; }
 
   .journey-turning {
-    @apply py-20 md:py-28;
+    @apply border-y border-primary/10 py-20 md:py-28;
+    background:
+      radial-gradient(circle at 18% 50%, hsl(var(--accent) / 0.035), transparent 24rem),
+      hsl(var(--card) / 0.16);
   }
 
-  .journey-turning__grid {
-    @apply grid border-y md:grid-cols-3;
-    border-color: hsl(var(--paper-rule));
+  .journey-turning__flow {
+    @apply border-t border-primary/15;
   }
 
-  .journey-turning__grid > article {
-    @apply py-8 md:px-7 md:py-10;
-    border-bottom: 1px solid hsl(var(--paper-rule));
+  .journey-turning__flow > article {
+    @apply grid gap-7 border-b border-primary/15 py-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-start;
   }
 
-  .journey-turning__grid > article:last-child {
-    border-bottom: 0;
+  .journey-turning__flow header {
+    @apply flex gap-4 lg:block;
   }
 
   .journey-card-number {
-    color: hsl(var(--paper-signal));
+    @apply pt-1 text-primary;
   }
 
   .journey-turning h3 {
-    @apply mt-5 text-xl leading-8;
+    @apply text-xl leading-8 lg:mt-4;
   }
 
-  .journey-turning dl {
-    @apply mt-7 space-y-5;
+  .journey-decision-flow {
+    @apply grid gap-3 md:grid-cols-3;
   }
 
-  .journey-turning dt {
-    @apply text-[0.625rem] font-semibold uppercase tracking-[0.12em];
-    color: hsl(var(--paper-signal));
+  .journey-decision-flow > div {
+    @apply relative border border-primary/15 bg-background/45 p-5;
+  }
+
+  .journey-decision-flow > div:not(:last-child)::after {
+    content: "";
+    @apply absolute top-1/2 hidden h-px w-3 bg-primary/45 md:block;
+    inset-inline-end: -0.8rem;
+  }
+
+  .journey-decision-flow__tension {
+    border-color: hsl(var(--accent) / 0.28) !important;
+  }
+
+  .journey-decision-flow__decision {
+    background: hsl(var(--accent) / 0.035) !important;
+  }
+
+  .journey-decision-flow dt {
+    @apply text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-primary;
     font-family: var(--font-mono);
   }
 
-  .journey-turning dd {
+  .journey-decision-flow__tension dt,
+  .journey-decision-flow__decision dt {
+    @apply text-accent;
+  }
+
+  .journey-decision-flow dd {
     @apply mt-1 text-[0.9375rem] leading-7;
-    color: var(--journey-muted);
+    color: hsl(var(--muted-foreground));
   }
 
   .journey-evidence {
@@ -2437,7 +2542,8 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-method {
-    @apply py-20 md:py-28;
+    @apply border-t border-primary/10 py-20 md:py-28;
+    background: linear-gradient(180deg, hsl(var(--card) / 0.2), transparent);
   }
 
   .journey-method__inner {
@@ -2446,21 +2552,50 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-method header > p:last-child {
     @apply mt-5 max-w-md text-base leading-8;
-    color: var(--journey-muted);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .journey-operating-loop {
+    @apply relative grid gap-3 border border-primary/15 bg-card/35 p-4 md:grid-cols-5;
+  }
+
+  .journey-operating-loop li {
+    @apply relative flex items-center gap-3 border border-primary/15 bg-background/55 px-3 py-3;
+  }
+
+  .journey-operating-loop li:not(:last-child)::after {
+    content: "";
+    @apply absolute top-1/2 hidden h-px w-3 bg-primary/55 md:block;
+    inset-inline-end: -0.8rem;
+  }
+
+  .journey-operating-loop li:last-child::before {
+    content: "";
+    @apply pointer-events-none absolute hidden rounded-full border border-dashed border-primary/20 md:block;
+    inset: -1rem;
+  }
+
+  .journey-operating-loop span {
+    @apply text-[0.625rem] text-primary;
+    font-family: var(--font-mono);
+  }
+
+  .journey-operating-loop strong {
+    @apply text-sm text-foreground;
   }
 
   .journey-method__list {
-    border-top: 1px solid hsl(var(--paper-rule));
+    @apply mt-8 border-t border-primary/15;
   }
 
   .journey-method__list article {
     @apply grid grid-cols-[2.5rem_1fr] gap-4 py-7;
-    border-bottom: 1px solid hsl(var(--paper-rule));
+    @apply border-b border-primary/15;
   }
 
   .journey-method__list article > span {
     @apply pt-1 text-xs;
-    color: hsl(var(--paper-signal));
+    @apply text-primary;
     font-family: var(--font-mono);
   }
 
@@ -2470,7 +2605,7 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-method__list p {
     @apply mt-2 text-[0.9375rem] leading-7;
-    color: var(--journey-muted);
+    color: hsl(var(--muted-foreground));
   }
 
   .journey-horizon {
@@ -2489,7 +2624,7 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-system-map {
-    @apply relative grid min-h-[25rem] content-center gap-3 border border-primary/20 p-7;
+    @apply relative grid min-h-[25rem] grid-cols-[minmax(0,1fr)_minmax(9rem,0.8fr)] content-center gap-x-12 gap-y-3 overflow-hidden border border-primary/20 p-7;
     background:
       linear-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
       linear-gradient(90deg, hsl(var(--primary) / 0.04) 1px, transparent 1px);
@@ -2497,21 +2632,32 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-system-map span {
-    @apply relative border border-primary/30 bg-background/85 px-4 py-3 text-sm text-muted-foreground;
+    @apply relative z-[2] col-start-1 border border-primary/30 bg-background/90 px-4 py-3 text-sm text-muted-foreground;
   }
 
-  .journey-system-map span::after {
-    content: "";
-    @apply absolute top-1/2 h-px w-8 bg-primary/55;
-    inset-inline-end: -2rem;
+  .journey-system-map svg {
+    @apply absolute inset-0 z-[1] h-full w-full;
+  }
+
+  .journey-system-map path {
+    fill: none;
+    stroke: hsl(var(--primary) / 0.48);
+    stroke-width: 0.8;
+    vector-effect: non-scaling-stroke;
+  }
+
+  html[dir="rtl"] .journey-system-map svg {
+    transform: scaleX(-1);
   }
 
   .journey-system-map strong {
-    @apply mt-5 border border-primary bg-primary/10 px-5 py-4 text-center text-base text-primary;
+    @apply relative z-[2] col-start-2 row-span-4 row-start-1 self-center border border-primary bg-primary/10 px-5 py-6 text-center text-base text-primary;
+    box-shadow: 0 0 32px hsl(var(--primary) / 0.12);
   }
 
   .journey-journal {
-    @apply py-16 md:py-20;
+    @apply border-t border-primary/10 py-16 md:py-20;
+    background: hsl(var(--night-deep) / 0.48);
   }
 
   .journey-journal__inner {
@@ -2524,18 +2670,7 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-journal__inner > div > p:last-child {
     @apply mt-4 max-w-2xl text-base leading-8;
-    color: var(--journey-muted);
-  }
-}
-
-@media (min-width: 768px) {
-  .journey-turning__grid > article {
-    border-bottom: 0;
-    border-inline-end: 1px solid hsl(var(--paper-rule));
-  }
-
-  .journey-turning__grid > article:last-child {
-    border-inline-end: 0;
+    color: hsl(var(--muted-foreground));
   }
 }
 
@@ -2559,11 +2694,22 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     opacity: 0.45;
   }
 
-  .journey-progression li:nth-child(2) {
-    border-inline-end: 0;
+  .journey-progression {
+    @apply gap-7 ps-4;
   }
 
-  .journey-progression li:nth-child(2)::after {
+  .journey-progression::before {
+    @apply block h-auto w-px;
+    inset-block: 2rem 2.25rem;
+    inset-inline-start: 3.65rem;
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--primary) / 0.35),
+      hsl(var(--primary))
+    );
+  }
+
+  .journey-progression::after {
     display: none;
   }
 
@@ -2571,8 +2717,51 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     margin-top: 2rem;
   }
 
-  .journey-motif {
-    min-height: 8rem;
+  .journey-graph {
+    min-height: 14rem;
+  }
+
+  .journey-decision-flow {
+    @apply grid-cols-1;
+  }
+
+  .journey-decision-flow > div:not(:last-child)::after {
+    @apply block h-3 w-px;
+    inset-block-start: auto;
+    inset-block-end: -0.8rem;
+    inset-inline-start: 50%;
+  }
+
+  .journey-operating-loop {
+    @apply grid-cols-1;
+  }
+
+  .journey-operating-loop li:not(:last-child)::after {
+    @apply block h-3 w-px;
+    inset-block-start: auto;
+    inset-block-end: -0.8rem;
+    inset-inline-start: 50%;
+  }
+
+  .journey-operating-loop li:last-child::before {
+    display: none;
+  }
+
+  .journey-system-map {
+    @apply min-h-[32rem] grid-cols-1 gap-y-3;
+  }
+
+  .journey-system-map span,
+  .journey-system-map strong {
+    @apply col-start-1 row-auto;
+  }
+
+  .journey-system-map strong {
+    @apply mt-5;
+  }
+
+  .journey-system-map svg {
+    display: none;
   }
 
   .journey-evidence__grid article {
@@ -2599,6 +2788,10 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   .journey-hero__noise span,
   .journey-current > span {
     animation: none;
+  }
+
+  .journey-graph path {
+    stroke-dasharray: none;
   }
 
   .journey-evidence__grid article,
