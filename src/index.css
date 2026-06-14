@@ -2068,19 +2068,6 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     background-size: auto, auto, 72px 72px, 72px 72px, auto;
   }
 
-  .journey-page::before {
-    content: "";
-    @apply pointer-events-none absolute bottom-24 top-[40rem] w-px;
-    inset-inline-start: max(1.5rem, calc((100% - 72rem) / 2 + 2rem));
-    background: linear-gradient(
-      to bottom,
-      hsl(var(--primary) / 0.05),
-      hsl(var(--primary) / 0.48) 22%,
-      hsl(var(--primary) / 0.16) 76%,
-      transparent
-    );
-  }
-
   .journey-kicker,
   .journey-section-index,
   .journey-chapter__eyebrow,
