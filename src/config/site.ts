@@ -12,7 +12,7 @@ export const siteConfig = {
   },
   documents: {
     cv: {
-      url: "/cv/rashed-sabra-cv.pdf",
+      url: "/cv/rashed-sabra-cv-2026-06-14.pdf",
       downloadName: "Rashed-Sabra-CV.pdf",
     },
   },
