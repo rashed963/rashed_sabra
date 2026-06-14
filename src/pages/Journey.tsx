@@ -112,6 +112,7 @@ const Journey = () => {
                           {chapterGraphPaths[index].map((path) => <path key={path} d={path} />)}
                         </svg>
                         {chapter.motif.map((label) => <span key={label}>{label}</span>)}
+                        {index === 3 && <i className="journey-graph__hub" />}
                       </div>
                     </div>
                   </div>
