@@ -32,7 +32,7 @@ describe("blog selectors", () => {
     const posts = getLatestBlogPosts(2, "ar");
 
     expect(posts).toHaveLength(2);
-    expect(posts[0].slug).toBe("organizational-intelligence-leadership");
+    expect(posts[0].slug).toBe("ai-autonomy-accountability");
     expect(new Date(posts[0].publishedAt).getTime()).toBeGreaterThanOrEqual(
       new Date(posts[1].publishedAt).getTime(),
     );
