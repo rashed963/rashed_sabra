@@ -2299,7 +2299,7 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-chapter__time {
-    @apply max-w-md text-muted-foreground lg:pt-1 lg:text-right;
+    @apply max-w-md text-muted-foreground lg:whitespace-nowrap lg:pt-1 lg:text-right;
   }
 
   html[dir="rtl"] .journey-chapter__time {
@@ -2337,8 +2337,12 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-graph {
-    @apply relative min-h-72 overflow-hidden border border-primary/20;
-    background: linear-gradient(145deg, hsl(var(--card) / 0.8), hsl(var(--background) / 0.35));
+    @apply relative min-h-72 overflow-hidden rounded-[1.75rem] border border-primary/20;
+    background:
+      radial-gradient(circle at 12% 50%, hsl(var(--accent) / 0.09), transparent 34%),
+      radial-gradient(circle at 88% 50%, hsl(var(--primary) / 0.1), transparent 34%),
+      linear-gradient(145deg, hsl(var(--card) / 0.82), hsl(var(--background) / 0.35));
+    box-shadow: inset 0 1px 0 hsl(var(--foreground) / 0.035);
   }
 
   .journey-graph::before {
@@ -2356,21 +2360,42 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 
   .journey-graph path {
     fill: none;
-    stroke: hsl(var(--primary) / 0.48);
-    stroke-width: 0.8;
-    stroke-dasharray: 2.5 2.5;
+    stroke: hsl(var(--primary) / 0.62);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.25;
     vector-effect: non-scaling-stroke;
   }
 
-  .journey-chapter--3 .journey-graph path,
-  .journey-chapter--4 .journey-graph path {
-    stroke-dasharray: none;
+  .journey-graph marker path {
+    fill: hsl(var(--primary) / 0.9);
+    stroke: none;
   }
 
   .journey-graph span {
-    @apply absolute z-[2] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/40 bg-background/95 px-3 py-2 text-center text-[0.625rem] uppercase tracking-wider text-muted-foreground;
+    @apply absolute z-[2] -translate-x-1/2 -translate-y-1/2 rounded-2xl border px-3 py-2 text-center text-[0.625rem] uppercase tracking-wider;
     font-family: var(--font-mono);
     box-shadow: 0 8px 24px hsl(var(--night-deep) / 0.45);
+  }
+
+  .journey-graph span {
+    border-color: hsl(var(--cosmos-glow) / 0.5);
+    background: hsl(var(--night-deep) / 0.98);
+    color: hsl(var(--foreground) / 0.82);
+  }
+
+  .journey-chapter--1 .journey-graph span:nth-of-type(-n+2),
+  .journey-chapter--2 .journey-graph span:nth-of-type(1),
+  .journey-chapter--3 .journey-graph span:nth-of-type(1) {
+    border-color: hsl(var(--accent) / 0.5);
+    background: hsl(var(--night-deep) / 0.98);
+    color: hsl(var(--accent));
+  }
+
+  .journey-graph span:last-of-type {
+    border-color: hsl(var(--primary) / 0.55);
+    background: hsl(var(--night-deep) / 0.98);
+    color: hsl(var(--primary));
   }
 
   html[dir="rtl"] .journey-graph span {
@@ -2381,25 +2406,25 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     transform: scaleX(-1);
   }
 
-  .journey-chapter--1 .journey-graph span:nth-of-type(1) { inset-inline-start: 12%; top: 20%; }
-  .journey-chapter--1 .journey-graph span:nth-of-type(2) { inset-inline-start: 18%; top: 76%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(1) { inset-inline-start: 16%; top: 20%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(2) { inset-inline-start: 22%; top: 76%; }
   .journey-chapter--1 .journey-graph span:nth-of-type(3) { inset-inline-start: 54%; top: 48%; }
-  .journey-chapter--1 .journey-graph span:nth-of-type(4) { inset-inline-start: 86%; top: 50%; }
-  .journey-chapter--2 .journey-graph span:nth-of-type(1) { inset-inline-start: 12%; top: 50%; }
+  .journey-chapter--1 .journey-graph span:nth-of-type(4) { inset-inline-start: 84%; top: 50%; }
+  .journey-chapter--2 .journey-graph span:nth-of-type(1) { inset-inline-start: 18%; top: 50%; }
   .journey-chapter--2 .journey-graph span:nth-of-type(2) { inset-inline-start: 38%; top: 24%; }
   .journey-chapter--2 .journey-graph span:nth-of-type(3) { inset-inline-start: 38%; top: 76%; }
-  .journey-chapter--2 .journey-graph span:nth-of-type(4) { inset-inline-start: 86%; top: 50%; }
-  .journey-chapter--3 .journey-graph span:nth-of-type(1) { inset-inline-start: 8%; top: 50%; }
+  .journey-chapter--2 .journey-graph span:nth-of-type(4) { inset-inline-start: 82%; top: 50%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(1) { inset-inline-start: 18%; top: 50%; }
   .journey-chapter--3 .journey-graph span:nth-of-type(2) { inset-inline-start: 28%; top: 22%; }
   .journey-chapter--3 .journey-graph span:nth-of-type(3) { inset-inline-start: 50%; top: 50%; }
   .journey-chapter--3 .journey-graph span:nth-of-type(4) { inset-inline-start: 72%; top: 22%; }
-  .journey-chapter--3 .journey-graph span:nth-of-type(5) { inset-inline-start: 88%; top: 70%; }
-  .journey-chapter--4 .journey-graph span:nth-of-type(1) { inset-inline-start: 10%; top: 20%; }
-  .journey-chapter--4 .journey-graph span:nth-of-type(2) { inset-inline-start: 10%; top: 80%; }
+  .journey-chapter--3 .journey-graph span:nth-of-type(5) { inset-inline-start: 82%; top: 70%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(1) { inset-inline-start: 16%; top: 20%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(2) { inset-inline-start: 16%; top: 80%; }
   .journey-chapter--4 .journey-graph span:nth-of-type(3) { inset-inline-start: 50%; top: 12%; }
   .journey-chapter--4 .journey-graph span:nth-of-type(4) { inset-inline-start: 50%; top: 88%; }
-  .journey-chapter--4 .journey-graph span:nth-of-type(5) { inset-inline-start: 88%; top: 24%; }
-  .journey-chapter--4 .journey-graph span:nth-of-type(6) { inset-inline-start: 88%; top: 76%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(5) { inset-inline-start: 84%; top: 24%; }
+  .journey-chapter--4 .journey-graph span:nth-of-type(6) { inset-inline-start: 84%; top: 76%; }
 
   .journey-graph__hub {
     @apply absolute left-1/2 top-1/2 z-[3] h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background bg-primary;
@@ -2416,11 +2441,32 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-turning__flow {
-    @apply border-t border-primary/15;
+    @apply grid gap-6;
   }
 
   .journey-turning__flow > article {
-    @apply grid gap-7 border-b border-primary/15 py-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-start;
+    @apply relative grid gap-7 overflow-hidden rounded-[2rem] border border-primary/15 px-6 py-7 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-center lg:px-8;
+    background:
+      radial-gradient(circle at 12% 50%, hsl(var(--accent) / 0.07), transparent 24%),
+      radial-gradient(circle at 88% 50%, hsl(var(--primary) / 0.08), transparent 26%),
+      hsl(var(--background) / 0.32);
+  }
+
+  .journey-turning__flow > article:nth-child(even) {
+    background:
+      radial-gradient(circle at 22% 50%, hsl(var(--cosmos-glow) / 0.08), transparent 26%),
+      radial-gradient(circle at 82% 50%, hsl(var(--primary) / 0.08), transparent 28%),
+      hsl(var(--background) / 0.32);
+  }
+
+  .journey-turning__flow > article {
+    transition: border-color 240ms ease, transform 240ms ease, box-shadow 240ms ease;
+  }
+
+  .journey-turning__flow > article:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.32);
+    box-shadow: 0 22px 55px hsl(var(--night-deep) / 0.22);
   }
 
   .journey-turning__flow header {
@@ -2436,25 +2482,44 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-decision-flow {
-    @apply grid gap-3 md:grid-cols-3;
+    @apply relative grid gap-8 md:grid-cols-3 md:gap-6;
+  }
+
+  .journey-decision-flow::before {
+    content: "";
+    @apply absolute hidden md:block;
+    inset: 1.15rem 12% auto;
+    height: 2.25rem;
+    border-top: 1px dashed hsl(var(--primary) / 0.45);
+    border-radius: 50%;
   }
 
   .journey-decision-flow > div {
-    @apply relative min-h-40 border border-primary/15 bg-background/45 p-5;
+    @apply relative z-[1] min-h-0 px-2 pt-12 md:px-3 md:pt-14;
   }
 
-  .journey-decision-flow > div:not(:last-child)::after {
+  .journey-decision-flow > div::before {
     content: "";
-    @apply absolute top-1/2 hidden h-px w-3 bg-primary/45 md:block;
-    inset-inline-end: -0.8rem;
+    @apply absolute top-0 h-9 w-9 rounded-full border-4 border-background;
+    inset-inline-start: 0.5rem;
+    background: hsl(var(--primary));
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.45),
+      0 0 22px hsl(var(--primary) / 0.24);
   }
 
-  .journey-decision-flow__tension {
-    border-color: hsl(var(--accent) / 0.28) !important;
+  .journey-decision-flow__tension::before {
+    background: hsl(var(--accent));
+    box-shadow:
+      0 0 0 1px hsl(var(--accent) / 0.5),
+      0 0 22px hsl(var(--accent) / 0.22);
   }
 
-  .journey-decision-flow__decision {
-    background: hsl(var(--accent) / 0.035) !important;
+  .journey-decision-flow__decision::before {
+    background: hsl(var(--cosmos-glow) / 0.9);
+    box-shadow:
+      0 0 0 1px hsl(var(--cosmos-glow) / 0.5),
+      0 0 22px hsl(var(--cosmos-glow) / 0.22);
   }
 
   .journey-decision-flow dt {
@@ -2468,7 +2533,7 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   }
 
   .journey-decision-flow dd {
-    @apply mt-1 text-[0.9375rem] leading-7;
+    @apply mt-2 text-[0.9375rem] leading-7;
     color: hsl(var(--muted-foreground));
   }
 
@@ -2721,11 +2786,20 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     @apply grid-cols-1;
   }
 
-  .journey-decision-flow > div:not(:last-child)::after {
-    @apply block h-3 w-px;
-    inset-block-start: auto;
-    inset-block-end: -0.8rem;
-    inset-inline-start: 50%;
+  .journey-decision-flow::before {
+    @apply block;
+    inset-block: 1rem;
+    inset-inline: 1.55rem auto;
+    width: 2rem;
+    height: auto;
+    border-top: 0;
+    border-inline-start: 1px dashed hsl(var(--primary) / 0.4);
+    border-radius: 50%;
+  }
+
+  .journey-decision-flow > div {
+    @apply min-h-24 pb-3 pt-0;
+    padding-inline-start: 4.25rem;
   }
 
   .journey-operating-loop {
@@ -2790,11 +2864,13 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     stroke-dasharray: none;
   }
 
+  .journey-turning__flow > article,
   .journey-evidence__grid article,
   .journey-evidence__grid article::before {
     transition: none;
   }
 
+  .journey-turning__flow > article:hover,
   .journey-evidence__grid article:hover,
   .journey-evidence__grid article:focus-visible {
     transform: none;

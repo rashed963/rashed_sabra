@@ -31,6 +31,7 @@ describe("Journey narrative", () => {
     const arabicChapter = getJourneyNarrative("ar").chapters[0];
 
     expect(englishChapter.time).toContain("2013 - 2021");
+    expect(englishChapter.time).toBe("2013 - 2021 · Damascus");
     expect(englishChapter.context).toEqual([
       "Academic foundation",
       "Early ML/NLP engineering",

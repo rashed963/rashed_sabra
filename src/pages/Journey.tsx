@@ -5,10 +5,10 @@ import { useLanguage } from "../features/i18n/language";
 import { getJourneyNarrative } from "../features/journey/narrative";
 
 const chapterGraphPaths = [
-  ["M12 20 L54 48", "M18 76 L54 48", "M54 48 L86 50"],
-  ["M12 50 L38 24", "M12 50 L38 76", "M38 24 L86 50", "M38 76 L86 50"],
-  ["M8 50 L28 22", "M28 22 L50 50", "M50 50 L72 22", "M72 22 L92 50", "M92 50 L72 78", "M72 78 L28 22"],
-  ["M10 20 L50 50", "M10 80 L50 50", "M50 12 L50 50", "M50 88 L50 50", "M50 50 L90 24", "M50 50 L90 76"],
+  ["M26 23 C31 25 33 38 35 43", "M31 72 C34 68 35 59 35 55", "M64 49 C67 49 69 50 70 50"],
+  ["M28 45 C27 39 24 35 21 34", "M28 55 C27 61 24 65 20 66", "M47 27 C56 29 62 40 65 46", "M47 73 C56 71 62 60 65 54"],
+  ["M27 45 Q25 37 27 34", "M38 27 Q41 32 40 39", "M57 45 Q63 37 67 34", "M78 28 Q82 39 82 54", "M77 75 Q55 88 34 34"],
+  ["M25 24 C34 27 41 40 47 46", "M25 76 C34 73 41 60 47 54", "M50 22 C50 32 50 39 50 46", "M50 78 C50 68 50 61 50 54", "M54 48 C62 45 65 35 67 30", "M54 52 C62 55 64 65 66 70"],
 ] as const;
 
 const Journey = () => {
@@ -109,7 +109,26 @@ const Journey = () => {
                       </div>
                       <div className="journey-graph" aria-hidden="true">
                         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                          {chapterGraphPaths[index].map((path) => <path key={path} d={path} />)}
+                          <defs>
+                            <marker
+                              id={`journey-arrow-${index}`}
+                              viewBox="0 0 8 8"
+                              refX="7"
+                              refY="4"
+                              markerWidth="5"
+                              markerHeight="5"
+                              orient="auto-start-reverse"
+                            >
+                              <path d="M0 0 L8 4 L0 8 Z" />
+                            </marker>
+                          </defs>
+                          {chapterGraphPaths[index].map((path) => (
+                            <path
+                              key={path}
+                              d={path}
+                              markerEnd={`url(#journey-arrow-${index})`}
+                            />
+                          ))}
                         </svg>
                         {chapter.motif.map((label) => <span key={label}>{label}</span>)}
                         {index === 3 && <i className="journey-graph__hub" />}
