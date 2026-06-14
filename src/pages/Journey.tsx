@@ -1,145 +1,216 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
-import { Timeline } from "../components/Timeline";
 import { siteConfig } from "../config/site";
 import { useLanguage } from "../features/i18n/language";
-import { getJourneyThemes, getMilestones } from "../features/journey/content";
+import { getJourneyNarrative } from "../features/journey/narrative";
 
 const Journey = () => {
-  const { language, routes, copy } = useLanguage();
-  const milestones = getMilestones(language);
-  const journeyThemes = getJourneyThemes(language);
+  const { language, routes } = useLanguage();
+  const journey = getJourneyNarrative(language);
 
   return (
     <Layout>
-    <div className="site-page journey-page">
-    <section className="interior-hero" aria-labelledby="journey-title">
-      <div className="page-shell">
-        <div className="interior-hero__copy">
-          <p className="section-label">
-            <span>01</span>
-            {copy.journey.eyebrow}
-          </p>
-          <h1 id="journey-title" className="interior-title">
-            {copy.journey.titlePrefix} {copy.journey.titleHighlight}
-          </h1>
-          <p className="interior-lede">
-            {copy.journey.subtitle}
-          </p>
-        </div>
-
-        <div className="editorial-actions">
-          <Link
-            to={routes.cv}
-            state={{ from: routes.journey }}
-            className="editorial-button editorial-button--primary"
-          >
-            {copy.common.cvCta}
-          </Link>
-          <a
-            href={siteConfig.external.linkedIn}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="editorial-button"
-          >
-            {copy.common.linkedInCta}
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section className="paper-section journey-section" aria-labelledby="journey-themes">
-      <div className="page-shell">
-        <div className="section-heading">
-          <div>
-            <p className="section-label"><span>02</span><span>{copy.journey.themesLabel}</span></p>
-            <h2 id="journey-themes">{copy.journey.themesTitle}</h2>
+      <div className="site-page journey-page">
+        <section className="journey-hero" aria-labelledby="journey-title">
+          <div className="journey-hero__noise" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
-        </div>
-        <div className="journey-themes">
-          {journeyThemes.map((theme) => (
-            <article key={theme.title}>
-              <p>{theme.num}</p>
-              <h3>{theme.title}</h3>
-              <p>{theme.description}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section className="journey-section" aria-labelledby="journey-principles">
-      <div className="page-shell">
-        <div className="section-heading">
-          <div>
-            <p className="section-label"><span>03</span><span>{copy.journey.principlesLabel}</span></p>
-            <h2 id="journey-principles">{copy.journey.principlesTitle}</h2>
+          <div className="page-shell journey-hero__inner">
+            <p className="journey-kicker">{journey.hero.label}</p>
+            <h1 id="journey-title">{journey.hero.title}</h1>
+            <p className="journey-hero__lede">{journey.hero.body}</p>
+            <div className="editorial-actions">
+              <a href="#proof-of-work" className="editorial-button editorial-button--primary">
+                {journey.hero.proofCta}
+              </a>
+              <Link to={routes.blog} className="editorial-button">
+                {journey.hero.thinkingCta}
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="journey-principles">
-          {copy.journey.principles.map((principle, index) => (
-            <article key={principle.title}>
-              <b>{String(index + 1).padStart(2, "0")}</b>
-              <div>
-                <h3>{principle.title}</h3>
-                <p>{principle.body}</p>
+        </section>
+
+        <section className="journey-thesis paper-section" aria-labelledby="journey-thesis-title">
+          <div className="page-shell journey-thesis__inner">
+            <div>
+              <p className="journey-section-index">01 / {journey.labels.thesis}</p>
+              <h2 id="journey-thesis-title">{journey.thesis.title}</h2>
+            </div>
+            <p>{journey.thesis.body}</p>
+            <ol className="journey-progression" aria-label={journey.thesis.progressionLabel}>
+              {journey.thesis.progression.map((step, index) => (
+                <li key={step}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="journey-chapters" aria-labelledby="journey-chapters-title">
+          <div className="page-shell">
+            <header className="journey-section-heading">
+              <p className="journey-section-index">02 / {journey.labels.chapters}</p>
+              <h2 id="journey-chapters-title">{journey.chaptersTitle}</h2>
+            </header>
+
+            <div className="journey-chapter-list">
+              {journey.chapters.map((chapter, index) => (
+                <article
+                  className={`journey-chapter journey-chapter--${index + 1}`}
+                  key={chapter.eyebrow}
+                >
+                  <div className="journey-chapter__rail" aria-hidden="true">
+                    <span className="journey-chapter__node" />
+                  </div>
+                  <div className="journey-chapter__content">
+                    <header>
+                      <div>
+                        <p className="journey-chapter__eyebrow">
+                          {chapter.eyebrow}
+                          {chapter.current && (
+                            <span className="journey-current">
+                              <span aria-hidden="true" />
+                              {journey.labels.current}
+                            </span>
+                          )}
+                        </p>
+                        <h3>{chapter.title}</h3>
+                      </div>
+                      <p className="journey-chapter__time" dir="ltr">{chapter.time}</p>
+                    </header>
+                    <div className="journey-chapter__body">
+                      <div>
+                        {chapter.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                        <ul className="journey-tags" aria-label={journey.labels.capabilities}>
+                          {chapter.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                        </ul>
+                      </div>
+                      <div className="journey-motif" aria-hidden="true">
+                        {chapter.motif.map((label) => <span key={label}>{label}</span>)}
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="journey-turning paper-section" aria-labelledby="turning-points-title">
+          <div className="page-shell">
+            <header className="journey-section-heading journey-section-heading--paper">
+              <p className="journey-section-index">03 / {journey.labels.turningPoints}</p>
+              <h2 id="turning-points-title">{journey.turningPointsTitle}</h2>
+            </header>
+            <div className="journey-turning__grid">
+              {journey.turningPoints.map((point, index) => (
+                <article key={point.title}>
+                  <p className="journey-card-number">{String(index + 1).padStart(2, "0")}</p>
+                  <h3>{point.title}</h3>
+                  <dl>
+                    <div><dt>{journey.labels.challenge}</dt><dd>{point.challenge}</dd></div>
+                    <div><dt>{journey.labels.decision}</dt><dd>{point.decision}</dd></div>
+                    <div><dt>{journey.labels.result}</dt><dd>{point.result}</dd></div>
+                  </dl>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="proof-of-work" className="journey-evidence" aria-labelledby="proof-title">
+          <div className="page-shell">
+            <header className="journey-section-heading">
+              <p className="journey-section-index">04 / {journey.labels.proof}</p>
+              <h2 id="proof-title">{journey.proofTitle}</h2>
+              <p>{journey.proofIntro}</p>
+            </header>
+            <div className="journey-evidence__grid">
+              {journey.proof.map((item, index) => (
+                <article key={item.title} tabIndex={0}>
+                  <div className="journey-evidence__meta">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span>{item.type}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <p className="journey-evidence__impact">
+                    <strong>{journey.labels.impact}</strong>
+                    {item.impact}
+                  </p>
+                  <ul className="journey-tags">
+                    {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="journey-method paper-section" aria-labelledby="method-title">
+          <div className="page-shell journey-method__inner">
+            <header>
+              <p className="journey-section-index">05 / {journey.labels.method}</p>
+              <h2 id="method-title">{journey.method.title}</h2>
+              <p>{journey.method.subtitle}</p>
+            </header>
+            <div className="journey-method__list">
+              {journey.method.principles.map((principle, index) => (
+                <article key={principle.title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div><h3>{principle.title}</h3><p>{principle.body}</p></div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="journey-horizon" aria-labelledby="horizon-title">
+          <div className="page-shell journey-horizon__inner">
+            <div className="journey-horizon__copy">
+              <p className="journey-section-index">06 / {journey.labels.horizon}</p>
+              <h2 id="horizon-title">{journey.horizon.title}</h2>
+              {journey.horizon.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <div className="editorial-actions">
+                <Link to={routes.blog} className="editorial-button editorial-button--primary">
+                  {journey.hero.thinkingCta}
+                </Link>
+                <a
+                  href={siteConfig.external.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="editorial-button"
+                >
+                  {journey.horizon.linkedInCta}
+                </a>
               </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section className="paper-section journey-section" aria-labelledby="journey-proof">
-      <div className="page-shell">
-        <div className="section-heading">
-          <div>
-            <p className="section-label"><span>04</span><span>{copy.journey.proofLabel}</span></p>
-            <h2 id="journey-proof">{copy.journey.proofTitle}</h2>
+            </div>
+            <div className="journey-system-map" aria-label={journey.horizon.systemLabel}>
+              {journey.horizon.tracks.map((track) => <span key={track}>{track}</span>)}
+              <strong>{journey.horizon.system}</strong>
+            </div>
           </div>
-        </div>
-        <div className="journey-proof">
-          {copy.journey.proofStories.map((story, index) => (
-            <article key={story.title}>
-              <b>{String(index + 1).padStart(2, "0")}</b>
-              <h3>{story.title}</h3>
-              <p>{story.body}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section className="journey-section" aria-labelledby="journey-timeline">
-      <div className="page-shell">
-        <div className="section-heading">
-          <div>
-            <p className="section-label"><span>05</span><span>{copy.journey.timelineLabel}</span></p>
-            <h2 id="journey-timeline">{copy.journey.timelineTitle}</h2>
+        <section className="journey-journal paper-section" aria-labelledby="journal-title">
+          <div className="page-shell journey-journal__inner">
+            <div>
+              <p className="journey-section-index">07 / {journey.labels.journal}</p>
+              <h2 id="journal-title">{journey.journal.title}</h2>
+              <p>{journey.journal.body}</p>
+            </div>
+            <Link to={routes.blog} className="editorial-button editorial-button--light">
+              {journey.journal.cta}
+            </Link>
           </div>
-        </div>
-        <Timeline milestones={milestones} />
+        </section>
       </div>
-    </section>
-
-    <section className="journey-closing" aria-labelledby="journey-writing">
-      <div className="page-shell">
-        <div>
-          <p className="section-label"><span>06</span><span>{copy.journey.writingLabel}</span></p>
-          <h2 id="journey-writing">{copy.blog.title}</h2>
-          <p>
-            {copy.blog.subtitle}
-          </p>
-          <Link
-            to={routes.blog}
-            className="editorial-button editorial-button--light"
-          >
-            {copy.home.showAllCta}
-          </Link>
-        </div>
-      </div>
-    </section>
-    </div>
     </Layout>
   );
 };
