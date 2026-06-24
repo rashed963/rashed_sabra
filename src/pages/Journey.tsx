@@ -107,7 +107,10 @@ const Journey = () => {
                           {chapter.tags.map((tag) => <li key={tag}>{tag}</li>)}
                         </ul>
                       </div>
-                      <div className="journey-graph" aria-hidden="true">
+                      <div
+                        className="journey-graph"
+                        aria-label={`${chapter.title} concept network`}
+                      >
                         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
                           <defs>
                             <marker
@@ -126,11 +129,16 @@ const Journey = () => {
                             <path
                               key={path}
                               d={path}
+                              pathLength={1}
                               markerEnd={`url(#journey-arrow-${index})`}
                             />
                           ))}
                         </svg>
-                        {chapter.motif.map((label) => <span key={label}>{label}</span>)}
+                        {chapter.motif.map((label) => (
+                          <span className="journey-graph__node" key={label}>
+                            {label}
+                          </span>
+                        ))}
                         {index === 3 && <i className="journey-graph__hub" />}
                       </div>
                     </div>
