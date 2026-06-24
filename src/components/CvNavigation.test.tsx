@@ -42,21 +42,17 @@ describe("CV navigation", () => {
     expect(screen.getByTestId("from")).toHaveTextContent(routes.blog);
   });
 
-  it("uses the CV as the primary Journey action", () => {
+  it("uses proof of work as the primary Journey action", () => {
     render(
       <MemoryRouter initialEntries={[routes.journey]}>
         <Routes>
           <Route path={routes.journey} element={<Journey />} />
-          <Route path={routes.cv} element={<LocationProbe />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    const cvAction = screen.getByRole("link", { name: copyAr.common.cvCta });
-    expect(cvAction).toHaveClass("editorial-button--primary");
-
-    fireEvent.click(cvAction);
-    expect(screen.getByTestId("pathname")).toHaveTextContent(routes.cv);
-    expect(screen.getByTestId("from")).toHaveTextContent(routes.journey);
+    const proofAction = screen.getByRole("link", { name: "اطّلع على نماذج من العمل" });
+    expect(proofAction).toHaveClass("editorial-button--primary");
+    expect(proofAction).toHaveAttribute("href", "#proof-of-work");
   });
 });
