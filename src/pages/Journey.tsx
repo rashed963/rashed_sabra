@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import { siteConfig } from "../config/site";
@@ -14,6 +15,44 @@ const chapterGraphPaths = [
 const Journey = () => {
   const { language, routes } = useLanguage();
   const journey = getJourneyNarrative(language);
+  const [activeChapter, setActiveChapter] = useState(0);
+
+  useEffect(() => {
+    const chapters = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-journey-chapter]"),
+    );
+
+    if (!chapters.length || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleChapter = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleChapter) {
+          setActiveChapter(Number((visibleChapter.target as HTMLElement).dataset.journeyChapter));
+        }
+      },
+      {
+        rootMargin: "-28% 0px -52% 0px",
+        threshold: [0, 0.15, 0.35, 0.6],
+      },
+    );
+
+    chapters.forEach((chapter) => observer.observe(chapter));
+    return () => observer.disconnect();
+  }, [language]);
+
+  const scrollToChapter = (index: number) => {
+    setActiveChapter(index);
+    document.getElementById(`journey-chapter-${index + 1}`)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <Layout>
@@ -70,81 +109,110 @@ const Journey = () => {
               <h2 id="journey-chapters-title">{journey.chaptersTitle}</h2>
             </header>
 
-            <div className="journey-chapter-list">
-              {journey.chapters.map((chapter, index) => (
-                <article
-                  className={`journey-chapter journey-chapter--${index + 1}`}
-                  key={chapter.eyebrow}
-                >
-                  <div className="journey-chapter__rail" aria-hidden="true">
-                    <span className="journey-chapter__node" />
-                  </div>
-                  <div className="journey-chapter__content">
-                    <header>
-                      <div>
-                        <p className="journey-chapter__eyebrow">
-                          {chapter.eyebrow}
-                          {chapter.current && (
-                            <span className="journey-current">
-                              <span aria-hidden="true" />
-                              {journey.labels.current}
-                            </span>
-                          )}
-                        </p>
-                        <h3>{chapter.title}</h3>
-                      </div>
-                      <p className="journey-chapter__time" dir="ltr">{chapter.time}</p>
-                    </header>
-                    {"context" in chapter && chapter.context && (
-                      <ul className="journey-context" aria-label={journey.labels.capabilities}>
-                        {chapter.context.map((item) => <li key={item}>{item}</li>)}
-                      </ul>
-                    )}
-                    <div className="journey-chapter__body">
-                      <div>
-                        {chapter.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                        <ul className="journey-tags" aria-label={journey.labels.capabilities}>
-                          {chapter.tags.map((tag) => <li key={tag}>{tag}</li>)}
-                        </ul>
-                      </div>
-                      <div
-                        className="journey-graph"
-                        aria-label={`${chapter.title} concept network`}
+            <div className="journey-chapters__layout">
+              <nav className="journey-arc" aria-label={journey.thesis.progressionLabel}>
+                <p>{journey.labels.chapters}</p>
+                <ol>
+                  {journey.chapters.map((chapter, index) => (
+                    <li key={chapter.eyebrow}>
+                      <button
+                        type="button"
+                        className={activeChapter === index ? "is-active" : ""}
+                        aria-current={activeChapter === index ? "step" : undefined}
+                        onClick={() => scrollToChapter(index)}
                       >
-                        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                          <defs>
-                            <marker
-                              id={`journey-arrow-${index}`}
-                              viewBox="0 0 8 8"
-                              refX="7"
-                              refY="4"
-                              markerWidth="5"
-                              markerHeight="5"
-                              orient="auto-start-reverse"
-                            >
-                              <path d="M0 0 L8 4 L0 8 Z" />
-                            </marker>
-                          </defs>
-                          {chapterGraphPaths[index].map((path) => (
-                            <path
-                              key={path}
-                              d={path}
-                              pathLength={1}
-                              markerEnd={`url(#journey-arrow-${index})`}
-                            />
+                        <span className="journey-arc__marker" aria-hidden="true" />
+                        <span className="journey-arc__copy">
+                          <small>{String(index + 1).padStart(2, "0")}</small>
+                          <strong>{journey.thesis.progression[index].title}</strong>
+                          <time dir="ltr">
+                            {chapter.time.split(" ").slice(0, 3).join(" ")}
+                          </time>
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+
+              <div className="journey-chapter-list">
+                {journey.chapters.map((chapter, index) => (
+                  <article
+                    id={`journey-chapter-${index + 1}`}
+                    data-journey-chapter={index}
+                    className={`journey-chapter journey-chapter--${index + 1}`}
+                    key={chapter.eyebrow}
+                  >
+                    <div className="journey-chapter__rail" aria-hidden="true">
+                      <span className="journey-chapter__node" />
+                    </div>
+                    <div className="journey-chapter__content">
+                      <header>
+                        <div>
+                          <p className="journey-chapter__eyebrow">
+                            {chapter.eyebrow}
+                            {chapter.current && (
+                              <span className="journey-current">
+                                <span aria-hidden="true" />
+                                {journey.labels.current}
+                              </span>
+                            )}
+                          </p>
+                          <h3>{chapter.title}</h3>
+                        </div>
+                        <p className="journey-chapter__time" dir="ltr">{chapter.time}</p>
+                      </header>
+                      {"context" in chapter && chapter.context && (
+                        <ul className="journey-context" aria-label={journey.labels.capabilities}>
+                          {chapter.context.map((item) => <li key={item}>{item}</li>)}
+                        </ul>
+                      )}
+                      <div className="journey-chapter__body">
+                        <div>
+                          {chapter.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                          <ul className="journey-tags" aria-label={journey.labels.capabilities}>
+                            {chapter.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                          </ul>
+                        </div>
+                        <div
+                          className="journey-graph"
+                          aria-label={`${chapter.title} concept network`}
+                        >
+                          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <defs>
+                              <marker
+                                id={`journey-arrow-${index}`}
+                                viewBox="0 0 8 8"
+                                refX="7"
+                                refY="4"
+                                markerWidth="5"
+                                markerHeight="5"
+                                orient="auto-start-reverse"
+                              >
+                                <path d="M0 0 L8 4 L0 8 Z" />
+                              </marker>
+                            </defs>
+                            {chapterGraphPaths[index].map((path) => (
+                              <path
+                                key={path}
+                                d={path}
+                                pathLength={1}
+                                markerEnd={`url(#journey-arrow-${index})`}
+                              />
+                            ))}
+                          </svg>
+                          {chapter.motif.map((label) => (
+                            <span className="journey-graph__node" key={label}>
+                              {label}
+                            </span>
                           ))}
-                        </svg>
-                        {chapter.motif.map((label) => (
-                          <span className="journey-graph__node" key={label}>
-                            {label}
-                          </span>
-                        ))}
-                        {index === 3 && <i className="journey-graph__hub" />}
+                          {index === 3 && <i className="journey-graph__hub" />}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>

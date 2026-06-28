@@ -2059,6 +2059,7 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
   .journey-page {
     --journey-signal: hsl(var(--primary));
     @apply relative;
+    overflow: clip;
     background:
       radial-gradient(circle at 14% 30%, hsl(var(--primary) / 0.07), transparent 32rem),
       radial-gradient(circle at 86% 68%, hsl(var(--cosmos-glow) / 0.11), transparent 35rem),
@@ -2228,8 +2229,17 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
     @apply relative;
   }
 
+  .journey-chapters__layout {
+    @apply relative;
+  }
+
+  .journey-arc {
+    display: none;
+  }
+
   .journey-chapter {
     @apply relative grid grid-cols-[2.75rem_minmax(0,1fr)] md:grid-cols-[5rem_minmax(0,1fr)];
+    scroll-margin-top: 6.5rem;
   }
 
   .journey-chapter__rail {
@@ -2887,6 +2897,122 @@ html[dir="ltr"] .journey-timeline__stage-footer > span:last-child {
 }
 
 @media (min-width: 1024px) {
+  .journey-chapters > .page-shell {
+    max-width: 90rem;
+  }
+
+  .journey-chapters__layout {
+    display: grid;
+    grid-template-columns: 13.5rem minmax(0, 1fr);
+    gap: clamp(3rem, 5vw, 6rem);
+    align-items: start;
+  }
+
+  .journey-arc {
+    @apply sticky block;
+    top: 7.5rem;
+    align-self: start;
+    height: max-content;
+    max-height: calc(100vh - 9rem);
+  }
+
+  .journey-arc > p {
+    @apply mb-7 text-[0.625rem] font-semibold uppercase tracking-[0.28em] text-primary;
+    font-family: var(--font-mono);
+  }
+
+  .journey-arc ol {
+    @apply relative;
+  }
+
+  .journey-arc ol::before {
+    content: "";
+    @apply absolute bottom-5 top-5 w-px bg-primary/25;
+    inset-inline-start: 0.42rem;
+  }
+
+  .journey-arc li + li {
+    @apply mt-7;
+  }
+
+  .journey-arc button {
+    @apply relative grid w-full grid-cols-[1rem_minmax(0,1fr)] gap-4 text-start text-muted-foreground transition-colors duration-300;
+  }
+
+  .journey-arc button:focus-visible {
+    @apply rounded-sm outline-none ring-2 ring-accent ring-offset-4 ring-offset-background;
+  }
+
+  .journey-arc__marker {
+    @apply relative z-[1] mt-1.5 h-3.5 w-3.5 rounded-full border border-primary bg-background transition duration-300;
+  }
+
+  .journey-arc__marker::after {
+    content: "";
+    @apply absolute inset-[3px] scale-0 rounded-full bg-primary transition-transform duration-300;
+  }
+
+  .journey-arc__copy {
+    @apply grid min-w-0;
+  }
+
+  .journey-arc small,
+  .journey-arc time {
+    @apply text-[0.625rem] uppercase tracking-[0.14em];
+    font-family: var(--font-mono);
+  }
+
+  .journey-arc strong {
+    @apply mt-1 text-[1.1rem] leading-6 text-foreground/70 transition duration-300;
+  }
+
+  .journey-arc time {
+    @apply mt-1 text-muted-foreground/70;
+  }
+
+  .journey-arc button:hover strong,
+  .journey-arc button.is-active strong {
+    @apply text-foreground;
+  }
+
+  .journey-arc button.is-active .journey-arc__marker {
+    @apply border-primary;
+    box-shadow: 0 0 0 5px hsl(var(--primary) / 0.1), 0 0 22px hsl(var(--primary) / 0.35);
+  }
+
+  .journey-arc button.is-active .journey-arc__marker::after {
+    @apply scale-100;
+  }
+
+  .journey-arc button.is-active small {
+    @apply text-primary;
+  }
+
+  .journey-arc button.is-active .journey-arc__copy {
+    transform: translateX(0.3rem);
+  }
+
+  html[dir="rtl"] .journey-arc button.is-active .journey-arc__copy {
+    transform: translateX(-0.3rem);
+  }
+
+  .journey-chapter {
+    @apply block;
+    min-height: min(52rem, calc(100vh - 6rem));
+  }
+
+  .journey-chapter__rail {
+    display: none;
+  }
+
+  .journey-chapter__content {
+    @apply pb-24 pt-14;
+  }
+
+  .journey-chapter:last-child .journey-chapter__content {
+    @apply pb-16;
+  }
+
   .journey-evidence__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
