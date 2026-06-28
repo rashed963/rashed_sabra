@@ -13,7 +13,6 @@ const journeyEn = {
     chapters: "The journey",
     turningPoints: "Turning points",
     proof: "Proof of work",
-    method: "How I work",
     horizon: "Direction",
     journal: "Journal",
     current: "Current",
@@ -114,19 +113,6 @@ const journeyEn = {
     { type: "Engineering Practice", title: "Agentic Development Workflow", description: "Introduced structured AI-assisted coding, review, project context, and edge-case thinking across development work.", impact: "Helped teams use AI with clearer boundaries, better review discipline, and more observable evidence.", tags: ["Agentic SDLC", "Code Review", "AI"] },
     { type: "Governance", title: "Release and Delivery Accountability", description: "Strengthened the connection between planning, implementation, testing, release readiness, and operational feedback.", impact: "Reduced ambiguity around ownership and made delivery more traceable.", tags: ["Release", "Delivery", "Accountability"] },
   ],
-  method: {
-    title: "How I work",
-    subtitle: "Five lessons I learned by building systems, not just software.",
-    loopLabel: "Practical operating loop",
-    loop: ["Clarify", "Decide", "Build", "Verify", "Follow up"],
-    principles: [
-      { title: "Clarity before motion", body: "I define the decision, scope, and standard of completion before execution begins. Ambiguity costs more than the time it takes to remove it." },
-      { title: "The missing layer is usually organizational", body: "Many recurring technical problems are process problems. Many process problems are ownership problems. I work backwards from the symptom to find what is structurally absent." },
-      { title: "Build for the team that does not exist yet", body: "A system should not only serve the current structure. It should prepare the organization for the next level of scale, ownership, and quality." },
-      { title: "AI as engineering discipline, not magic", body: "AI becomes useful inside serious software work only when it has boundaries, context, review, and observable evidence." },
-      { title: "Close the loop", body: "Every commitment needs an owner, an action, and a follow-up. This small habit compounds into trust, predictability, and delivery quality." },
-    ],
-  },
   horizon: {
     title: "Where this is going",
     body: [
@@ -159,7 +145,6 @@ const journeyAr = {
     chapters: "الرحلة",
     turningPoints: "نقاط التحول",
     proof: "نماذج من العمل",
-    method: "كيف أعمل",
     horizon: "الاتجاه",
     journal: "المدونة",
     current: "الفصل الحالي",
@@ -203,19 +188,6 @@ const journeyAr = {
     { type: "ممارسة هندسية", title: "مسار تطوير وكيلي", description: "أدخلت البرمجة والمراجعة وسياق المشروع والتفكير في الحالات الطرفية ضمن استخدام منظم للذكاء الاصطناعي.", impact: "ساعد ذلك الفرق على استخدام AI بحدود أوضح وانضباط مراجعة أفضل وأدلة أكثر قابلية للملاحظة.", tags: ["Agentic SDLC", "مراجعة الشيفرة", "AI"] },
     { type: "حوكمة", title: "المساءلة عن الإصدار والتسليم", description: "قويت الصلة بين التخطيط والتنفيذ والاختبار وجاهزية الإصدار والتغذية الراجعة التشغيلية.", impact: "قللت الغموض حول الملكية وجعلت التسليم أكثر قابلية للتتبع.", tags: ["الإصدار", "التسليم", "المساءلة"] },
   ],
-  method: {
-    title: "كيف أعمل",
-    subtitle: "خمسة دروس تعلمتها من بناء الأنظمة، لا البرمجيات وحدها.",
-    loopLabel: "حلقة التشغيل العملية",
-    loop: ["وضّح", "قرّر", "ابنِ", "تحقّق", "تابع"],
-    principles: [
-      { title: "الوضوح قبل الحركة", body: "أحدد القرار والنطاق ومعيار الإنجاز قبل بدء التنفيذ. تكلفة الغموض أكبر من الوقت اللازم لإزالته." },
-      { title: "الطبقة المفقودة غالباً تنظيمية", body: "كثير من المشكلات التقنية المتكررة هي مشكلات عمليات، وكثير من مشكلات العمليات هي مشكلات ملكية. أعود من العَرَض لأجد ما ينقص البنية." },
-      { title: "ابنِ للفريق الذي لم يوجد بعد", body: "لا ينبغي للنظام أن يخدم الهيكل الحالي فقط، بل أن يهيئ المؤسسة للمستوى التالي من التوسع والملكية والجودة." },
-      { title: "AI انضباط هندسي، لا سحر", body: "يصبح AI مفيداً في العمل البرمجي الجاد عندما تكون له حدود وسياق ومراجعة وأدلة قابلة للملاحظة." },
-      { title: "أغلق الحلقة", body: "كل التزام يحتاج إلى مالك وإجراء ومتابعة. هذه العادة الصغيرة تتراكم لتصنع الثقة والتوقع وجودة التسليم." },
-    ],
-  },
   horizon: {
     title: "إلى أين يتجه هذا المسار",
     body: ["يركز الفصل الحالي على التثبيت: رفع الملكية الهندسية، وتوضيح اتجاه المنتج، وتقوية انضباط الجودة والإصدار، ودمج AI في دورة التطوير بما يحسن الموثوقية، لا السرعة فقط.", "أما الأفق الأبعد فهو قيادة المنتج والتقنية على نطاق أكبر: جمع العمق التقني، والطلاقة في AI، والتصميم التنظيمي، والتنفيذ المؤسسي في نموذج تشغيل واحد."],

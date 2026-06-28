@@ -10,8 +10,6 @@ describe("Journey narrative", () => {
     expect(arabic.chapters).toHaveLength(english.chapters.length);
     expect(arabic.turningPoints).toHaveLength(english.turningPoints.length);
     expect(arabic.proof).toHaveLength(english.proof.length);
-    expect(arabic.method.loop).toHaveLength(english.method.loop.length);
-    expect(arabic.method.principles).toHaveLength(english.method.principles.length);
   });
 
   it("defines the transformation path as titled nodes with supporting copy", () => {

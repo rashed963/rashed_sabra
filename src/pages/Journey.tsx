@@ -276,38 +276,10 @@ const Journey = () => {
           </div>
         </section>
 
-        <section className="journey-method" aria-labelledby="method-title">
-          <div className="page-shell journey-method__inner">
-            <header>
-              <p className="journey-section-index">05 / {journey.labels.method}</p>
-              <h2 id="method-title">{journey.method.title}</h2>
-              <p>{journey.method.subtitle}</p>
-            </header>
-            <div>
-              <ol className="journey-operating-loop" aria-label={journey.method.loopLabel}>
-                {journey.method.loop.map((step, index) => (
-                  <li key={step}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{step}</strong>
-                  </li>
-                ))}
-              </ol>
-              <div className="journey-method__list">
-                {journey.method.principles.map((principle, index) => (
-                  <article key={principle.title}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <div><h3>{principle.title}</h3><p>{principle.body}</p></div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="journey-horizon" aria-labelledby="horizon-title">
           <div className="page-shell journey-horizon__inner">
             <div className="journey-horizon__copy">
-              <p className="journey-section-index">06 / {journey.labels.horizon}</p>
+              <p className="journey-section-index">05 / {journey.labels.horizon}</p>
               <h2 id="horizon-title">{journey.horizon.title}</h2>
               {journey.horizon.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               <div className="editorial-actions">
@@ -341,7 +313,7 @@ const Journey = () => {
         <section className="journey-journal" aria-labelledby="journal-title">
           <div className="page-shell journey-journal__inner">
             <div>
-              <p className="journey-section-index">07 / {journey.labels.journal}</p>
+              <p className="journey-section-index">06 / {journey.labels.journal}</p>
               <h2 id="journal-title">{journey.journal.title}</h2>
               <p>{journey.journal.body}</p>
             </div>
